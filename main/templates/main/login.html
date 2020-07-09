@@ -1,0 +1,64 @@
+{% extends 'main/includes/common.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block head %}
+
+<title>TuDu | Login</title>
+<meta description="">
+<!--Insert calculated SEO wording-->
+<meta keywords="">
+<!--Insert calculated SEO wording-->
+<base href="/">
+<!--Insert calculated SEO wording, target="" can open in new tab etc-->
+
+{% endblock %}
+
+
+{% block content %}
+<div class="main">
+    <div class="no-gutters h-100 d-flex flex-column justify-content-center">
+        <div class="row" style="min-vh-100;">
+            <div class="container" id="login_form">
+                <div class="container text-center mb-4">
+                    <img class="mb-1" src="{% static "main/img/favicon.png" %}" alt="logo" width="150" height="150">
+                    <h1 class="h2 font-weight-normal"><strong>Login to TuDu</strong></h1>
+                    <p>If you don't already have an account then please click "Create a free account" below.</p>
+                </div>
+                <form class="col-auto" method="POST">
+
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {% render_field form.username class="form-control" %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password.label_tag }}
+                        {% render_field form.password class="form-control" %}
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="btn-lg" type="submit" formmethod="POST">Sign in</button>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <p><sub><u><a href="/register">Create a free account</a></sub></u></p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

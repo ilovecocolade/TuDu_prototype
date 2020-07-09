@@ -1,0 +1,198 @@
+{% extends 'main/includes/common.html' %}
+
+
+{% block head %}
+
+<title>TuDu | Find something TuDu!</title>
+<meta description="">
+<!--Insert calculated SEO wording-->
+<meta keywords="">
+<!--Insert calculated SEO wording-->
+<base href="/">
+<!--Insert calculated SEO wording, target="" can open in new tab etc-->
+
+{% endblock %}
+
+
+{% block content %}
+<div class="no-gutters indexMain">
+  <div class="row indexMain">
+    <!--
+  !--Sidebar--
+  <div class="sidenav" id="sidebar">
+    <div class="container-fluid" id="sidebarControl">
+      <form class="form-inline" action="#">
+        !--define form action (is this 'enter'?)--
+        <input type="text" class="form-control" placeholder="Search..." id="searchField">
+        <button type="submit" class="btn" id="searchBtn">
+          <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fas fa-search fa-stack-1x fa-inverse"></i>
+          </span>
+        </button>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar">&times;</a>
+      </form>
+    </div>
+  </div>
+
+  !--Open sidebar and shift map right--
+  <script>
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "250px";
+      document.getElementById("map").style.marginLeft = "250px";
+    }
+  </script>
+
+  !--Close sidebar and shift map left--
+  <script>
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+      document.getElementById("map").style.marginLeft = "0";
+    }
+  </script>-->
+
+    <div class="no-gutters indexMain">
+      <div class="container rounded" id="searchBoxFloat">
+        <div class="row">
+          <form class="form-inline" action="#">
+            <!--define form action (is this 'enter'?)-->
+            <input type="text" class="form-control" placeholder="Search..." id="searchFieldFloat">
+            <button class="btn" type="submit" id="goSearch">
+              <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-search fa-stack-1x fa-inverse"></i>
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!--Filter button-->
+      <button type="button" class="btn mapBtn" name="filters" onclick="toggleFilterCard()">
+        <span class="fa-stack fa-2x fa-fw">
+          <i class="fas fa-circle fa-stack-2x"></i>
+          <i class="fas fa-glasses fa-stack-1x fa-inverse"></i>
+        </span>
+      </button>
+
+      <!--DropPin button-->
+      {% if user.is_authenticated %}
+      <button type="button" class="btn" id="dropPin">
+        <span class="fa-stack fa-2x fa-fw">
+          <i class="fas fa-circle fa-stack-2x"></i>
+          <i class="fas fa-map-pin fa-stack-1x fa-inverse"></i>
+        </span>
+      </button>
+      {% endif %}
+
+      <!--Show/hide filters card-->
+      <script>
+        function toggleFilterCard() {
+          var x = document.getElementById("filterCard");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        }
+      </script>
+
+      <!--Filters card-->
+      <div class="card" id="filterCard">
+        <div class="card-header">
+          <button class="btn catBtn">Activities</button>
+          <button class="btn catBtn">Natural</button>
+          <button class="btn catBtn">Historic</button>
+          <button class="btn catBtn">Art</button>
+          <!--Add category tabs with carousel of sub-categories-->
+        </div>
+        <div class="card-body">
+          <div class="no-gutters">
+            <div class="row">
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+              <div class="col-3 filter">
+                <button class="btn" type="button">
+                  <figure class="figure">
+                    <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border fa-flip-horizontal"></i>
+                    <figcaption class="figure-caption">Swimming</figcaption>
+                  </figure>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!--create svg/png/ico files for all filters and store in static-->
+        </div>
+      </div>
+
+      <!--MapBox-->
+      <!--if sizing weird due to bootstrap, see CSS comment.-->
+      <section id="mapbox">
+        <iframe width="100%" height="100%"
+          src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Leeds%20Castle%2C%20Broomfield%2C%20Maidstone+(mapboxplaceholder)&amp;ie=UTF8&amp;t=p&amp;z=9&amp;iwloc=B&amp;output=embed"
+          frameborder="0" scrolling="no"><a href="http://www.gps.ie/">GPS
+            coordinates</a></iframe>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
