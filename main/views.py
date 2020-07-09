@@ -25,9 +25,9 @@ def register(request):
         form = CreateAccountForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # username = form.cleaned_data.get('username')
-            # successful account creation message
-            # login message
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account Created: {username}')
+            messages.info(request, f'Logged in: {username}')
             login(request, user)
             return redirect('main:home')
     else:
@@ -42,7 +42,7 @@ def user_login(request):
             user = form.can_login(request)
             if user:
                 login(request, user)
-                # successful login message
+                messages.info(request, f'Logged in: {user.username}')
                 return redirect('main:home')
     else:
         form = UserLoginForm()
@@ -51,5 +51,5 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    # logout message
+    messages.info(request, 'Log out successful')
     return redirect('main:home')
