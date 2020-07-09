@@ -11,6 +11,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('login/', views.user_login, name='login'),
     path('register/', views.register, name='register'),
-    path('test/', views.test, name='test'),
+    path('test/', views.test, name='test'),  # TEST HTML FILE
+    path('test2/', views.test2, name='test2'),  # SECOND TEST HTML FILE
 
 ]

@@ -7,8 +7,13 @@ from django import forms
 
 # Create your views here.
 
+
+# TEST VIEWS FOR HTML FILES
 def test(request):
     return render(request, 'main/test.html')
+
+def test2(request):
+    return render(request, 'main/test2.html')
 
 
 def home(request):
