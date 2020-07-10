@@ -3,3 +3,7 @@ html,
 * {
     box-sizing: border-box;
 }
+
+#filterCard {
+    width: 400px;
+}

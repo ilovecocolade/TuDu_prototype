@@ -43,9 +43,9 @@
     <br>
 
     <div class="container">
-        <div class="card">
+        <div class="card" id="filterCard">
             <div class="card-header">
-                <div class="catBtnContainer">
+                <div class="catBtnContainer no-gutters border">
                     <button class="btn catBtn">Activities</button>
                     <button class="btn catBtn">Natural</button>
                     <button class="btn catBtn">Historic</button>
@@ -53,12 +53,81 @@
                 </div>
             </div>
             <div class="card-body" style="background-color: orange;">
-                <div id="subCat" class="carousel slide">
+                <!--IF <x subCategories-->
+                <div class="no-gutters border">
+                    rtbsrt
+                </div>
+                <!--IF >x subCategories-->
+                <div class="no-gutters" style="display:none;">
+                    <div id="filterMenu" class="carousel slide border">
+                        <!--Indicators-->
+                        <ol class="carousel-indicators">
+                            <li data-target="#filterMenu" data-slide-to="0" class="active"></li>
+                            <li data-target="#filterMenu" data-slide-to="1"></li>
+                            <li data-target="#filterMenu" data-slide-to="2"></li>
+                        </ol>
+                        <!--Slideshow-->
+                        <div class="carousel-inner">
+                            <div class="container">
+                                <div class="carousel-item active">
+                                    <div class="container">
+                                        <button class="btn" type="button">
+                                            <figure class="figure">
+                                                <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border"></i>
+                                                <figcaption class="figure-caption">Activities</figcaption>
+                                            </figure>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="container">
+                                        <button class="btn" type="button">
+                                            <figure class="figure">
+                                                <i class="filterbtn rounded-circle fas fa-joint fa-2x fa-border"></i>
+                                                <figcaption class="figure-caption">cro</figcaption>
+                                            </figure>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="container">
+                                        <button class="btn" type="button">
+                                            <figure class="figure">
+                                                <i class="filterbtn rounded-circle fas fa-search fa-2x fa-border"></i>
+                                                <figcaption class="figure-caption">Historic</figcaption>
+                                            </figure>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Left & Right Controls-->
+                        <a class="carousel-control-prev" href="#filterMenu" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#filterMenu" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" style="background-color: aquamarine;">
+                <!--IF NONE, display none-->
+
+                <!--IF <X FILTERS-->
+                <div class="container-fluid border">
+                    gregbvrtt
+                </div>
+
+                <!--IF >X FILTERS-->
+                <div id="activeFilters" style="display:none;" class="carousel slide border">
                     <!--Indicators-->
                     <ol class="carousel-indicators">
-                        <li data-target="#subCat" data-slide-to="0" class="active"></li>
-                        <li data-target="#subCat" data-slide-to="1"></li>
-                        <li data-target="#subCat" data-slide-to="2"></li>
+                        <li data-target="#activeFilters" data-slide-to="0" class="active"></li>
+                        <li data-target="#activeFilters" data-slide-to="1"></li>
+                        <li data-target="#activeFilters" data-slide-to="2"></li>
                     </ol>
                     <!--Slideshow-->
                     <div class="carousel-inner">
@@ -67,8 +136,8 @@
                                 <div class="container">
                                     <button class="btn" type="button">
                                         <figure class="figure">
-                                            <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border"></i>
-                                            <figcaption class="figure-caption">Activities</figcaption>
+                                            <i class="filterbtn rounded-circle fas fa-ad fa-border"></i>
+                                            <figcaption class="figure-caption">active1</figcaption>
                                         </figure>
                                     </button>
                                 </div>
@@ -77,8 +146,8 @@
                                 <div class="container">
                                     <button class="btn" type="button">
                                         <figure class="figure">
-                                            <i class="filterbtn rounded-circle fas fa-joint fa-2x fa-border"></i>
-                                            <figcaption class="figure-caption">cro</figcaption>
+                                            <i class="filterbtn rounded-circle fab fa-adn fa-2x fa-border"></i>
+                                            <figcaption class="figure-caption">active2</figcaption>
                                         </figure>
                                     </button>
                                 </div>
@@ -87,8 +156,8 @@
                                 <div class="container">
                                     <button class="btn" type="button">
                                         <figure class="figure">
-                                            <i class="filterbtn rounded-circle fas fa-search fa-2x fa-border"></i>
-                                            <figcaption class="figure-caption">Historic</figcaption>
+                                            <i class="filterbtn rounded-circle fab fa-android fa-2x fa-border"></i>
+                                            <figcaption class="figure-caption">active 3</figcaption>
                                         </figure>
                                     </button>
                                 </div>
@@ -96,18 +165,15 @@
                         </div>
                     </div>
                     <!--Left & Right Controls-->
-                    <a class="carousel-control-prev" href="#subCat" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#activeFilters" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#subCat" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#activeFilters" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-            </div>
-            <div class="card-footer">
-                rgvse
             </div>
         </div>
     </div>
