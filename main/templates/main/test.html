@@ -45,15 +45,21 @@
     <div class="container">
         <div class="card" id="filterCard">
             <div class="card-header">
-                <div class="catBtnContainer no-gutters border">
-                    <button class="btn catBtn">Activities</button>
-                    <button class="btn catBtn">Natural</button>
-                    <button class="btn catBtn">Historic</button>
-                    <button class="btn catBtn">Art</button>
+                <div class="catBtnContainer no-gutters border">   
+                    {% for category in Categories %}
+                        <button class="btn catBtn" onclick='categoryFunction()' value={{category.name}}>{{category.name}}</button>
+                    {% endfor %}
                 </div>
+
+                <script>
+                    function categoryFunction () {
+                        document.getElementsByClassName('.catBtn')
+                    }
+                </script>
+
             </div>
             <div class="card-body" style="background-color: orange; padding:0; margin:0;">
-                <!--IF <x subCategories-->
+                
                 <div class="no-gutters" style="display:none;">
                     rtbsrt
                 </div>

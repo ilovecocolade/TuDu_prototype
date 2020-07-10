@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout
 from .forms import UserLoginForm, CreateAccountForm
 from django.contrib import messages
 from django import forms
+from .models import Categories, SubCategories
 
 
 # Create your views here.
@@ -10,7 +11,8 @@ from django import forms
 
 # TEST VIEWS FOR HTML FILES
 def test(request):
-    return render(request, 'main/test.html')
+    return render(request, 'main/test.html', context={'Categories': Categories.objects.all, 
+                                                      'SubCategories': SubCategories.objects.all})
 
 def test2(request):
     return render(request, 'main/test2.html')
