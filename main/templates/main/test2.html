@@ -28,28 +28,144 @@
 
     <!-- Custom styles for this template REMOVE REFRESH ^^^^ CACHE -->
     <link href="{% static "main/css/test2.css" %}?{% now 'U' %}" rel="stylesheet">
+    <!-- SCRIPT FOR OPEN/CLOSE SIDEBAR-->
+    <script>
+        $(document).ready(function () {
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+
+        });
+    </script>
 </head>
 
 <body>
-    <div class="no-gutters">
-        <div class="row header">
-            {% include "main/includes/navbar.html" %}
+    <!--HEADER SECTION FOR NAVBAR-->
+    <div id="header">
+        <nav class="navbar fixed-top navbar-expand">
+            <a class="navbar-brand" href="/" style="color: #EFFD5F;">
+                <img src="{% static "main/img/favicon.ico" %}" alt="logo" style="width: 32px; height: 32px;">
+                <span style="font-size:120%;">|</span> TuDu
+            </a>
+            <div class="d-flex ml-auto">
+                <ul class="navbar-nav">
+                    <li>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav w-100 justify-content-end">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="pr-2" style="color:#EFFD5F;">{{user.username}}</span>
+                                        <svg class="bi bi-person-circle" width="32px" height="32px" viewBox="0 0 16 16"
+                                            fill="#EFFD5F" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                            <path fill-rule="evenodd"
+                                                d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--MAIN SECTION-->
+    <div id="main" class="wrapper border">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Dummy Heading</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!--open sidebar button-->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+
+                </div>
+            </nav>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <aside id="sidebar">
-        sidebar
-    </aside>
-    <main id="map">
-        <button type="button" class="btn" id="sidebarBtn" onclick="openSidebar()">
-            <span class="fa-stack fa-2x fa-fw">
-              <i class="fas fa-circle fa-stack-2x"></i>
-              <i class="fas fa-glasses fa-stack-1x fa-inverse"></i>
-            </span>
-          </button>
-        <section id="mapbox">
-            i frame here
-        </section>
-    </main>
+
+    <!--attempt 2
+        <div class="container-fluid" style="height: 100%;">
+            <div class="row d-flex" style="height: 100%;">
+                <div class="col-6 col-sm-5 col-lg-4 col-xl-3 border" id="sidebar">
+                    <a href="javascript:void(0)" class="closebtn border" onclick="closeSidebar()">&times;</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Clients</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="flex-grow-1 border" id="map">
+                    <button type="button" class="btn" id="sidebarBtn" onclick="openSidebar()">
+                        <span class="fa-stack fa-2x fa-fw">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-glasses fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </button>
+                    <section id="mapbox">
+                        i frame here
+                    </section>
+                </div>
+            </div>
+        </div>-->
+
+</body>
