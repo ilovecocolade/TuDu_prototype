@@ -102,7 +102,6 @@ a:active {color: #ffffff;}
   background-color: #6b6b6b;
   }
 
-
 #mapbox {
   height: 100%;
   width: 100%;
@@ -179,7 +178,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: #EFFD5F;
   -webkit-text-fill-color: #EFFD5F;
-  -webkit-box-shadow: 0 0 0px 1000px #252424 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #6b6b6b inset;
 }
 
 /* Card for location filters */

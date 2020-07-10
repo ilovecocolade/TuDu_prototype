@@ -15,7 +15,7 @@
     <link rel="icon" href="{% static "main/img/favicon.ico" %}">
 
     <!-- Bootstrap CSS -->
-    <link href="{% static "main/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "main/css/bootstrap.min.css" %}" rel="stylesheet">
     <!-- Font awesome Icons-->
     <script src="https://kit.fontawesome.com/00bc557d5e.js" crossorigin="anonymous"></script>
     <!-- JQuery, Popper, Bootstrap javascript plugins-->
@@ -34,15 +34,12 @@
 </head>
 
 <body>
-
-    {% include 'main/includes/messages.html' %}
-
     <div class="no-gutters">
         <div class="row header">
             {% include "main/includes/navbar.html" %}
         </div>
     </div>
-    
+    {% include 'main/includes/messages.html' %}
     {% block content %}
     {% endblock %}
 
