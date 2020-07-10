@@ -4,6 +4,7 @@ from .forms import UserLoginForm, CreateAccountForm
 from django.contrib import messages
 from django import forms
 from .models import Categories, SubCategories
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -16,6 +17,18 @@ def test(request):
 
 def test2(request):
     return render(request, 'main/test2.html')
+
+
+def populate_sub_categories(request):
+    messages.info(request, 'populate')
+    category = request.POST.get('category')
+    messages.info(request, str(category))
+    data = {
+        'status': 200,
+        'sub_categories': SubCategories.objects.filter(category=str(category))
+    }
+    return JsonResponse(data)
+
 
 
 def home(request):
