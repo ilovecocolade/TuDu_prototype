@@ -20,12 +20,11 @@ def test2(request):
 
 
 def populate_sub_categories(request):
-    messages.info(request, 'populate')
-    category = request.POST.get('category')
-    messages.info(request, str(category))
+    category = request.GET.get('category', None)
+    sub_categories = {}
+    [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category)]
     data = {
-        'status': 200,
-        'sub_categories': SubCategories.objects.filter(category=str(category))
+        'sub_categories': sub_categories
     }
     return JsonResponse(data)
 

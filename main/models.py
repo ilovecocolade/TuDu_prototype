@@ -26,6 +26,7 @@ class SubCategories(models.Model):
     name = models.CharField(max_length=200, primary_key=True)
     category = models.ForeignKey(Categories, default='Unknown', on_delete=models.SET_DEFAULT)
     summary = models.TextField()
+    icon = models.ImageField(upload_to='static/main/img/sub_cat_icons/', default='static/main/img/favicon.png')
     created = models.DateTimeField(default=dt.now())
 
     class Meta:

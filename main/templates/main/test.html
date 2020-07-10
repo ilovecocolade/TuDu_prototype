@@ -65,7 +65,6 @@
                 <script>
                     $('.catBtn').click(function () {
                         var category = $(this).val();
-                        console.log(category)
 
                         $.ajax({
                             url: 'ajax/populate_sub_categories/',
@@ -74,7 +73,20 @@
                             },
                             dataType: 'json',
                             success: function (data) {
-                                console.log('success');
+                                var len = Object.keys(data.sub_categories).length;
+                                console.log(len);
+                                for ( var i = 0; i<len; i++ ){
+                                    var name = Object.keys(data.sub_categories)[i];
+                                    var icon_path = Object.values(data.sub_categories)[i];
+
+                                    var new_icon_path = String(icon_path).replace('static/', "{% static '");
+                                    new_icon_path = new_icon_path.concat("' %}");
+                                    console.log(new_icon_path)
+
+                                    // NEED FUNCTIONALITY FOR CAROUSEL PAGES
+
+                                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src=' + new_icon_path + '><figcaption class="figure-caption">' + String(name) + '</figcaption></figure></button></div></div>');
+                                }
                             }
                         });
                     });
@@ -83,9 +95,6 @@
             </div>
             <div class="card-body" style="background-color: orange; padding:0; margin:0;">
 
-                <div class="no-gutters" style="display:none;">
-                    rtbsrt
-                </div>
                 <!--IF >x subCategories - LOAD CAROUSEL-->
                 <div class="no-gutters">
                     <div id="filterMenu" class="carousel slide" data-interval="false">
@@ -97,37 +106,8 @@
                         </ol>
                         <!--Slideshow-->
                         <div class="carousel-inner">
-                            <div class="container">
-                                <div class="carousel-item active">
-                                    <div class="container">
-                                        <button class="btn" type="button">
-                                            <figure class="figure">
-                                                <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border"></i>
-                                                <figcaption class="figure-caption">Activities</figcaption>
-                                            </figure>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="container">
-                                        <button class="btn" type="button">
-                                            <figure class="figure">
-                                                <i class="filterbtn rounded-circle fas fa-joint fa-2x fa-border"></i>
-                                                <figcaption class="figure-caption">cro</figcaption>
-                                            </figure>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="container">
-                                        <button class="btn" type="button">
-                                            <figure class="figure">
-                                                <i class="filterbtn rounded-circle fas fa-search fa-2x fa-border"></i>
-                                                <figcaption class="figure-caption">Historic</figcaption>
-                                            </figure>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="container" id='subCatCarousel'>
+                                
                             </div>
                         </div>
                         <!--Left & Right Controls-->
