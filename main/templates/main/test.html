@@ -58,16 +58,19 @@
         function initialPopulate(categories) {
             var default_category = Object.keys(categories)[0];
 
+            $('#subCatCarousel').append('<div class="carousel-inner"><div class="container"><div class="carousel-item active"><div class="container">');
+            //$('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
+
+
             for (var i = 0; i < Object.keys(categories[default_category]).length; i++) {
                 var name = String(Object.keys(categories[default_category])[i]);
                 var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");
-                if (i == 0) {
-                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
-                } else if ( (i+1)%4 == 0) {
+                if ( (i+1)%4 == 0) {
                     
+                } else {
+                    $('#subCatCarousel').append('<button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>')
                 }
             }
-        }
 
             // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
             /*$.ajax({
@@ -93,7 +96,7 @@
                     }
                 }
             });*/
-        };
+        }
 
     </script>
 
