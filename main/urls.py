@@ -14,5 +14,6 @@ urlpatterns = [
     path('test/ajax/populate_sub_categories/', views.populate_sub_categories, name='populate_sub_categories'),
     path('test/', views.test, name='test'),  # TEST HTML FILE
     path('test2/', views.test2, name='test2'),  # SECOND TEST HTML FILE
+    path('test3/', views.test2, name='test2'),  # THIRD TEST HTML FILE
 
 ]

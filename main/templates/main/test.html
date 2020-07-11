@@ -39,7 +39,7 @@
     <link href="{% static "main/css/test.css" %}?{% now 'U' %}" rel="stylesheet">
 </head>
 
-<body>
+<body onload="initialPopulate()">
     <div class="no-gutters">
         <div class="row header">
             {% include "main/includes/navbar.html" %}
@@ -53,6 +53,16 @@
     <br>
     <br>
 
+    <script>
+
+        function initialPopulate () {
+
+            
+
+        };
+
+    </script>
+
     <div class="container">
         <div class="card" id="filterCard">
             <div class="card-header">
@@ -61,7 +71,8 @@
                     <button class="btn catBtn" value={{category.name}}>{{category.name}}</button>
                     {% endfor %}
                 </div>
-
+                
+                <!-- LOAD SUB-CATEGORIES SCRIPT -->
                 <script>
                     $('.catBtn').click(function () {
                         var category = $(this).val();
