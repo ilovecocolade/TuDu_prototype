@@ -3,20 +3,7 @@ html, body {
 }
 
 * {
-    box-sizing: border-box; /*move to body see what happens*/
-}
-
-.wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-}
-
-
-body {
-    position: relative;
-    padding-top: 50px;
-    background-color: white;
+    box-sizing: border-box;
 }
 
 #header {
@@ -26,40 +13,148 @@ body {
     top: 0;
 }
 
+.navbar {
+    background-color: blueviolet;
+    height: 50px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    z-index: 5;
+}
+
+body {
+    position: relative;
+    padding-top: 50px;
+    background-color: white;
+}
+
+/* wrapper for #main */
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
 #main {
     height: 100%;
     width: 100%;
     background-color: grey;
 }
 
+/* Sidebar */
 #sidebar {
     min-height: 100%;
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 300px;
+    max-width: 300px;
 }
 
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -300px;
 }
 
+/* open as default on >large screens, closed on <medium */
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -250px;
+        margin-left: -300px;
     }
     #sidebar.active {
         margin-left: 0;
     }
 }
 
-/*
-#sidebar a{
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+#sidebarSearchField {
+    width: 250px;
+    border: none;
+    color: #EFFD5F;
+    background-color: orange;
+    margin-top: 5px;
+    margin-left: 5px;
 }
+
+#sidebarSearchField::placeholder {
+    color: #EFFD5F;
+}
+
+#sidebarSearch {
+    margin-left: 15px;
+    width: 300px;
+}
+
+/* Interactive map section */
+#mapSection {
+    width: 100%;
+}
+
+.mapBtn {
+    position: absolute;
+    z-index: 1;
+}
+
+#dropPin {
+    position: absolute;
+    left: 350px;
+    z-index: 2;
+  }
+
+.fa-map-pin {
+    color: #EFFD5F;
+  }
+
+#searchBoxFloat {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    z-index: 2;
+    width: 250px;
+    border: 2px solid #252424;
+    border-radius: 15%;
+    background-color: #6b6b6b;
+  }
+  
+  #searchFieldFloat {
+    width: 200px;
+    border: none;
+    background-color: transparent;
+    color: #EFFD5F;
+    z-index: 3;
+  }
+  
+  #searchFieldFloat::placeholder {
+    color: #EFFD5F;
+    z-index: 2;
+  }
+  
+  #goSearch {
+    margin: 0;
+    padding: 0;
+  }
+
+  .fa-search {
+    color: #EFFD5F;
+  }
+  
+  /* Change autocomplete styles in WebKit */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: #EFFD5F;
+    -webkit-text-fill-color: #EFFD5F;
+    -webkit-box-shadow: 0 0 0px 1000px #6b6b6b inset;
+  }
+  
+
+#mapbox {
+    position: relative;
+    height: 100%;
+}
+
+
 
 /* Position and style the close button (top right corner) *
 #sidebar .closebtn {
@@ -70,30 +165,3 @@ body {
     margin-left: 50px;
     z-index: 1;
   }
-
-#map {
-    height: 100%;
-    transition: margin-left .5s;
-    padding: 20px;
-    position: relative;
-}
-
-.navbar {
-    background-color: blueviolet;
-    height: 50px;
-}
-
-
-/*
-/* Generic viewpane rules *
-#view {margin:  }
-.row, .col { overflow: hidden; position: absolute; }
-.row { left: ; right: ; }
-.col { top: ; bottom: ; }
-.scroll-x { overflow-x: auto; }
-.scroll-y { overflow-y: auto; }
-
-.header.row { height: 50px; top: ; }
-.body.row { top: 50px; bottom: ; }
-
-/* Sidebar */
