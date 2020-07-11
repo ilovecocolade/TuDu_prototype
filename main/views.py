@@ -19,6 +19,10 @@ def test2(request):
     return render(request, 'main/test2.html')
 
 
+def test3(request):
+    return render(request, 'main/test3.html')
+
+
 def populate_sub_categories(request):
     category = request.GET.get('category', None)
     sub_categories = {}
