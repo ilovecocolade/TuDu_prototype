@@ -153,15 +153,3 @@ body {
     position: relative;
     height: 100%;
 }
-
-
-
-/* Position and style the close button (top right corner) *
-#sidebar .closebtn {
-    position: absolute;
-    top: 25px;
-    right: 0;
-    font-size: 36px;
-    margin-left: 50px;
-    z-index: 1;
-  }
