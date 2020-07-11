@@ -74,18 +74,18 @@
                             dataType: 'json',
                             success: function (data) {
                                 var len = Object.keys(data.sub_categories).length;
-                                console.log(len);
                                 for ( var i = 0; i<len; i++ ){
-                                    var name = Object.keys(data.sub_categories)[i];
-                                    var icon_path = Object.values(data.sub_categories)[i];
+                                    var name = String(Object.keys(data.sub_categories)[i]);
+                                    var icon_path = String(Object.values(data.sub_categories)[i]);
 
-                                    var new_icon_path = String(icon_path).replace('static/', "{% static '");
-                                    new_icon_path = new_icon_path.concat("' %}");
-                                    console.log(new_icon_path)
+                                    // icon_path = String(icon_path).replace('static/', "{% static '");
+                                    // icon_path = icon_path.concat("' %}");
+                                    icon_path = icon_path.replace('static/', "/static/");
+                                    console.log(icon_path)
 
                                     // NEED FUNCTIONALITY FOR CAROUSEL PAGES
 
-                                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src=' + new_icon_path + '><figcaption class="figure-caption">' + String(name) + '</figcaption></figure></button></div></div>');
+                                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
                                 }
                             }
                         });
