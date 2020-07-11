@@ -12,8 +12,14 @@ from django.http import JsonResponse
 
 # TEST VIEWS FOR HTML FILES
 def test(request):
-    return render(request, 'main/test.html', context={'Categories': Categories.objects.all, 
-                                                      'SubCategories': SubCategories.objects.all})
+    categories = {}
+    for category in Categories.objects.all():
+        sub_categories = {}
+        [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category.name)]
+        categories.update({category.name: sub_categories})
+
+    return render(request, 'main/test.html', context={'categories': categories})
+
 
 def test2(request):
     return render(request, 'main/test2.html')
