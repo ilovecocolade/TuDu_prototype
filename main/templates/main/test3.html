@@ -29,9 +29,19 @@
     <!-- Custom styles for this template REMOVE REFRESH ^^^^ CACHE -->
     <link href="{% static "main/css/test3.css" %}?{% now 'U' %}" rel="stylesheet">
 
-    <!-- SCRIPT -->
-
-
+    <!-- SCRIPT FOR OPEN/CLOSE DASHBOARD-->
+    <script>
+        $(document).ready(function () {
+            $('#toggleDash').click(function () {
+                if ($('#toggleDash').parent().is('footer.active')) {
+                    $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>');
+                } else if ($('#toggleDash').parent().is('footer')) {
+                    $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up fa-rotate-180"></i>DASHBOARD</span>');
+                };
+                $('footer').toggleClass('active');
+        });
+        });
+    </script>
 </head>
 
 <body>
@@ -71,10 +81,11 @@
         </div>
     </nav>
 
-    <!--INTERACTIVE MAP-->
-    <main class="no-gutters border">
+    <!--MAIN INTERACTIVE MAP-->
+    <main class="no-gutters">
 
         <!--Floating interactionables-->
+
         <!--DropPin button-->
         {% if user.is_authenticated %}
         <button type="button" class="btn" id="dropPin">
@@ -118,10 +129,54 @@
         </div>
     </main>
 
-    <!--BOTTOM DASHBOARD-->
+    <!--DASHBOARD FOOTER-->
     <footer>
+        <button type="button" class="btn" onclick="" id="toggleDash">
+            <span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>            
+        </button>
+        <div id="dashContent">
+            gvaerv
+        </div>
 
     </footer>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+<!-- <div class="carousel-item active">
+                                    <div class="container">
+                                        <button class="btn" type="button">
+                                            <figure class="figure">
+                                                <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border"></i>
+                                                <figcaption class="figure-caption">Activities</figcaption>
+                                            </figure>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="container">
+                                        <button class="btn" type="button">
+                                            <figure class="figure">
+                                                <i class="filterbtn rounded-circle fas fa-joint fa-2x fa-border"></i>
+                                                <figcaption class="figure-caption">cro</figcaption>
+                                            </figure>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="container">
+                                        <button class="btn" type="button">
+                                            <figure class="figure">
+                                                <i class="filterbtn rounded-circle fas fa-search fa-2x fa-border"></i>
+                                                <figcaption class="figure-caption">Historic</figcaption>
+                                            </figure>
+                                        </button>
+                                    </div>
+                                </div> -->

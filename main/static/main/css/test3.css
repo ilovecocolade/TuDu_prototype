@@ -1,7 +1,148 @@
 html, body {
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 * {
     box-sizing: border-box;
 }
+
+body {
+    position: relative;
+    padding: 50px 0 50px 0;
+    background-color: white;
+}
+
+/* NAVBAR */
+nav {
+    height: 50px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.navbar {
+    background-color: blueviolet;
+    height: 50px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    z-index: 5;
+}
+
+/* MAIN INTERACTIVE MAP*/
+main {
+    height: 100%;
+    width: 100%;
+    background-color: grey;
+}
+
+.mapBtn {
+    position: absolute;
+    z-index: 1;
+}
+
+#dropPin {
+    position: absolute;
+    left: 350px;
+    z-index: 2;
+  }
+
+.fa-map-pin {
+    color: #EFFD5F;
+  }
+
+#searchBoxFloat {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    z-index: 2;
+    width: 250px;
+    border: 2px solid #252424;
+    border-radius: 15%;
+    background-color: #6b6b6b;
+  }
+  
+  #searchFieldFloat {
+    width: 200px;
+    border: none;
+    background-color: transparent;
+    color: #EFFD5F;
+    z-index: 3;
+  }
+  
+  #searchFieldFloat::placeholder {
+    color: #EFFD5F;
+    z-index: 2;
+  }
+
+  .fa-search {
+    color: #EFFD5F;
+  }
+  
+  /* Change autocomplete styles in WebKit */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: #EFFD5F;
+    -webkit-text-fill-color: #EFFD5F;
+    -webkit-box-shadow: 0 0 0px 1000px #6b6b6b inset;
+  }
+  
+
+#mapbox {
+    position: relative;
+    height: 100%;
+}
+
+/* DASHBOARD FOOTER */
+footer {
+    min-height: 50px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+}
+
+footer.active {
+    height: 400px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+}
+
+#toggleDash {
+    position: absolute;
+    z-index: 1;
+    height: 20px;
+    width: 100px;
+    color: white;
+    background-color: blueviolet;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#toggleDash:hover {
+    background-color: rgb(15, 132, 168);
+}
+
+#toggleDash, i {
+    font-size: small;
+}
+
+#dashContent {
+    display: none;
+    position: absolute;
+    background-color: black;
+    width: 100%;
+    z-index: 1;
+}
+
