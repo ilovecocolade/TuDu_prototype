@@ -39,7 +39,7 @@
     <link href="{% static "main/css/test.css" %}?{% now 'U' %}" rel="stylesheet">
 </head>
 
-<body onload="initialPopulate()">
+<body onload="initialPopulate(categories={{categories}})">
     <div class="no-gutters">
         <div class="row header">
             {% include "main/includes/navbar.html" %}
@@ -55,11 +55,17 @@
 
     <script>
 
-        function initialPopulate() {
+        function initialPopulate(categories) {
+            var default_category = Object.keys(categories)[0];
 
-            var category = 'Activities';
+            for (var i=0; i<Object.keys(categories[default_category]).length; i++) { 
+                var name = String(Object.keys(categories[default_category])[i]);
+                var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");;
+                $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
+            };
 
-            $.ajax({
+            // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
+            /*$.ajax({
                 url: 'ajax/populate_sub_categories/',
                 data: {
                     'category': category
@@ -81,8 +87,7 @@
                         $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
                     }
                 }
-            });
-
+            });*/
         };
 
     </script>
@@ -91,17 +96,22 @@
         <div class="card" id="filterCard">
             <div class="card-header">
                 <div class="catBtnContainer no-gutters border">
-                    {% for category in Categories %}
-                    <button class="btn catBtn" value={{category.name}}>{{category.name}}</button>
+                    {% for name, sub_cat in categories.items %}
+                    <button class="btn catBtn" onclick="popSubCategories(sub_categories={{sub_cat}})">{{name}}</button>
                     {% endfor %}
                 </div>
 
                 <!-- LOAD SUB-CATEGORIES SCRIPT -->
                 <script>
-                    $('.catBtn').click(function () {
-                        var category = $(this).val();
+                    function popSubCategories(sub_categories) {
 
-                        $.ajax({
+                        for (var i=0; i<Object.keys(sub_categories).length; i++) { 
+                            var name = String(Object.keys(sub_categories)[i]);
+                            var icon_path = String(Object.values(sub_categories)[i]).replace("static/", "/static/");
+                        
+                        }
+
+                        /* $.ajax({
                             url: 'ajax/populate_sub_categories/',
                             data: {
                                 'category': category
@@ -123,8 +133,8 @@
                                     $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
                                 }
                             }
-                        });
-                    });
+                        }); */
+                    };
                 </script>
 
             </div>
