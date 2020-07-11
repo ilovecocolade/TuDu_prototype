@@ -55,9 +55,33 @@
 
     <script>
 
-        function initialPopulate () {
+        function initialPopulate() {
 
-            
+            var category = 'Activities';
+
+            $.ajax({
+                url: 'ajax/populate_sub_categories/',
+                data: {
+                    'category': category
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var len = Object.keys(data.sub_categories).length;
+                    for (var i = 0; i < len; i++) {
+                        var name = String(Object.keys(data.sub_categories)[i]);
+                        var icon_path = String(Object.values(data.sub_categories)[i]);
+
+                        // icon_path = String(icon_path).replace('static/', "{% static '");
+                        // icon_path = icon_path.concat("' %}");
+                        icon_path = icon_path.replace('static/', "/static/");
+                        console.log(icon_path)
+
+                        // NEED FUNCTIONALITY FOR CAROUSEL PAGES
+
+                        $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
+                    }
+                }
+            });
 
         };
 
@@ -71,7 +95,7 @@
                     <button class="btn catBtn" value={{category.name}}>{{category.name}}</button>
                     {% endfor %}
                 </div>
-                
+
                 <!-- LOAD SUB-CATEGORIES SCRIPT -->
                 <script>
                     $('.catBtn').click(function () {
@@ -85,7 +109,7 @@
                             dataType: 'json',
                             success: function (data) {
                                 var len = Object.keys(data.sub_categories).length;
-                                for ( var i = 0; i<len; i++ ){
+                                for (var i = 0; i < len; i++) {
                                     var name = String(Object.keys(data.sub_categories)[i]);
                                     var icon_path = String(Object.values(data.sub_categories)[i]);
 
@@ -118,7 +142,7 @@
                         <!--Slideshow-->
                         <div class="carousel-inner">
                             <div class="container" id='subCatCarousel'>
-                                
+
                             </div>
                         </div>
                         <!--Left & Right Controls-->
