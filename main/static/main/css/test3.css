@@ -141,6 +141,9 @@ footer.active {
 
 #activeFilters {
     margin-top: 2px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
 .filterBarBtn {
@@ -152,6 +155,11 @@ footer.active {
     position: absolute;
     background-color: black;
     width: 100%;
+}
+
+#xlDash {
+    width: 100%;
+    height: 100%;
 }
 
 #mdDash {
@@ -178,6 +186,20 @@ footer.active {
     width: 30px;
     top: 40%;
     bottom: 60%;
-    transform: translateX(30%);
+    transform: translateX(0%);
     background-color: red;
+}
+
+.carousel-control-prev.min {
+    height: 30px;
+    width: 30px;
+    top: 20px;
+    transform: translateX(-30%);
+}
+
+.carousel-control-next.min {
+    height: 30px;
+    width: 30px;
+    top: 20px;
+    transform: translateX(0%);
 }

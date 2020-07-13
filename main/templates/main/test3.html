@@ -135,8 +135,8 @@
             <span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>
         </button>
         <!--DASHBOARD IS MINIMIZED-->
-        <!--populate with filters until screen width reached-->
-        <div id="activeFiltersBar" class="activeFiltersMin border no-gutters" style="display:none;">
+        <!--populate with filters until screen width reached--
+        <div id="activeFiltersBar" class="border no-gutters">
             <button class="btn filterBarBtn" type="button">
                 <figure class="figure">
                     <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;" width="50px;"></i>
@@ -149,28 +149,78 @@
                     <figcaption class="figure-caption">Swimming</figcaption>
                 </figure>
             </button>
-        </div>
+        </div>-->
 
-        <!--populate with filters when screen width exceeded-->
-        <div id="activeFilters" class="activeFiltersMin carousel slide" style="display:none;">
+        <!--populate with filters when screen width exceeded--
+        <div id="activeFilters" class="carousel slide">
             <div class="carousel-inner">
+                !--Indicators--
+                <ol class="carousel-indicators">
+                    <li data-target="#activeFilters" data-slide-to="0" class="active"></li>
+                    <li data-target="#activeFilters" data-slide-to="1"></li>
+                </ol>
+                !--Slideshow--
                 <div class="carousel-item active">
-                    kjdshviushjk
+                    <button class="btn filterBarBtn" type="button">
+                        <figure class="figure">
+                            <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;"
+                                width="50px;"></i>
+                            <figcaption class="figure-caption">Swimming</figcaption>
+                        </figure>
+                    </button>
+                    <button class="btn filterBarBtn" type="button">
+                        <figure class="figure">
+                            <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;"
+                                width="50px;"></i>
+                            <figcaption class="figure-caption">Swimming</figcaption>
+                        </figure>
+                    </button>
+                    <button class="btn filterBarBtn" type="button">
+                        <figure class="figure">
+                            <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;"
+                                width="50px;"></i>
+                            <figcaption class="figure-caption">Swimming</figcaption>
+                        </figure>
+                    </button>
+                    <button class="btn filterBarBtn" type="button">
+                        <figure class="figure">
+                            <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;"
+                                width="50px;"></i>
+                            <figcaption class="figure-caption">Swimming</figcaption>
+                        </figure>
+                    </button>
+                </div>
+                <div class="carousel-item">
+                    <button class="btn filterBarBtn" type="button">
+                        <figure class="figure">
+                            <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;"
+                                width="50px;"></i>
+                            <figcaption class="figure-caption">Swimming</figcaption>
+                        </figure>
+                    </button>
+                    <button class="btn filterBarBtn" type="button">
+                        <figure class="figure">
+                            <img src="/static/main/img/x_swimming.svg" alt="clearSwimming" height="50px;"
+                                width="50px;"></i>
+                            <figcaption class="figure-caption">Swimming</figcaption>
+                        </figure>
+                    </button>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#activeFilters" data-slide="prev">
+            !--Left & Right controls--
+            <a class="carousel-control-prev min" href="#activeFilters" data-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </a>
-            <a class="carousel-control-next" href="#activeFilters" data-slide="next">
+            <a class="carousel-control-next min" href="#activeFilters" data-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </a>
-        </div>
+        </div>-->
 
         <!--DASHBOARD IS EXPANDED-->
-        <div id="dashContent" class="row no-gutters d-flex" style="background-color: aquamarine; height: 100%;">
+        <div id="dashContent" class="no-gutters" style="background-color: aquamarine; height: 100%;">
 
-            <!--SCREEN IS LARGE, DISPLAY ALL 4 DASHSECTIONS-->
-            <div id="lgDash" style="display:none;">
+            <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS--
+            <div id="xlDash" class="row d-flex">
                 <div class="col-3 no-gutters border">
                     SEARCH RESULTS
                 </div>
@@ -183,16 +233,16 @@
                 <div class="col-3 no-gutters border">
                     MORE FEATURES
                 </div>
-            </div>
+            </div>-->
 
-            <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS-->
-            <div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true" style="display:none;">
-                <!--Indicators-->
+            <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS--
+            <div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
+                !--Indicators--
                 <ol class="carousel-indicators" style="margin: 0; padding: 0;">
                     <li data-target="#mdDash" data-slide-to="0" class="active"></li>
                     <li data-target="#mdDash" data-slide-to="1"></li>
                 </ol>
-                <!--Slideshow-->
+                !--Slideshow--
                 <div class="carousel-inner no-gutters">
                     <div class="carousel-item active container-fluid">
                         <div class="row d-flex border">
@@ -215,7 +265,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Left & Right Controls-->
+                !--Left & Right Controls--
                 <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -224,7 +274,7 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+            </div>-->
 
             <!--SCREEN IS SMALL, DISPLAY 1 DASHSECTION IN 4 CAROUSELS-->
             <div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
