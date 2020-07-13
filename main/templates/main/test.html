@@ -150,24 +150,44 @@
                         var carousel_page;
                         var name = $(this).find('figcaption').text();
                         var icon_path = $(this).find('img').attr('src');
-                        var no_active = $('#activeBtn').length;
-
-                        if (no_active%4 == 0) {
-                            carousel_page = (no_active/4) + 1;
-                        } else {}
+                        var no_active = $('.activeBtn').length;
+                        console.log(no_active);
 
                         if ($('.card-footer').length) {
 
                             if (no_active%4 == 0) {
-                                carousel_page = (no_active/4) + 1;
+                                carousel_page = (no_active/4);
+                                $('#carousel-pages-active').empty();
+
+                                if (!($('.carousel-arrow').length)) {
+                                    $('#activeFilters').append('<a class="carousel-control-prev carousel-arrow" href="#activeFilters" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next carousel-arrow" href="#activeFilters" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>');
+                                }
+                                
+                                for (var i=0; i<carousel_page+1; i++) {
+
+                                    if (i==carousel_page) {
+
+                                        $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '" class="active"></li>');
+
+                                    } else {
+                                        $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '"></li>');
+                                    }
+                                
+                                }
+
+                                $('#active-button-container' + (carousel_page-1)).parent().removeClass('active');
+                                $('#active-button-container' + (carousel_page-1)).parent().after('<div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
+
                             } else {
                                 carousel_page = Math.floor(no_active/4);
-                                $('#active-button-container' + carousel_page).append('<button class="btn" type="button" id="activeBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
                             }
+
+                            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+
                         } else {
                             
                             carousel_page = 0;
-                            $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container"><div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn" type="button" id="activeBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+                            $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container"><div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
                             
                         }
 
@@ -250,11 +270,11 @@
                         </div>
                     </div>
 
-                    <a class="carousel-control-prev" href="#activeFilters" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#activeFilters" role="button" data-slide="prev" id="carousel-arrow">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#activeFilters" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#activeFilters" role="button" data-slide="next" id="carousel-arrow">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
