@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .forms import UserLoginForm
+from django.conf.urls.static import static
+from django.conf import settings
 
 app_name = 'main'
 
@@ -16,4 +18,4 @@ urlpatterns = [
     path('test2/', views.test2, name='test2'),  # SECOND TEST HTML FILE
     path('test3/', views.test3, name='test3'),  # THIRD TEST HTML FILE
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
