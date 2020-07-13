@@ -67,18 +67,19 @@
                 var icon_path = '/media/' + String(Object.values(categories[default_category])[i]);
                 
                 if ( i==0 ) {
-                    $('carousel-indicators').append('<li data-target="#filterMenu" data-slide-to="' + i + '" class="active"></li>');
-                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container">');
-                } else if ( (i+1)%4 == 0) {
+                    $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '" class="active"></li>');
+                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container" id="button-container' + carousel_page + '">');
+                } else if (i%4== 0) {
                     carousel_page += 1;
-                    $('carousel-indicators').append('<li data-target="#filterMenu" data-slide-to="' + i + '"></li>');
-                    
+                    $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '"></li>');
+                    $('#subCatCarousel').append('</div></div>');
+                    $('#subCatCarousel').append('<div class="carousel-item"><div class="container" id="button-container' + carousel_page + '">');
+
                 } 
-                $('#subCatCarousel').append('<button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+                $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
 
             }
-
-            //$('#subCatCarousel').append('</div></div>');
+            $('#subCatCarousel').append('</div></div>');
 
             // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
             /*$.ajax({
@@ -120,37 +121,58 @@
                 <!-- LOAD SUB-CATEGORIES SCRIPT -->
                 <script>
                     function popSubCategories(sub_categories) {
+                        var sub_cat_length = Object.keys(sub_categories).length;
+                        var carousel_page = 0;
 
-                        for (var i = 0; i < Object.keys(sub_categories).length; i++) {
+                        $('.carousel-indicators').empty()
+                        $('#subCatCarousel').empty()
+
+                        for (var i = 0; i<sub_cat_length; i++) {
                             var name = String(Object.keys(sub_categories)[i]);
-                            var icon_path = String(Object.values(sub_categories)[i]).replace("static/", "/static/");
+                            // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
+                            var icon_path = '/media/' + String(Object.values(sub_categories)[i]);
+                            
+                            if ( i==0 ) {
+                                $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '" class="active"></li>');
+                                $('#subCatCarousel').append('<div class="carousel-item active"><div class="container" id="button-container' + carousel_page + '"></div></div>');
+                            } else if (i%4== 0) {
+                                carousel_page += 1;
+                                $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '"></li>');
+                                $('#subCatCarousel').append('<div class="carousel-item"><div class="container" id="button-container' + carousel_page + '"></div></div>');
+                            } 
+                            $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+                        }
+                    }
+                </script>
 
+                <script>
+                    $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUTTONS
+                        var carousel_page;
+                        var name = $(this).find('figcaption').text();
+                        var icon_path = $(this).find('img').attr('src');
+                        var no_active = $('#activeBtn').length;
+
+                        if (no_active%4 == 0) {
+                            carousel_page = (no_active/4) + 1;
+                        } else {}
+
+                        if ($('.card-footer').length) {
+
+                            if (no_active%4 == 0) {
+                                carousel_page = (no_active/4) + 1;
+                            } else {
+                                carousel_page = Math.floor(no_active/4);
+                                $('#active-button-container' + carousel_page).append('<button class="btn" type="button" id="activeBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+                            }
+                        } else {
+                            
+                            carousel_page = 0;
+                            $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container"><div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn" type="button" id="activeBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+                            
                         }
 
-                        /* $.ajax({
-                            url: 'ajax/populate_sub_categories/',
-                            data: {
-                                'category': category
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                                var len = Object.keys(data.sub_categories).length;
-                                for (var i = 0; i < len; i++) {
-                                    var name = String(Object.keys(data.sub_categories)[i]);
-                                    var icon_path = String(Object.values(data.sub_categories)[i]);
 
-                                    // icon_path = String(icon_path).replace('static/', "{% static '");
-                                    // icon_path = icon_path.concat("' %}");
-                                    icon_path = icon_path.replace('static/', "/static/");
-                                    console.log(icon_path)
-
-                                    // NEED FUNCTIONALITY FOR CAROUSEL PAGES
-
-                                    $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
-                                }
-                            }
-                        }); */
-                    };
+                    });
                 </script>
 
             </div>
@@ -160,15 +182,13 @@
                 <div class="no-gutters">
                     <div id="filterMenu" class="carousel slide" data-interval="false">
                         <!--Indicators-->
-                        <ol class="carousel-indicators" style="margin: 0; padding: 0;">
-                            <li data-target="#filterMenu" data-slide-to="0" class="active"></li>
-                            <li data-target="#filterMenu" data-slide-to="1"></li>
-                            <li data-target="#filterMenu" data-slide-to="2"></li>
+                        <ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages">
+                            <!-- CAROUSEL INDICATORS HERE -->
                         </ol>
                         <!--Slideshow-->
                         <div class="carousel-inner">
                             <div class="container" id='subCatCarousel'>
-
+                                <!-- SUB-CATEGORY CAROUSEL BUTTONS HERE -->
                             </div>
                         </div>
                         <!--Left & Right Controls-->
@@ -183,23 +203,18 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;">
-                <!--IF NONE, display none-->
+            
+            
+            <!-- <div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;">
 
-                <!--IF <X FILTERS-->
-                <div class="container-fluid" style="display:none;">
-                    gregbvrtt
-                </div>
-
-                <!--IF >X FILTERS - LOAD CAROUSEL-->
                 <div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true">
-                    <!--Indicators-->
-                    <ol class="carousel-indicators" style="margin: 0; padding: 0;">
+
+                    <ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages-active">
                         <li data-target="#activeFilters" data-slide-to="0" class="active"></li>
                         <li data-target="#activeFilters" data-slide-to="1"></li>
                         <li data-target="#activeFilters" data-slide-to="2"></li>
                     </ol>
-                    <!--Slideshow-->
+
                     <div class="carousel-inner">
                         <div class="container">
                             <div class="carousel-item active">
@@ -234,7 +249,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--Left & Right Controls-->
+
                     <a class="carousel-control-prev" href="#activeFilters" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -244,7 +259,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
