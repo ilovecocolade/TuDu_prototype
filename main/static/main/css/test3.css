@@ -9,6 +9,12 @@ html, body {
 
 body {
     position: relative;
+    padding: 50px 0 0 0;
+    background-color: white;
+}
+
+#bodyCollapseFilters {
+    position: relative;
     padding: 50px 0 50px 0;
     background-color: white;
 }
@@ -103,6 +109,14 @@ main {
 
 /* DASHBOARD FOOTER */
 footer {
+    height: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+}
+
+#footerCollapseFilters {
     height: 80px;
     width: 100%;
     position: absolute;
