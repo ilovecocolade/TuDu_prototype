@@ -103,7 +103,7 @@ main {
 
 /* DASHBOARD FOOTER */
 footer {
-    min-height: 60px;
+    height: 80px;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -143,11 +143,41 @@ footer.active {
     margin-top: 2px;
 }
 
+.filterBarBtn {
+    margin: 5px;
+    padding: 0;
+}
+
 #dashContent {
-    display: none;
     position: absolute;
     background-color: black;
     width: 100%;
-    z-index: 1;
 }
 
+#mdDash {
+    height: 100%;
+    width: 100%;
+}
+
+#smDash {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-control-prev {
+    height: 30px;
+    width: 30px;
+    top: 40%;
+    bottom: 60%;
+    transform: translateX(-30%);
+    background-color: red;
+  }
+
+.carousel-control-next {
+    height: 30px;
+    width: 30px;
+    top: 40%;
+    bottom: 60%;
+    transform: translateX(30%);
+    background-color: red;
+}
