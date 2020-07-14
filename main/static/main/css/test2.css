@@ -30,6 +30,7 @@ nav {
     z-index: 5;
 }
 
+/* CARDS */
 .cardContainer {
     position: relative;
     width: 390px;
@@ -55,6 +56,16 @@ nav {
     width: 100%;
 }
 
+.card-body {
+    margin: 0;
+    padding: 0;
+}
+
+.card-bodyContainer {
+    height: 320px;
+}
+
+/* SEARCH CARD */
 #searchDash {
     width: 100%;
 }
@@ -63,6 +74,7 @@ nav {
     width: 320px;
     height: 100%;
     border: none;
+    box-shadow: none; /* removes blue highlight from field on focus */
 }
 
 #searchFieldDash::placeholder {
@@ -78,26 +90,58 @@ nav {
     color: #c940ff;
   }
 
-.card-body {
-    margin: 0;
-    padding: 0;
+/* LOCATIONS CARD */
+/* Units */
+.onoffswitch {
+    position: relative; width: 45px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 15px; padding: 0; line-height: 15px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "mi";
+    padding-left: 5px;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "km";
+    padding-right: 5px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 15px; margin: 2.5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 26px;
+    top: 33px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
 }
 
-.card-bodyContainer {
-    height: 320px;
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-
-.switch input {
-    display: none;
-}
-
+/* Range slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -105,7 +149,38 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: rgb(206, 0, 233);
     -webkit-transition: .4s;
     transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: rgb(224, 204, 16);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #10e078;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 17px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
   }

@@ -108,40 +108,63 @@
         </div>
     </div>
 
+
+
     <!--Locations card for dash-->
+<script>
+    function show_value(x) {
+        document.getElementById("range_value").innerHTML = x;
+    }
+
+    function change_unit() {
+        var unit = $('#range_unit').text();
+        var max_miles = 100;
+        var current_range = $('#range_value').text();
+
+        if (unit == 'miles') {
+            $('#range_unit').html('km');
+            $('#searchRange').attr('max', max_miles*1.6);
+            $('#range_value').html(current_range*1.6);
+
+
+        } else if (unit == 'km') {
+            $('#range_unit').html('miles');
+            $('#searchRange').attr('max', max_miles);
+            $('#range_value').html(current_range/1.6);
+        }
+
+    }
+</script>
     <div class="container border cardContainer" style="margin-top:1%; margin-left:1%;">
         <div class="card">
             <div class="card-header">
                 <div class="no-gutters">
                     <div class="row d-flex">
                         <div class="col-8">
-                            <h5 style="padding-top:15px;">Things TuDu within 100 km</h5>
+                            <h6 style="padding:20px 0 0 10px;">Things TuDu within <span id="range_value">25</span> <span id="range_unit">miles</span></h6>
                         </div>
-                        <div class="col-2">
-                            <div class="slidecontainer">
-                                <label style="margin-bottom:0;" for="searchRange"><small>Range</small></label>
-                                <input type="range" min="1" max="100" value="25" class="custom-range" id="searchRange">
+                        <div class="col-2" style="padding:0;">
+                            <div class="slidecontainer no-gutters" style="width:70px">
+                                <label style="margin-bottom:0;" for="searchRange"><small>Range:</small></label>
+                                <input type="range" min="1" max="100" value="25" class="custom-range" onchange="show_value(this.value);" id="searchRange">
                             </div>
                         </div>
                         <div class="col-2">
-                            <form>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round">
-                                        <span class="km">km</span>
-                                        <span class="mi">mi</span>
-                                    </span>
+                            <div class="onoffswitch no-gutters">
+                                <label for="myonoffswitch"><small>Units:</small></label>
+                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" onchange="change_unit();" id="myonoffswitch" tabindex="0" checked>
+                                <label class="onoffswitch-label" for="myonoffswitch">
+                                    <span class="onoffswitch-inner"></span>
+                                    <span class="onoffswitch-switch"></span>
                                 </label>
-                                <label style="margin-bottom:0;" for="miles"><small>mi </small><input type="radio" id="miles" name="unit"></label><br>
-                                <label for="kilometres"><small>km </small><input type="radio" id="kilometres" name="unit"></label>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="overflow-auto container-fluid card-bodyContainer">
-                    <ul class="list-group list-group-flush">
+                    <ol class="list-group list-group-flush">
                         <li class="list-group-item">Location</li>
                         <li class="list-group-item">Location</li>
                         <li class="list-group-item">Location</li>
@@ -153,7 +176,7 @@
                         <li class="list-group-item">Location</li>
                         <li class="list-group-item">Location</li>
                         <li class="list-group-item">Location</li>
-                    </ul>
+                    </ol>
                 </div>
             </div>
         </div>
