@@ -13,9 +13,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="{% static "main/css/bootstrap.css" %}" rel="stylesheet">
-    <!-- Font awesome Icons-->
+    <!-- Font awesome Icons -->
     <script src="https://kit.fontawesome.com/00bc557d5e.js" crossorigin="anonymous"></script>
-    <!-- JQuery, Popper, Bootstrap javascript plugins-->
+    <!-- JQuery, Popper, Bootstrap javascript plugins -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -29,201 +29,136 @@
     <!-- Custom styles for this template REMOVE REFRESH ^^^^ CACHE -->
     <link href="{% static "main/css/test2.css" %}?{% now 'U' %}" rel="stylesheet">
 
-    <!-- SCRIPT FOR OPEN/CLOSE SIDEBAR-->
-    <script>
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>
 </head>
 
 <body>
-    <!--HEADER FOR NAVBAR-->
-    <div id="header">
-        <nav class="navbar fixed-top navbar-expand">
-            <a class="navbar-brand" href="/" style="color: #EFFD5F;">
-                <img src="{% static "main/img/favicon.ico" %}" alt="logo" style="width: 32px; height: 32px;">
-                <span style="font-size:120%;">|</span> TuDu
-            </a>
-            <div class="d-flex ml-auto">
-                <ul class="navbar-nav">
-                    <li>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav w-100 justify-content-end">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="pr-2" style="color:#EFFD5F;">{{user.username}}</span>
-                                        <svg class="bi bi-person-circle" width="32px" height="32px" viewBox="0 0 16 16"
-                                            fill="#EFFD5F" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                            <path fill-rule="evenodd"
-                                                d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
+    <!-- NAVBAR -->
+    <nav class="navbar fixed-top navbar-expand">
+        <a class="navbar-brand" href="/" style="color: #EFFD5F;">
+            <img src="{% static "main/img/favicon.ico" %}" alt="logo" style="width: 32px; height: 32px;">
+            <span style="font-size:120%;">|</span> TuDu
+        </a>
+        <div class="d-flex ml-auto">
+            <ul class="navbar-nav">
+                <li>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav w-100 justify-content-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="pr-2" style="color:#EFFD5F;">{{user.username}}</span>
+                                    <svg class="bi bi-person-circle" width="32px" height="32px" viewBox="0 0 16 16"
+                                        fill="#EFFD5F" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd"
+                                            d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!--Search card for dash-->
+    <div class="container border cardContainer" style="margin-top:1%; margin-left:1%;">
+        <div class="card">
+            <div class="card-header">
+                <div class="container">
+                    <div class="row">
+                        <form class="form-inline" action="#" id="searchDash">
+                            <!--define form action (is this 'enter'?)-->
+                            <input type="text" class="form-control" placeholder="Search..." id="searchFieldDash">
+                            <button class="btn" type="submit" id="goSearch">
+                                <span class="fa-stack">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fas fa-search fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="overflow-auto container-fluid card-bodyContainer">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                        <li class="list-group-item">search result</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Locations card for dash-->
+    <div class="container border cardContainer" style="margin-top:1%; margin-left:1%;">
+        <div class="card">
+            <div class="card-header">
+                <div class="no-gutters">
+                    <div class="row d-flex">
+                        <div class="col-8">
+                            <h5 style="padding-top:15px;">Things TuDu within 100 km</h5>
                         </div>
-                    </li>
-                </ul>
+                        <div class="col-2">
+                            <div class="slidecontainer">
+                                <label style="margin-bottom:0;" for="searchRange"><small>Range</small></label>
+                                <input type="range" min="1" max="100" value="25" class="custom-range" id="searchRange">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <form>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round">
+                                        <span class="km">km</span>
+                                        <span class="mi">mi</span>
+                                    </span>
+                                </label>
+                                <label style="margin-bottom:0;" for="miles"><small>mi </small><input type="radio" id="miles" name="unit"></label><br>
+                                <label for="kilometres"><small>km </small><input type="radio" id="kilometres" name="unit"></label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </nav>
+            <div class="card-body">
+                <div class="overflow-auto container-fluid card-bodyContainer">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                        <li class="list-group-item">Location</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!--MAIN-->
-    <div id="main" class="wrapper">
-
-        <!--SIDEBAR-->
-        <aside id="sidebar" class="border-right">
-
-            <!--Sidebar control bar-->
-            <div class="no-gutters" id="sidebarCtrl">
-                <div class="row">
-                    <form id="sidebarSearch" class="form-inline" action="#">
-                        <!--define form action (is this 'enter'?)-->
-                        <input type="text" class="form-control" placeholder="Search..." id="sidebarSearchField">
-                        <button class="btn" style="padding: 0; margin-top: 5px;" type="submit">
-                            <span class="fa-stack">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-search fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <!--Sidebar populated search results-->
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="container-fluid border">
-                <div class="row border">
-                    <div class="col-7 no-gutters border">
-                        <small>Top places within [variable] miles</small>
-                    </div>
-                    <div class="col-2 no-gutters border" id="unitToggle">
-                        unit
-                    </div>
-                    <div class="col-3 no-gutters border" id="rangeSlider">
-                        range
-                    </div>
-                </div>
-                <ul class="list-unstyled components">
-                    <li>
-                        <a href="#">mmmmmmmmmmmmmmmmmmm</a>
-                    </li>
-                    <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-        </aside>
-
-        <!--INTERACTIVE MAP-->
-        <section id="mapSection" class="no-gutters border">
-
-            <!--Floating interactionables-->
-
-            <!--DropPin button-->
-            {% if user.is_authenticated %}
-            <button type="button" class="btn" id="dropPin">
-                <span class="fa-stack fa-2x fa-fw">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-map-pin fa-stack-1x fa-inverse"></i>
-                </span>
-            </button>
-            {% endif %}
-
-            <!--Filter button.....card and script TBI
-            <button type="button" class="btn mapBtn" name="filters" onclick="toggleFilterCard()">
-                <span class="fa-stack fa-2x fa-fw">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-glasses fa-stack-1x fa-inverse"></i>
-                </span>
-            </button>-->
-
-            <!--Floating search box-->
-            <div class="container rounded" id="searchBoxFloat">
-                <div class="row">
-                    <form class="form-inline" action="#">
-                        <!--define form action (is this 'enter'?)-->
-                        <input type="text" class="form-control" placeholder="Search..." id="searchFieldFloat">
-                        <button class="btn" type="button" id="sidebarCollapse">
-                            <span class="fa-stack">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-search fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!--MapBox panel.....if sizing weird due to bootstrap, see CSS comment-->
-            <div id="mapbox">
-                <iframe width="100%" height="100%"
-                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Leeds%20Castle%2C%20Broomfield%2C%20Maidstone+(mapboxplaceholder)&amp;ie=UTF8&amp;t=p&amp;z=9&amp;iwloc=B&amp;output=embed"
-                    frameborder="0" scrolling="no"><a href="http://www.gps.ie/">GPS
-                        coordinates</a></iframe>
-            </div>
-        </section>
-    </div>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-<!-- <div class="carousel-item active">
-                                    <div class="container">
-                                        <button class="btn" type="button">
-                                            <figure class="figure">
-                                                <i class="filterbtn rounded-circle fas fa-swimmer fa-2x fa-border"></i>
-                                                <figcaption class="figure-caption">Activities</figcaption>
-                                            </figure>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="container">
-                                        <button class="btn" type="button">
-                                            <figure class="figure">
-                                                <i class="filterbtn rounded-circle fas fa-joint fa-2x fa-border"></i>
-                                                <figcaption class="figure-caption">cro</figcaption>
-                                            </figure>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="container">
-                                        <button class="btn" type="button">
-                                            <figure class="figure">
-                                                <i class="filterbtn rounded-circle fas fa-search fa-2x fa-border"></i>
-                                                <figcaption class="figure-caption">Historic</figcaption>
-                                            </figure>
-                                        </button>
-                                    </div>
-                                </div> -->
