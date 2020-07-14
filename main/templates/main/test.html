@@ -61,21 +61,21 @@
             var carousel_page = 0;
 
 
-            for (var i = 0; i<sub_cat_length; i++) {
+            for (var i = 0; i < sub_cat_length; i++) {
                 var name = String(Object.keys(categories[default_category])[i]);
                 // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
                 var icon_path = '/media/' + String(Object.values(categories[default_category])[i]);
-                
-                if ( i==0 ) {
+
+                if (i == 0) {
                     $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '" class="active"></li>');
                     $('#subCatCarousel').append('<div class="carousel-item active"><div class="container" id="button-container' + carousel_page + '">');
-                } else if (i%4== 0) {
+                } else if (i % 4 == 0) {
                     carousel_page += 1;
                     $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '"></li>');
                     $('#subCatCarousel').append('</div></div>');
                     $('#subCatCarousel').append('<div class="carousel-item"><div class="container" id="button-container' + carousel_page + '">');
 
-                } 
+                }
                 $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
 
             }
@@ -127,19 +127,19 @@
                         $('.carousel-indicators').empty()
                         $('#subCatCarousel').empty()
 
-                        for (var i = 0; i<sub_cat_length; i++) {
+                        for (var i = 0; i < sub_cat_length; i++) {
                             var name = String(Object.keys(sub_categories)[i]);
                             // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
                             var icon_path = '/media/' + String(Object.values(sub_categories)[i]);
-                            
-                            if ( i==0 ) {
+
+                            if (i == 0) {
                                 $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '" class="active"></li>');
                                 $('#subCatCarousel').append('<div class="carousel-item active"><div class="container" id="button-container' + carousel_page + '"></div></div>');
-                            } else if (i%4== 0) {
+                            } else if (i % 4 == 0) {
                                 carousel_page += 1;
                                 $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '"></li>');
                                 $('#subCatCarousel').append('<div class="carousel-item"><div class="container" id="button-container' + carousel_page + '"></div></div>');
-                            } 
+                            }
                             $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
                         }
                     }
@@ -151,46 +151,129 @@
                         var name = $(this).find('figcaption').text();
                         var icon_path = $(this).find('img').attr('src');
                         var no_active = $('.activeBtn').length;
-                        console.log(no_active);
+                        var actives = {};
+                        var already_active = false;
 
                         if ($('.card-footer').length) {
 
-                            if (no_active%4 == 0) {
-                                carousel_page = (no_active/4);
-                                $('#carousel-pages-active').empty();
+                            $('.activeBtn').each(function () {
 
-                                if (!($('.carousel-arrow').length)) {
-                                    $('#activeFilters').append('<a class="carousel-control-prev carousel-arrow" href="#activeFilters" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next carousel-arrow" href="#activeFilters" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>');
+                                var active_name = $(this).find('figcaption').text();
+
+                                if (active_name == name) {
+
+                                    already_active = true;
+
                                 }
-                                
-                                for (var i=0; i<carousel_page+1; i++) {
+                            });
 
-                                    if (i==carousel_page) {
+                            if (!already_active) {
 
-                                        $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '" class="active"></li>');
+                                if (no_active % 4 == 0) {
+                                    carousel_page = no_active / 4;
+                                    $('#carousel-pages-active').empty();
 
-                                    } else {
-                                        $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '"></li>');
+                                    if (!($('.carousel-arrow').length)) {
+                                        $('#activeFilters').append('<a class="carousel-control-prev carousel-arrow" href="#activeFilters" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next carousel-arrow" href="#activeFilters" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>');
                                     }
-                                
+
+                                    for (var i = 0; i < carousel_page + 1; i++) {
+
+                                        if (i == carousel_page) {
+
+                                            $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '" class="active"></li>');
+
+                                        } else {
+                                            $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '"></li>');
+                                        }
+
+                                    }
+
+                                    $('#active-button-container' + (carousel_page - 1)).parent().removeClass('active');
+                                    $('#active-button-container' + (carousel_page - 1)).parent().after('<div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
+
+                                } else {
+                                    carousel_page = Math.floor(no_active / 4);
                                 }
 
-                                $('#active-button-container' + (carousel_page-1)).parent().removeClass('active');
-                                $('#active-button-container' + (carousel_page-1)).parent().after('<div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
+                                $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+                            }
+                        } else {
 
-                            } else {
-                                carousel_page = Math.floor(no_active/4);
+                            carousel_page = 0;
+                            $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+
+                        }
+                    });
+                </script>
+
+                <script>
+                    $(document).on('click', '.activeBtn', function () {
+                        var carousel_page;
+                        var no_active = $('.activeBtn').length;
+                        var actives = {};
+                        var clicked_name = $(this).find('figcaption').text();
+
+                        $('.activeBtn').each(function () {
+
+                            var name = $(this).find('figcaption').text();
+
+                            if (clicked_name != name) {
+
+                                var icon_path = $(this).find('img').attr('src');
+
+                                actives[name] = icon_path;
+
+                            }
+                        });
+
+                        if (Object.keys(actives).length != 0) {
+
+                            $('#carousel-pages-active').empty();
+                            $('.carousel-arrow').remove();
+                            $('.actives-pages').empty();
+
+                            for (i = 0; i < Object.keys(actives).length; i++) {
+
+                                name = Object.keys(actives)[i];
+                                icon_path = Object.values(actives)[i];
+
+                                if (i == 0) {
+                                    carousel_page = 0;
+                                    $('.actives-pages').append('<div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
+
+                                } else if (i % 4 == 0) {
+                                    carousel_page = i / 4;
+                                    $('#carousel-pages-active').empty();
+
+                                    if (!($('.carousel-arrow').length)) {
+                                        $('#activeFilters').append('<a class="carousel-control-prev carousel-arrow" href="#activeFilters" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next carousel-arrow" href="#activeFilters" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>');
+                                    }
+
+                                    for (var j = 0; j < carousel_page + 1; j++) {
+
+                                        if (j == carousel_page) {
+
+                                            $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + j + '" class="active"></li>');
+
+                                        } else {
+                                            $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + j + '"></li>');
+                                        }
+
+                                    }
+
+                                    $('#active-button-container' + (carousel_page - 1)).parent().removeClass('active');
+                                    $('#active-button-container' + (carousel_page - 1)).parent().after('<div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
+
+                                } else {
+                                    carousel_page = Math.floor(i / 4);
+                                }
+
+                                $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+
                             }
 
-                            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-
-                        } else {
-                            
-                            carousel_page = 0;
-                            $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container"><div class="carousel-item active"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
-                            
-                        }
-
+                        } else { $('.card-footer').remove(); }
 
                     });
                 </script>
@@ -223,9 +306,13 @@
                     </div>
                 </div>
             </div>
-            
-            
-            <!-- <div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;">
+
+            <!-- CAROUSEL HTML HERE -->
+
+        </div>
+    </div>
+
+    <!-- <div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;">
 
                 <div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true">
 
@@ -280,9 +367,6 @@
                     </a>
                 </div>
             </div> -->
-        </div>
-    </div>
-
 
 </body>
 
