@@ -30,7 +30,7 @@
     <link href="{% static "main/css/test3.css" %}?{% now 'U' %}" rel="stylesheet">
 
     <!-- Dashboard controller -->
-    <script src="{% static "main/js/dashboard.js" %}" rel="dashboardcontroller"></script>
+    <script src="{% static "main/js/dashboard.js" %}?{% now 'U' %}" rel="dashboardcontroller"></script>
 </head>
 
 <body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)">
@@ -205,8 +205,7 @@
             </a>
         </div>-->
 
-        <!-- DASHBOARD IS EXPANDED -->
-        <div id="dashContent" class="no-gutters" style="background-color: aquamarine; height: 100%;">
+        <div id="dashContent" class="no-gutters" style="background-color: aquamarine; height: 100%; display: none;">
 
             <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS-->
             <div id="xlDash" class="row d-flex">
@@ -263,7 +262,7 @@
                     MORE FEATURES
                 </div>
             </div>
-
+        
         <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS--
             <div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
                 !--Indicators--
@@ -304,7 +303,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>-->
-
+        
         <!--SCREEN IS SMALL, DISPLAY 1 DASHSECTION IN 4 CAROUSELS--
             <div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
                 !--Indicators--
@@ -338,8 +337,11 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>-->
-        </div>
+            </div>
+        </div> -->
+        
+
+
     </footer>
 </body>
 
