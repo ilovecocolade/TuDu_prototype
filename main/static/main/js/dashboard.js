@@ -1,41 +1,59 @@
 // Dashboard controller
 
 // JQUERY EVENT HANDLERS
-$(document).on('click', '.activeBtn', function () { build_actives_carousel(max_filters_per_page=4, 
-                                                                           actives=remove_active_filter($(this).find('figcaption').text()), 
-                                                                           display_page=get_display_page(4, remove_active_filter($(this).find('figcaption').text()))) });
+$(document).on('click', '.activeBtn', function () {
+
+    var actives = remove_active_filter($(this).find('figcaption').text());
+
+    if ($('#toggleDash').parent().is('footer.active')) {
+        build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = get_display_page(4, actives));
+    } else {
+        build_dashboard_active_filters(actives = actives);
+    }
+});
 
 
 // Open/Close Dashboard
-$(document).ready(function () {
-    $('#toggleDash').click(function () {
-        if ($('#toggleDash').parent().is('footer.active')) {
-            if (!($('.activeBtn').length)) {
-                $('footer').attr('id', '');
-                $('body').attr('id', '');
-            } else {
-                // TODO: get card code for active filters
-            }
-            $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>');
-        } else if ($('#toggleDash').parent().is('footer')) {
-            $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up fa-rotate-180"></i>DASHBOARD</span>');
-        };
-        $('footer').toggleClass('active');
-    });
+$(document).on('click', '#toggleDash', function () {
+    if ($('#toggleDash').parent().is('footer.active')) {
+
+        if (!$('.activeBtn').length) {
+            $('footer').attr('id', '');
+            $('body').attr('id', '');
+            $('footer.active').removeClass('collapseFilters');
+        } else {
+            $('footer.active').addClass('collapseFilters');
+            var actives = get_all_active();
+            $('.dashboardActiveFilters').remove();
+            build_dashboard_active_filters(actives = actives);
+        }
+        $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>');
+        $('#dashContent').attr('style', 'background-color: aquamarine; height: 100%; display: none;');
+    } else {
+        $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up fa-rotate-180"></i>DASHBOARD</span>');
+        $('#dashContent').attr('style', 'background-color: aquamarine; height: 100%;');
+        $('footer').removeClass('collapseFilters');
+        if ($('.activeBtn').length) {
+            var actives = get_all_active();
+            $('.dashboardActiveFilters').remove();
+            build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = 0);
+        }
+    };
+    $('footer').toggleClass('active');
 });
 
 
 // Collapse collapsed dashboard after removing final active filter
 
-$(document).on('click', '#activeBtn', function () {
+/*$(document).on('click', '.activeBtn', function () {
     if ($('footerCollapseFilters').length) {
         // TODO: remove active filter here
-        if (!($('#activeBtn').length)) {
+        if (!($('.activeBtn').length)) {
             $('footer').attr('id', '');
             $('body').attr('id', '');
         }
     }
-});
+});*/
 
 
 // Collapse full dashboard after removing active filters
@@ -48,66 +66,16 @@ $(document).on('click', '#activeBtn', function () {
 
 // INSERT CAROUSEL GENERATION FOR DASHBOARD PAGES
 
-/*function initialPopulate(categories) {
-    var default_category = Object.keys(categories)[0];
-    var sub_cat_length = Object.keys(categories[default_category]).length;
-    var carousel_page = 0;
 
-
-    for (var i = 0; i < sub_cat_length; i++) {
-        var name = String(Object.keys(categories[default_category])[i]);
-        // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
-        var icon_path = '/media/' + String(Object.values(categories[default_category])[i]);
-
-        if (i == 0) {
-            $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '" class="active"></li>');
-            $('#subCatCarousel').append('<div class="carousel-item active"><div class="container" id="button-container' + carousel_page + '">');
-        } else if (i % 4 == 0) {
-            carousel_page += 1;
-            $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '"></li>');
-            $('#subCatCarousel').append('</div></div>');
-            $('#subCatCarousel').append('<div class="carousel-item"><div class="container" id="button-container' + carousel_page + '">');
-
-        }
-        $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-
-    }
-    $('#subCatCarousel').append('</div></div>');
-
-    // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
-    /*$.ajax({
-        url: 'ajax/populate_sub_categories/',
-        data: {
-            'category': category
-        },
-        dataType: 'json',
-        success: function (data) {
-            var len = Object.keys(data.sub_categories).length;
-            for (var i = 0; i < len; i++) {
-                var name = String(Object.keys(data.sub_categories)[i]);
-                var icon_path = String(Object.values(data.sub_categories)[i]);
-
-                // icon_path = String(icon_path).replace('static/', "{% static '");
-                // icon_path = icon_path.concat("' %}");
-                icon_path = icon_path.replace('static/', "/static/");
-                console.log(icon_path)
-
-                // NEED FUNCTIONALITY FOR CAROUSEL PAGES
-
-                $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
-            }
-        }
-    });
-}*/
 
 
 function popSubCategories(categories, sub_categories, initial) {
     var carousel_page = 0;
 
-    if ( initial ) {
-        var category = Object.keys(categories)[0]; 
+    if (initial) {
+        var category = Object.keys(categories)[0];
         sub_categories = categories[category];
-    } else { 
+    } else {
         $('.carousel-indicators.subCat').empty()
         $('#subCatCarousel').empty()
     }
@@ -143,54 +111,9 @@ $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUT
 
     if ($('.card-footer').length) {
 
-        if ( no_actives%4==0 ) { display_page = (no_actives/4) - 1; } else { display_page = Math.floor(no_actives/4); }
-        
-            console.log(display_page);
+        if (no_actives % 4 == 0) { display_page = (no_actives / 4) - 1; } else { display_page = Math.floor(no_actives / 4); }
+        build_actives_carousel(4, actives, display_page);
 
-            build_actives_carousel(4, actives, display_page);
-
-        /*$('.activeBtn').each(function () {
-
-            var active_name = $(this).find('figcaption').text();
-
-            if (active_name == name) {
-
-                already_active = true;
-
-            }
-        });
-
-        if (!already_active) {
-
-            if (no_active % 4 == 0) {
-                carousel_page = no_active / 4;
-                $('#carousel-pages-active').empty();
-
-                if (!($('.carousel-arrow').length)) {
-                    $('#activeFilters').append('<a class="carousel-control-prev carousel-arrow" href="#activeFilters" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next carousel-arrow" href="#activeFilters" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>');
-                }
-
-                for (var i = 0; i < carousel_page + 1; i++) {
-
-                    if (i == carousel_page) {
-
-                        $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '" class="active"></li>');
-
-                    } else {
-                        $('#carousel-pages-active').append('<li data-target="#activeFilters" data-slide-to="' + i + '"></li>');
-                    }
-
-                }
-
-                $('#active-button-container' + (carousel_page - 1)).parent().removeClass('active');
-                $('#active-button-container' + (carousel_page - 1)).parent().after('<div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
-
-            } else {
-                carousel_page = Math.floor(no_active / 4);
-            }
-
-            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-        }*/
     } else {
 
         carousel_page = 0;
@@ -198,6 +121,37 @@ $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUT
 
     }
 });
+
+
+function build_dashboard_active_filters(actives) {
+    var no_actives = Object.keys(actives).length;
+    var last_page = 0;
+
+    if (no_actives) {
+        if ($('.dashboardActiveFilters').length) {
+
+            for (i = 0; i < no_actives; i++) { if ((i % get_max_filters_per_page() == 0) && (i > 0)) { last_page++; } }
+            build_actives_carousel(get_max_filters_per_page(), actives, last_page);
+
+        } else {
+
+            var carousel_page = 0;
+            $('#toggleDash').after('<div class="dashboardActiveFilters no-gutters" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div></div></div></div></div>');
+            build_actives_carousel(get_max_filters_per_page(), actives, carousel_page);
+
+        }
+    } else {
+        $('.dashboardActiveFilters').remove()
+        $('footer').removeClass('collapseFilters');
+    }
+}
+
+
+function get_max_filters_per_page() {
+
+    var screen_size = $(window).width();
+    return (screen_size - 100) / 83;
+}
 
 
 function add_active_filter(clicked_name, clicked_icon_path) {
@@ -225,21 +179,33 @@ function remove_active_filter(clicked_name) {
 }
 
 
+function get_all_active() {
+    var actives = {};
+    $('.activeBtn').each(function () {
+        var name = $(this).find('figcaption').text();
+        var icon_path = $(this).find('img').attr('src');
+        actives[name] = icon_path;
+    });
+    return actives;
+}
+
+
 function get_display_page(max_filters_per_page, actives) {
     var no_actives = Object.keys(actives).length;
     var current_page = $('.carousel-item.footer.active').children('.container').attr('id').replace('active-button-container', '');
     var last_page = 0;
 
-    for ( i=0; i<no_actives; i++ ) { if ( (i%max_filters_per_page==0) && (i>0) ) { last_page++; }}
+    for (i = 0; i < no_actives; i++) { if ((i % max_filters_per_page == 0) && (i > 0)) { last_page++; } }
 
-    if ( last_page>=current_page ) { return current_page; } else { return last_page; }
+    if (last_page >= current_page) { return current_page; } else { return last_page; }
 }
 
 
 function build_actives_carousel(max_filters_per_page, actives, display_page) {
     var carousel_page;
-    
-    if (Object.keys(actives).length != 0) {
+
+
+    if (Object.keys(actives).length) {
 
         $('#carousel-pages-active').empty();
         $('.carousel-arrow').remove();
@@ -252,6 +218,12 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
             icon_path = Object.values(actives)[i];
 
             if (i == 0) {
+                if (!$('.card-footer').length) {
+                    carousel_page = 0;
+                    $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+                    continue;
+                }
+
                 carousel_page = 0;
                 $('.actives-pages').append('<div class="carousel-item footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
 
@@ -260,6 +232,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
                 $('#carousel-pages-active').empty();
 
                 if (!($('.carousel-arrow').length)) {
+                    console.log('success');
                     $('#activeFilters').append('<a class="carousel-control-prev carousel-arrow" href="#activeFilters" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next carousel-arrow" href="#activeFilters" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>');
                 }
 
@@ -285,3 +258,28 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
     } else { $('.card-footer').remove(); }
 
 }
+
+// AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
+/*$.ajax({
+    url: 'ajax/populate_sub_categories/',
+    data: {
+        'category': category
+    },
+    dataType: 'json',
+    success: function (data) {
+        var len = Object.keys(data.sub_categories).length;
+        for (var i = 0; i < len; i++) {
+            var name = String(Object.keys(data.sub_categories)[i]);
+            var icon_path = String(Object.values(data.sub_categories)[i]);
+
+            // icon_path = String(icon_path).replace('static/', "{% static '");
+            // icon_path = icon_path.concat("' %}");
+            icon_path = icon_path.replace('static/', "/static/");
+            console.log(icon_path)
+
+            // NEED FUNCTIONALITY FOR CAROUSEL PAGES
+
+            $('#subCatCarousel').append('<div class="carousel-item active"><div class="container"><button class="btn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div>');
+        }
+    }
+});*/
