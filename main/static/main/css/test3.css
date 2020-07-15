@@ -141,7 +141,14 @@ footer.active {
     background-color: blueviolet;
     padding: 0;
     margin: -20px;
-    left: 20px;
+    /* Firefox */
+    left: -moz-calc(50% - 40px);
+    /* WebKit */
+    left: -webkit-calc(50% - 40px);
+    /* Opera */
+    left: -o-calc(50% - 40px);
+    /* Standard */
+    left: calc(50% - 40px);
     cursor: pointer;
 }
 

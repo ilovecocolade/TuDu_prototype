@@ -26,7 +26,13 @@ def test2(request):
 
 
 def test3(request):
-    return render(request, 'main/test3.html')
+    categories = {}
+    for category in Categories.objects.all():
+        sub_categories = {}
+        [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category.name)]
+        categories.update({category.name: sub_categories})
+
+    return render(request, 'main/test3.html', context={'categories': categories})
 
 
 def populate_sub_categories(request):
