@@ -242,6 +242,11 @@ input:checked + .slider:before {
     line-height: 1.2;
 }
 
+#verifyOnly {
+    font-size: small;
+    padding: 2px;
+}
+
 .badge-pill {
     height: 18px;
 }

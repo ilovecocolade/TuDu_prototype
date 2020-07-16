@@ -34,6 +34,11 @@
     <!-- Custom styles for this template REMOVE REFRESH ^^^^ CACHE -->
     <link href="{% static "main/css/test2.css" %}?{% now 'U' %}" rel="stylesheet">
 
+    <!-- Change verified only button when toggled to green fill -->
+    <script>
+        $(document).ready(verified_toggle() {
+        })
+    </script>
 
 </head>
 
@@ -165,6 +170,7 @@
                                         <a class="dropdown-item">Nearest</a>
                                     </div>
                                 </div>
+                                <button class="btn btn-sm btn-outline-success" data-toggle="tooltip" style="margin-left:10px;" id="verifyOnly" onclick="verified_toggle()">Verified only</button>
                             </div>
                         </div>
                         <div class="col-2" style="padding:0;">
