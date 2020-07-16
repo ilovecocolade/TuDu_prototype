@@ -8,6 +8,7 @@ $(document).on('click', '.activeBtn', function () {
     if ($('#toggleDash').parent().is('footer.active')) {
         build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = get_display_page(4, actives));
     } else {
+        console.log(actives);
         build_dashboard_active_filters(actives = actives);
     }
 });
@@ -24,7 +25,6 @@ $(document).on('click', '#toggleDash', function () {
         } else {
             $('footer.active').addClass('collapseFilters');
             var actives = get_all_active();
-            $('.dashboardActiveFilters').remove();
             build_dashboard_active_filters(actives = actives);
         }
         $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>');
@@ -37,7 +37,7 @@ $(document).on('click', '#toggleDash', function () {
             var actives = get_all_active();
             $('.dashboardActiveFilters').remove();
             build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = 0);
-        }
+        } else { $('.card-footer').remove(); }
     };
     $('footer').toggleClass('active');
 });
