@@ -215,6 +215,7 @@ input:checked + .slider:before {
     width: 30px;
     top: 40%;
     bottom: 60%;
+    background-color: goldenrod;
     transform: translateX(0%);
   }
                                         /* DUPLICATES? */
@@ -223,6 +224,7 @@ input:checked + .slider:before {
     width: 30px;
     top: 40%;
     bottom: 60%;
+    background-color: goldenrod;
     transform: translateX(0%);
 }
 
