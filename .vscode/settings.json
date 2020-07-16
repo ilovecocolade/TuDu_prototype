@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "C:\\Users\\john6\\anaconda3\\envs\\toodoo\\python.exe"
+    "python.pythonPath": "C:\\Users\\john6\\anaconda3\\envs\\toodoo\\python.exe",
+
+    "vscode_custom_css.imports":[
+        "file:///C:/Users/john6/.vscode/extensions/victoriadrake.kabukicho-0.0.5/lights-on.css"
+    ]
 }
