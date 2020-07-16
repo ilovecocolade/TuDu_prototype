@@ -33,7 +33,7 @@
     <script src="{% static "main/js/dashboard.js" %}?{% now 'U' %}" rel="dashboardcontroller"></script>
 </head>
 
-<body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)">
+<body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)" onresize="resize_dashboard()">
     <!-- NAVBAR -->
     <nav class="navbar fixed-top navbar-expand">
         <a class="navbar-brand" href="/" style="color: #EFFD5F;">
@@ -209,29 +209,31 @@
 
             <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS-->
             <div id="xlDash" class="row d-flex">
-                <div class="col-3 no-gutters border">
+                <div class="col-3 no-gutters border" id="dash0">
                     SEARCH RESULTS
                 </div>
-                <div class="col-3 no-gutters border">
+                <div class="col-3 no-gutters border" id="dash1">
                     THINGS TuDu
                 </div>
-                <div class="col-3 no-gutters border">
+                <div class="col-3 no-gutters border" id="dash2">
                     <div class="container">
                         <div class="card" id="filterCard">
                             <div class="card-header">
                                 <div class="catBtnContainer no-gutters border">
                                     {% for name, sub_cat in categories.items %}
-                                    <button class="btn catBtn" onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                    <button class="btn catBtn"
+                                        onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
                                     {% endfor %}
                                 </div>
                             </div>
                             <div class="card-body" style="background-color: orange; padding:0; margin:0;">
-                
+
                                 <!--IF >x subCategories - LOAD CAROUSEL-->
                                 <div class="no-gutters">
                                     <div id="filterMenu" class="carousel slide" data-interval="false">
                                         <!--Indicators-->
-                                        <ol class="carousel-indicators subCat" style="margin: 0; padding: 0;" id="carousel-pages">
+                                        <ol class="carousel-indicators subCat" style="margin: 0; padding: 0;"
+                                            id="carousel-pages">
                                             <!-- CAROUSEL INDICATORS HERE -->
                                         </ol>
                                         <!--Slideshow-->
@@ -241,28 +243,31 @@
                                             </div>
                                         </div>
                                         <!--Left & Right Controls-->
-                                        <a class="carousel-control-prev" href="#filterMenu" role="button" data-slide="prev">
+                                        <a class="carousel-control-prev" href="#filterMenu" role="button"
+                                            data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="sr-only">Previous</span>
                                         </a>
-                                        <a class="carousel-control-next" href="#filterMenu" role="button" data-slide="next">
+                                        <a class="carousel-control-next" href="#filterMenu" role="button"
+                                            data-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="sr-only">Next</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                
+
                             <!-- CAROUSEL HTML HERE -->
-                
+
                         </div>
                     </div>
                 </div>
-                <div class="col-3 no-gutters border">
+                <div class="col-3 no-gutters border" id="dash3">
                     MORE FEATURES
                 </div>
             </div>
-        
+        </div>
+
         <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS--
             <div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
                 !--Indicators--
@@ -303,7 +308,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>-->
-        
+
         <!--SCREEN IS SMALL, DISPLAY 1 DASHSECTION IN 4 CAROUSELS--
             <div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
                 !--Indicators--
@@ -339,10 +344,67 @@
                 </a>
             </div>
         </div> -->
-        
+
 
 
     </footer>
 </body>
 
 </html>
+
+<!-- 4 slide dashboard
+<div id="dashboardCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+      <li data-target="#dashboardCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#dashboardCarousel" data-slide-to="1"></li>
+      <li data-target="#dashboardCarousel" data-slide-to="2"></li>
+      <li data-target="#dashboardCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        ' + dash0 + '
+      </div>
+      <div class="carousel-item">
+        ' + dash01 + '      
+    </div>
+      <div class="carousel-item">
+        ' + dash2 + '
+      </div>
+      <div class="carousel-item">
+        ' + dash3 + '
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#dashboardCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#dashboardCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+<div id="dashboardCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+      <li data-target="#dashboardCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#dashboardCarousel" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        ' + dash0 + dash1 '
+      </div>
+      <div class="carousel-item">
+        ' + dash2 + dash3 '
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#dashboardCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#dashboardCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div> -->

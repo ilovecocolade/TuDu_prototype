@@ -8,7 +8,6 @@ $(document).on('click', '.activeBtn', function () {
     if ($('#toggleDash').parent().is('footer.active')) {
         build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = get_display_page(4, actives));
     } else {
-        console.log(actives);
         build_dashboard_active_filters(actives = actives);
     }
 });
@@ -146,11 +145,58 @@ function build_dashboard_active_filters(actives) {
     }
 }
 
+// TODO: FIX dashboard carousel
+function resize_dashboard() {
+
+    if ($('#toggleDash').parent().is('footer.active')) {
+
+        var sections_per_page = Math.floor(($(window).width() - 100) / 300);
+        var dash0 = $('#dash0').get(0);
+        var dash1 = $('#dash1').get(0);
+        var dash2 = $('#dash2').get(0);
+        var dash3 = $('#dash3').get(0);
+
+        console.log(dash0);
+
+        if (1 < sections_per_page && sections_per_page < 4) {
+            console.log('2 page dash');
+            $('#xlDash').empty();
+
+            $('#xlDash').append(`<div id="dashboardCarousel" class="carousel slide"> <ol class="carousel-indicators"> <li data-target="#dashboardCarousel" data-slide-to="0" class="active"></li> <li data-target="#dashboardCarousel" data-slide-to="1"></li> </ol> <div class="carousel-inner"> <div class="carousel-item active">${dash0}${dash1}</div> <div class="carousel-item">${dash2}${dash3}</div> </div> <a class="carousel-control-prev" href="#dashboardCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#dashboardCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>`);
+
+
+        } else if (sections_per_page < 2) {
+            console.log('4 page dash');
+            $('#xlDash').empty();
+
+            $('#xlDash').append('<div id="dashboardCarousel" class="carousel slide"> <ol class="carousel-indicators"> <li data-target="#dashboardCarousel" data-slide-to="0" class="active"></li> <li data-target="#dashboardCarousel" data-slide-to="1"></li> <li data-target="#dashboardCarousel" data-slide-to="2"></li> <li data-target="#dashboardCarousel" data-slide-to="3"></li> </ol> <div class="carousel-inner"> <div class="carousel-item active">' + dash0 + '</div> <div class="carousel-item">' + dash1 + '</div> <div class="carousel-item">' + dash2 + '</div> <div class="carousel-item">' + dash3 + '</div> </div> <a class="carousel-control-prev" href="#dashboardCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#dashboardCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>');
+
+        } else {
+            $('#xlDash').empty();
+
+            $('#xlDash').append(dash0 + dash1 + dash2 + dash3);
+        }
+
+    }
+
+}
+
+
+function resize_active_dash_carousel() {
+
+    if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
+
+        build_actives_carousel(get_max_filters_per_page(), get_all_active(), 0);
+
+    }
+
+}
+
 
 function get_max_filters_per_page() {
 
     var screen_size = $(window).width();
-    return (screen_size - 100) / 83;
+    return Math.floor((screen_size - 100) / 83);
 }
 
 
