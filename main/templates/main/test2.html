@@ -34,6 +34,11 @@
     <!-- Custom styles for this template REMOVE REFRESH ^^^^ CACHE -->
     <link href="{% static "main/css/test2.css" %}?{% now 'U' %}" rel="stylesheet">
 
+    <!-- Change verified only button when toggled to green fill -->
+    <script>
+        $(document).ready(verified_toggle() {
+        })
+    </script>
 
 </head>
 
@@ -165,6 +170,7 @@
                                         <a class="dropdown-item">Nearest</a>
                                     </div>
                                 </div>
+                                <button class="btn btn-sm btn-outline-success" data-toggle="tooltip" style="margin-left:10px;" id="verifyOnly" onclick="verified_toggle()">Verified only</button>
                             </div>
                         </div>
                         <div class="col-2" style="padding:0;">
@@ -241,23 +247,23 @@
                                 <a class="carousel-control-prev" href="#locationImages" data-slide="prev">
                                     <span class="carousel-control-prev-icon"></span>
                                 </a>
-                                <a class="carousel-control-next" href="#LocationImages" data-slide="next">
+                                <a class="carousel-control-next" href="#locationImages" data-slide="next">
                                     <span class="carousel-control-next-icon"></span>
                                 </a>
                             </div>
                         </div>
                         <div class="col-4" style="overflow:hidden; padding: 2px; line-height: 0.4">
-                            <h6 class="subHead">Ranking:</h6>
+                            <h6 class="subHead">TuDu Ranking:</h6>
                             <p>1 of 100</p>
-                            <h6 class="subHead">Rating:</h6>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <h6 class="subHead" style="margin-top: 10px;">Visits:</h6>
+                            <h6 class="subHead" style="margin-top: 5px;">Visits:</h6>
                             <p style="margin-bottom: 10px;">50</p>
-                            <h6 class="subHead" style="margin-bottom: 0; padding-top: 5px;">Distance:</h6>
+                            <h6 class="subHead" style="padding-top:5px;">Rating:</h6>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <h6 class="subHead" style="margin-bottom: 0; padding-top: 10px;">Distance:</h6>
                             <p style="font-size: 15px; line-height: 1;">100 miles or 160 km away</p>
                         </div>
                     </div>

@@ -215,6 +215,7 @@ input:checked + .slider:before {
     width: 30px;
     top: 40%;
     bottom: 60%;
+    background-color: goldenrod;
     transform: translateX(0%);
   }
                                         /* DUPLICATES? */
@@ -223,6 +224,7 @@ input:checked + .slider:before {
     width: 30px;
     top: 40%;
     bottom: 60%;
+    background-color: goldenrod;
     transform: translateX(0%);
 }
 
@@ -240,6 +242,11 @@ input:checked + .slider:before {
 .subHead {
     font-size: 16px;
     line-height: 1.2;
+}
+
+#verifyOnly {
+    font-size: small;
+    padding: 2px;
 }
 
 .badge-pill {
