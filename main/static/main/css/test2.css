@@ -203,3 +203,59 @@ input:checked + .slider:before {
     height: 60px;
     width: 360px;
 }
+
+#imageContainer {
+    height: 200px;
+    width: 100%;
+    border: solid 2px;
+}
+
+.carousel-control-prev {
+    height: 30px;
+    width: 30px;
+    top: 40%;
+    bottom: 60%;
+    transform: translateX(0%);
+  }
+                                        /* DUPLICATES? */
+.carousel-control-next {
+    height: 30px;
+    width: 30px;
+    top: 40%;
+    bottom: 60%;
+    transform: translateX(0%);
+}
+
+.checked {
+    color: goldenrod;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.fa-star {
+    margin: 0;
+    padding: 0;
+}
+
+.subHead {
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.badge-pill {
+    height: 18px;
+}
+
+.verifyBtn {
+    font-size: x-small;
+    margin: 0;
+    padding: 2px;
+}
+
+.flagBtn {
+    font-size: x-small;
+    margin: 0;
+    padding: 2px;
+}
+
+
