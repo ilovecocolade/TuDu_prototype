@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 {% load static %}
 
 <head>
@@ -209,13 +210,14 @@
 
             <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS-->
             <div id="xlDash" class="row d-flex">
-                <div class="col-3 no-gutters border" id="dash0">
-                    SEARCH RESULTS
+                <div class="col-3 no-gutters border">
+                    <div class="no-gutters" id="dash0">SEARCH RESULTS</div>
                 </div>
-                <div class="col-3 no-gutters border" id="dash1">
-                    THINGS TuDu
+                <div class="col-3 no-gutters border">
+                    <div class="no-gutters" id="dash1">THINGS TuDu</div>
                 </div>
-                <div class="col-3 no-gutters border" id="dash2">
+                <div class="col-3 no-gutters border">
+                <div class="no-gutters" id="dash2">
                     <div class="container">
                         <div class="card" id="filterCard">
                             <div class="card-header">
@@ -238,7 +240,7 @@
                                         </ol>
                                         <!--Slideshow-->
                                         <div class="carousel-inner">
-                                            <div class="container" id='subCatCarousel'>
+                                            <div class="container" id="subCatCarousel">
                                                 <!-- SUB-CATEGORY CAROUSEL BUTTONS HERE -->
                                             </div>
                                         </div>
@@ -261,9 +263,10 @@
 
                         </div>
                     </div>
+                    </div>
                 </div>
-                <div class="col-3 no-gutters border" id="dash3">
-                    MORE FEATURES
+                <div class="col-3 no-gutters border">
+                    <div class="no-gutters" id="dash3">MORE FEATURES</div>
                 </div>
             </div>
         </div>
@@ -311,15 +314,15 @@
 
         <!--SCREEN IS SMALL, DISPLAY 1 DASHSECTION IN 4 CAROUSELS--
             <div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
-                !--Indicators--
+
                 <ol class="carousel-indicators" style="margin: 0; padding: 0;">
                     <li data-target="#smDash" data-slide-to="0" class="active"></li>
                     <li data-target="#smDash" data-slide-to="1"></li>
                     <li data-target="#smDash" data-slide-to="2"></li>
                     <li data-target="#smDash" data-slide-to="3"></li>
                 </ol>
-                !--Slideshow--
-                <div class="carousel-inner no-gutters">
+ 
+                 <div class="carousel-inner no-gutters">
                     <div class="carousel-item active container-fluid">
                         SEARCH RESULTS
                     </div>
@@ -333,7 +336,7 @@
                         MORE FEATURES
                     </div>
                 </div>
-                !--Left & Right Controls--
+
                 <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
