@@ -48,12 +48,7 @@ class CreateAccountForm(forms.Form):
         fields = ('username', 'email', 'password1', 'password2')
 
     def save(self, commit=True):
-        '''email = self.clean_email()
-        username = self.clean_username()
-        user = super(CreateAccountForm, self).save(commit=False)
-        user.email = email
-        user.username = username'''
-
+        
         username=self.clean_username()
         email=self.clean_email()
         password=self.clean_password2()
