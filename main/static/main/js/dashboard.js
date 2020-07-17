@@ -145,7 +145,7 @@ function build_dashboard_active_filters(actives) {
     }
 }
 
-// TODO: FIX dashboard carousel
+
 function resize_dashboard() {
 
     if ($('#toggleDash').parent().is('footer.active')) {
@@ -159,7 +159,7 @@ function resize_dashboard() {
             var dash3 = $('#dash3')[0].outerHTML;
             
             $('#dashContent').empty();
-            $('#dashContent').append('<div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true"> <ol class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#mdDash" data-slide-to="0" class="active"></li> <li data-target="#mdDash" data-slide-to="1"></li> </ol> <div class="carousel-inner no-gutters"> <div class="carousel-item active container-fluid"> <div class="row d-flex border"> <div class="col-6 border"> ' + dash0 + ' </div> <div class="col-6 border"> ' + dash1 + ' </div> </div> </div> <div class="carousel-item container-fluid"> <div class="row d-flex border"> <div class="col-6 border"> ' + dash2 + ' </div> <div class="col-6 border"> ' + dash3 + ' </div> </div> </div> </div> <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#mdDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>-->');
+            $('#dashContent').append('<div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true"> <ol class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#mdDash" data-slide-to="0" class="active"></li> <li data-target="#mdDash" data-slide-to="1"></li> </ol> <div class="carousel-inner no-gutters"> <div class="carousel-item active container-fluid"> <div class="row d-flex border"> <div class="col-6 border"> ' + dash0 + ' </div> <div class="col-6 border"> ' + dash1 + ' </div> </div> </div> <div class="carousel-item container-fluid"> <div class="row d-flex border"> <div class="col-6 border"> ' + dash2 + ' </div> <div class="col-6 border"> ' + dash3 + ' </div> </div> </div> </div> <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#mdDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>');
             
 
         } else if (sections_per_page < 2 && $('#smDash').length == 0) {
@@ -169,7 +169,7 @@ function resize_dashboard() {
             var dash3 = $('#dash3')[0].outerHTML;
            
             $('#dashContent').empty();
-            $('#dashContent').append('<div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">  <ol class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#smDash" data-slide-to="0" class="active"></li> <li data-target="#smDash" data-slide-to="1"></li> <li data-target="#smDash" data-slide-to="2"></li> <li data-target="#smDash" data-slide-to="3"></li> </ol>  <div class="carousel-inner no-gutters"> <div class="carousel-item active container-fluid"> ' + dash0 + ' </div> <div class="carousel-item container-fluid"> ' + dash1 + ' </div> <div class="carousel-item container-fluid"> ' + dash2 + ' </div> <div class="carousel-item container-fluid"> ' + dash3 + ' </div> </div>  <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#smDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div> </div>');
+            $('#dashContent').append('<div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">  <ol class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#smDash" data-slide-to="0" class="active"></li> <li data-target="#smDash" data-slide-to="1"></li> <li data-target="#smDash" data-slide-to="2"></li> <li data-target="#smDash" data-slide-to="3"></li> </ol>  <div class="carousel-inner no-gutters"> <div class="carousel-item active container-fluid"> ' + dash0 + ' </div> <div class="carousel-item container-fluid"> ' + dash1 + ' </div> <div class="carousel-item container-fluid"> ' + dash2 + ' </div> <div class="carousel-item container-fluid"> ' + dash3 + ' </div> </div>  <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#smDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>');
 
         } else if (sections_per_page >= 4 && $('#xlDash').length == 0) {
             var dash0 = $('#dash0')[0].outerHTML;
