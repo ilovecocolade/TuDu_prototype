@@ -34,7 +34,7 @@
     <script src="{% static "main/js/dashboard.js" %}?{% now 'U' %}" rel="dashboardcontroller"></script>
 </head>
 
-<body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)" onresize="resize_dashboard()">
+<body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)">
     <!-- NAVBAR -->
     <nav class="navbar fixed-top navbar-expand">
         <a class="navbar-brand" href="/" style="color: #EFFD5F;">
@@ -208,7 +208,7 @@
 
         <div id="dashContent" class="no-gutters" style="background-color: aquamarine; height: 100%; display: none;">
 
-            <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS-->
+            <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS--
             <div id="xlDash" class="row d-flex">
                 <div class="col-3 no-gutters border">
                     <div class="no-gutters" id="dash0">SEARCH RESULTS</div>
@@ -217,136 +217,232 @@
                     <div class="no-gutters" id="dash1">THINGS TuDu</div>
                 </div>
                 <div class="col-3 no-gutters border">
-                <div class="no-gutters" id="dash2">
-                    <div class="container">
-                        <div class="card" id="filterCard">
-                            <div class="card-header">
-                                <div class="catBtnContainer no-gutters border">
-                                    {% for name, sub_cat in categories.items %}
-                                    <button class="btn catBtn"
-                                        onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
-                                    {% endfor %}
+                    <div class="no-gutters" id="dash2">
+                        <div class="container">
+                            <div class="card" id="filterCard">
+                                <div class="card-header">
+                                    <div class="catBtnContainer no-gutters border">
+                                        {% for name, sub_cat in categories.items %}
+                                        <button class="btn catBtn"
+                                            onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body" style="background-color: orange; padding:0; margin:0;">
+                                <div class="card-body" style="background-color: orange; padding:0; margin:0;">
 
-                                <!--IF >x subCategories - LOAD CAROUSEL-->
-                                <div class="no-gutters">
-                                    <div id="filterMenu" class="carousel slide" data-interval="false">
-                                        <!--Indicators-->
-                                        <ol class="carousel-indicators subCat" style="margin: 0; padding: 0;"
-                                            id="carousel-pages">
-                                            <!-- CAROUSEL INDICATORS HERE -->
-                                        </ol>
-                                        <!--Slideshow-->
-                                        <div class="carousel-inner">
-                                            <div class="container" id="subCatCarousel">
-                                                <!-- SUB-CATEGORY CAROUSEL BUTTONS HERE -->
+                                    <!--IF >x subCategories - LOAD CAROUSEL--
+                                    <div class="no-gutters">
+                                        <div id="filterMenu" class="carousel slide" data-interval="false">
+                                            <!--Indicators--
+                                            <ol class="carousel-indicators subCat" style="margin: 0; padding: 0;"
+                                                id="carousel-pages">
+                                                <!-- CAROUSEL INDICATORS HERE --
+                                            </ol>
+                                            <!--Slideshow--
+                                            <div class="carousel-inner">
+                                                <div class="container" id="subCatCarousel">
+                                                    <!-- SUB-CATEGORY CAROUSEL BUTTONS HERE --
+                                                </div>
                                             </div>
+                                            <!--Left & Right Controls--
+                                            <a class="carousel-control-prev" href="#filterMenu" role="button"
+                                                data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#filterMenu" role="button"
+                                                data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
                                         </div>
-                                        <!--Left & Right Controls-->
-                                        <a class="carousel-control-prev" href="#filterMenu" role="button"
-                                            data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#filterMenu" role="button"
-                                            data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- CAROUSEL HTML HERE -->
-
                         </div>
-                    </div>
                     </div>
                 </div>
                 <div class="col-3 no-gutters border">
                     <div class="no-gutters" id="dash3">MORE FEATURES</div>
                 </div>
             </div>
+        </div>-->
+
+            <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS-->
+            <div class="row border carouselRow">
+                <div id="mdDash" class="border carousel slide" data-interval="false" data-touch="true">
+                    <!--Indicators-->
+                    <ul class="carousel-indicators" style="margin: 0; padding: 0;">
+                        <li data-target="#mdDash" data-slide-to="0" class="active"></li>
+                        <li data-target="#mdDash" data-slide-to="1"></li>
+                    </ul>
+                    <!--Slideshow-->
+                    <div class="carousel-inner no-gutters carouselRow">
+                        <div class="carousel-item active container-fluid">
+                            <div class="row d-flex border carouselRow">
+                                <div class="col-6 no-gutters border">
+                                    <div class="no-gutters" id="dash0">SEARCH RESULTS
+                                    </div>
+                                </div>
+                                <div class="col-6 no-gutters border">
+                                    <div class="no-gutters" id="dash1">THINGS TuDu
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item container-fluid">
+                            <div class="row d-flex border carouselRow">
+                                <div class="col-6 border">
+                                    <!--<div class="no-gutters carouselRow" id="dash2">
+                                        <div class="container carouselRow">
+                                        <div class="card" id="filterCard">
+                                            <div class="card-header">
+                                                <div class="catBtnContainer no-gutters border">
+                                                    {% for name, sub_cat in categories.items %}
+                                                    <button class="btn catBtn"
+                                                        onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="card-body"
+                                                style="background-color: orange; padding:0; margin:0;">
+
+                                                <!--IF >x subCategories - LOAD CAROUSEL--
+                                                <div class="no-gutters">
+                                                    <div id="filterMenu" class="carousel slide"
+                                                        data-interval="false">
+                                                        <!--Indicators--
+                                                        <ul class="carousel-indicators subCat"
+                                                            style="margin: 0; padding: 0;" id="carousel-pages">
+                                                            <!-- CAROUSEL INDICATORS HERE --
+                                                        </ul>
+                                                        <!--Slideshow--
+                                                            <div class="carousel-inner">
+                                                                <div class="container" id="subCatCarousel">
+                                                                    <!-- SUB-CATEGORY CAROUSEL BUTTONS HERE --
+                                                                </div>
+                                                            </div>
+                                                            <!--Left & Right Controls--
+                                                            <a class="carousel-control-prev" href="#filterMenu"
+                                                                role="button" data-slide="prev">
+                                                                <span class="carousel-control-prev-icon"
+                                                                    aria-hidden="true"></span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                            <a class="carousel-control-next" href="#filterMenu"
+                                                                role="button" data-slide="next">
+                                                                <span class="carousel-control-next-icon"
+                                                                    aria-hidden="true"></span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+                                <div class="col-6 border">
+                                    <div class="no-gutters" id="dash3">MORE FEATURES
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Left & Right Controls-->
+                    <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#mdDash" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS--
-            <div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
-                !--Indicators--
-                <ol class="carousel-indicators" style="margin: 0; padding: 0;">
-                    <li data-target="#mdDash" data-slide-to="0" class="active"></li>
-                    <li data-target="#mdDash" data-slide-to="1"></li>
-                </ol>
-                !--Slideshow--
-                <div class="carousel-inner no-gutters">
-                    <div class="carousel-item active container-fluid">
-                        <div class="row d-flex border">
-                            <div class="col-6 border">
-                                SEARCH RESULTS
-                            </div>
-                            <div class="col-6 border">
-                                THINGS TuDu
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item container-fluid">
-                        <div class="row d-flex border">
-                            <div class="col-6 border">
-                                FILTERS
-                            </div>
-                            <div class="col-6 border">
-                                MORE FEATURES
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                !--Left & Right Controls--
-                <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#mdDash" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>-->
-
         <!--SCREEN IS SMALL, DISPLAY 1 DASHSECTION IN 4 CAROUSELS--
-            <div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
+            <div class="row border">
+                <div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">
 
-                <ol class="carousel-indicators" style="margin: 0; padding: 0;">
-                    <li data-target="#smDash" data-slide-to="0" class="active"></li>
-                    <li data-target="#smDash" data-slide-to="1"></li>
-                    <li data-target="#smDash" data-slide-to="2"></li>
-                    <li data-target="#smDash" data-slide-to="3"></li>
-                </ol>
- 
-                 <div class="carousel-inner no-gutters">
-                    <div class="carousel-item active container-fluid">
-                        SEARCH RESULTS
+                    <ul class="carousel-indicators" style="margin: 0; padding: 0;">
+                        <li data-target="#smDash" data-slide-to="0" class="active"></li>
+                        <li data-target="#smDash" data-slide-to="1"></li>
+                        <li data-target="#smDash" data-slide-to="2"></li>
+                        <li data-target="#smDash" data-slide-to="3"></li>
+                    </ul>
+
+                    <div class="carousel-inner no-gutters">
+                        <div class="carousel-item active container-fluid">
+                            <div class="no-gutters" id="dash0">SEARCH RESULTS
+                            </div>
+                        </div>
+                        <div class="carousel-item container-fluid">
+                            <div class="no-gutters" id="dash1">THINGS TuDu</div>
+                        </div>
+                        <div class="carousel-item container-fluid">
+                            <div class="no-gutters" id="dash2">
+                                <div class="container">
+                                    <div class="card" id="filterCard">
+                                        <div class="card-header">
+                                            <div class="catBtnContainer no-gutters border">
+                                                {% for name, sub_cat in categories.items %}
+                                                <button class="btn catBtn"
+                                                    onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="card-body" style="background-color: orange; padding:0; margin:0;">
+
+                                            <!--IF >x subCategories - LOAD CAROUSEL--
+                                            <div class="no-gutters">
+                                                <div id="filterMenu" class="carousel slide" data-interval="false">
+                                                    <!--Indicators--
+                                                    <ol class="carousel-indicators subCat" style="margin: 0; padding: 0;"
+                                                        id="carousel-pages">
+                                                        <!-- CAROUSEL INDICATORS HERE --
+                                                    </ol>
+                                                    <!--Slideshow--
+                                                    <div class="carousel-inner">
+                                                        <div class="container" id="subCatCarousel">
+                                                            <!-- SUB-CATEGORY CAROUSEL BUTTONS HERE --
+                                                        </div>
+                                                    </div>
+                                                    <!--Left & Right Controls--
+                                                    <a class="carousel-control-prev" href="#filterMenu" role="button"
+                                                        data-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#filterMenu" role="button"
+                                                        data-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item container-fluid">
+                            <div class="no-gutters" id="dash3">MORE FEATURES</div>
+                        </div>
                     </div>
-                    <div class="carousel-item container-fluid">
-                        THINGS TuDu
-                    </div>
-                    <div class="carousel-item container-fluid">
-                        FILTERS
-                    </div>
-                    <div class="carousel-item container-fluid">
-                        MORE FEATURES
-                    </div>
+
+                    <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#smDash" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-
-                <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#smDash" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
-        </div> -->
+        </div>-->
 
 
 
