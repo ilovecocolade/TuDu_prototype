@@ -151,40 +151,37 @@ function resize_dashboard() {
     if ($('#toggleDash').parent().is('footer.active')) {
 
         var sections_per_page = Math.floor(($(window).width() - 100) / 300);
-        var dash0 = $('#dash0').get(0);
-        var dash1 = $('#dash1').get(0);
-        var dash2 = $('#dash2').get(0);
-        var dash3 = $('#dash3').get(0);
 
-        console.log(dash0);
+        if (1 < sections_per_page && sections_per_page < 4 && $('#mdDash').length == 0) {
+            var dash0 = $('#dash0')[0].outerHTML;
+            var dash1 = $('#dash1')[0].outerHTML;
+            var dash2 = $('#dash2')[0].outerHTML;
+            var dash3 = $('#dash3')[0].outerHTML;
+            
+            $('#dashContent').empty();
+            $('#dashContent').append('<div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true"> <ol class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#mdDash" data-slide-to="0" class="active"></li> <li data-target="#mdDash" data-slide-to="1"></li> </ol> <div class="carousel-inner no-gutters"> <div class="carousel-item active container-fluid"> <div class="row d-flex border"> <div class="col-6 border"> ' + dash0 + ' </div> <div class="col-6 border"> ' + dash1 + ' </div> </div> </div> <div class="carousel-item container-fluid"> <div class="row d-flex border"> <div class="col-6 border"> ' + dash2 + ' </div> <div class="col-6 border"> ' + dash3 + ' </div> </div> </div> </div> <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#mdDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>-->');
+            
 
-        if (1 < sections_per_page && sections_per_page < 4) {
-            console.log('2 page dash');
-            $('#xlDash').empty();
+        } else if (sections_per_page < 2 && $('#smDash').length == 0) {
+            var dash0 = $('#dash0')[0].outerHTML;
+            var dash1 = $('#dash1')[0].outerHTML;
+            var dash2 = $('#dash2')[0].outerHTML;
+            var dash3 = $('#dash3')[0].outerHTML;
+           
+            $('#dashContent').empty();
+            $('#dashContent').append('<div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">  <ol class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#smDash" data-slide-to="0" class="active"></li> <li data-target="#smDash" data-slide-to="1"></li> <li data-target="#smDash" data-slide-to="2"></li> <li data-target="#smDash" data-slide-to="3"></li> </ol>  <div class="carousel-inner no-gutters"> <div class="carousel-item active container-fluid"> ' + dash0 + ' </div> <div class="carousel-item container-fluid"> ' + dash1 + ' </div> <div class="carousel-item container-fluid"> ' + dash2 + ' </div> <div class="carousel-item container-fluid"> ' + dash3 + ' </div> </div>  <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#smDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div> </div>');
 
-            $('#xlDash').append(`<div id="dashboardCarousel" class="carousel slide"> <ol class="carousel-indicators"> <li data-target="#dashboardCarousel" data-slide-to="0" class="active"></li> <li data-target="#dashboardCarousel" data-slide-to="1"></li> </ol> <div class="carousel-inner"> <div class="carousel-item active">${dash0}${dash1}</div> <div class="carousel-item">${dash2}${dash3}</div> </div> <a class="carousel-control-prev" href="#dashboardCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#dashboardCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>`);
-
-
-        } else if (sections_per_page < 2) {
-            console.log('4 page dash');
-            $('#xlDash').empty();
-
-            $('#xlDash').append('<div id="dashboardCarousel" class="carousel slide"> <ol class="carousel-indicators"> <li data-target="#dashboardCarousel" data-slide-to="0" class="active"></li> <li data-target="#dashboardCarousel" data-slide-to="1"></li> <li data-target="#dashboardCarousel" data-slide-to="2"></li> <li data-target="#dashboardCarousel" data-slide-to="3"></li> </ol> <div class="carousel-inner"> <div class="carousel-item active">' + dash0 + '</div> <div class="carousel-item">' + dash1 + '</div> <div class="carousel-item">' + dash2 + '</div> <div class="carousel-item">' + dash3 + '</div> </div> <a class="carousel-control-prev" href="#dashboardCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#dashboardCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>');
-
-        } else {
-            $('#xlDash').empty();
-
-            $('#xlDash').append(dash0 + dash1 + dash2 + dash3);
+        } else if (sections_per_page >= 4 && $('#xlDash').length == 0) {
+            var dash0 = $('#dash0')[0].outerHTML;
+            var dash1 = $('#dash1')[0].outerHTML;
+            var dash2 = $('#dash2')[0].outerHTML;
+            var dash3 = $('#dash3')[0].outerHTML;
+            
+            $('#dashContent').empty();
+            $('#dashContent').append('<div id="xlDash" class="row d-flex"> <div class="col-3 no-gutters border"> ' + dash0 + ' </div> <div class="col-3 no-gutters border"> ' + dash1 + ' </div> <div class="col-3 no-gutters border"> ' + dash2 + ' </div> <div class="col-3 no-gutters border"> ' + dash3 + ' </div> </div>');
         }
 
-    }
-
-}
-
-
-function resize_active_dash_carousel() {
-
-    if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
+    } else if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
 
         build_actives_carousel(get_max_filters_per_page(), get_all_active(), 0);
 

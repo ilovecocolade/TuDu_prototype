@@ -35,14 +35,14 @@ def test3(request):
     return render(request, 'main/test3.html', context={'categories': categories})
 
 
-def populate_sub_categories(request):
+'''def populate_sub_categories(request):
     category = request.GET.get('category', None)
     sub_categories = {}
     [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category)]
     data = {
         'sub_categories': sub_categories
     }
-    return JsonResponse(data)
+    return JsonResponse(data)'''
 
 
 
