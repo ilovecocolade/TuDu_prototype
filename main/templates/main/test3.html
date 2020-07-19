@@ -17,19 +17,11 @@
     <!-- Font awesome Icons -->
     <script src="https://kit.fontawesome.com/00bc557d5e.js" crossorigin="anonymous"></script>
     <!-- JQuery, Popper, Bootstrap javascript plugins -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="{% static "main/js/jquery.js" %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
-
-    <!-- MATERIALIZE CSS & JS -->
-    <link href="{% static "main/css/materialize.css" %}">
-    <script src="{% static "main/js/materialize.js" %}"></script>
+    <script type="module" src="{% static "main/js/custom-bootstrap.js" %}"></script>
 
     <!-- Custom styles for this template REMOVE REFRESH ^^^^ CACHE -->
     <link href="{% static "main/css/test3.css" %}?{% now 'U' %}" rel="stylesheet">
@@ -213,7 +205,7 @@
 
         <div id="dashContent" class="no-gutters" style="background-color: aquamarine; height: 100%; display: none;">
 
-            <div class="carousel carousel-slider center carouselRow">
+            <!-- <div class="carousel carousel-slider center carouselRow">
                 <div class="carousel-item container-fluid" href="#one!">
                     <div class="row d-flex border carouselRow">
                         <div class="col-6 no-gutters border">
@@ -237,7 +229,31 @@
                     </div>
 
                 </div>
-            </div>
+            </div> 
+
+
+            <div class="carousel carousel-slider center">
+                <div class="carousel-fixed-item center">
+                  <a class="btn waves-effect white grey-text darken-text-2">button</a>
+                </div>
+                <div class="carousel-item red white-text" href="#one!">
+                  <h2>First Panel</h2>
+                  <p class="white-text">This is your first panel</p>
+                </div>
+                <div class="carousel-item amber white-text" href="#two!">
+                  <h2>Second Panel</h2>
+                  <p class="white-text">This is your second panel</p>
+                </div>
+                <div class="carousel-item green white-text" href="#three!">
+                  <h2>Third Panel</h2>
+                  <p class="white-text">This is your third panel</p>
+                </div>
+                <div class="carousel-item blue white-text" href="#four!">
+                  <h2>Fourth Panel</h2>
+                  <p class="white-text">This is your fourth panel</p>
+                </div>
+              </div>
+
 
         </div>
 
@@ -248,9 +264,9 @@
                 indicators: true
             });
 
-        </script>
+        </script> -->
 
-        <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS--
+        <!--SCREEN IS X-LARGE, DISPLAY ALL 4 DASHSECTIONS-->
             <div id="xlDash" class="row d-flex">
                 <div class="col-3 no-gutters border">
                     <div class="no-gutters" id="dash0">SEARCH RESULTS</div>
@@ -305,7 +321,7 @@
                     <div class="no-gutters" id="dash3">MORE FEATURES</div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!--SCREEN IS MEDIUM, DISPLAY 2 DASHSECTIONS IN 2 CAROUSELS
             <div class="row border carouselRow">
