@@ -8,7 +8,6 @@ $(document).on('click', '.activeBtn', function () {
     if ($('#toggleDash').parent().is('footer.active')) {
         build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = get_display_page(4, actives));
     } else {
-        console.log(actives);
         build_dashboard_active_filters(actives = actives);
     }
 });
@@ -37,34 +36,10 @@ $(document).on('click', '#toggleDash', function () {
             var actives = get_all_active();
             $('.dashboardActiveFilters').remove();
             build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = 0);
-        } else { $('.card-footer').remove(); }
+        } else { $('#filterCardFooter').remove(); }
     };
     $('footer').toggleClass('active');
 });
-
-
-// Collapse collapsed dashboard after removing final active filter
-
-/*$(document).on('click', '.activeBtn', function () {
-    if ($('footerCollapseFilters').length) {
-        // TODO: remove active filter here
-        if (!($('.activeBtn').length)) {
-            $('footer').attr('id', '');
-            $('body').attr('id', '');
-        }
-    }
-});*/
-
-
-// Collapse full dashboard after removing active filters
-
-// INSERT CAROUSEL GENERATION FOR ACTIVE FILTERS
-
-
-
-// display dashboard according to screensize
-
-// INSERT CAROUSEL GENERATION FOR DASHBOARD PAGES
 
 
 
@@ -101,26 +76,7 @@ function popSubCategories(categories, sub_categories, initial) {
 
 
 
-$(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUTTONS
-    var carousel_page;
-    var display_page;
-    var name = $(this).find('figcaption').text();
-    var icon_path = $(this).find('img').attr('src');
-    var actives = add_active_filter(name, icon_path);
-    var no_actives = Object.keys(actives).length;
 
-    if ($('.card-footer').length) {
-
-        if (no_actives % 4 == 0) { display_page = (no_actives / 4) - 1; } else { display_page = Math.floor(no_actives / 4); }
-        build_actives_carousel(4, actives, display_page);
-
-    } else {
-
-        carousel_page = 0;
-        $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
-
-    }
-});
 
 
 function build_dashboard_active_filters(actives) {
@@ -149,7 +105,7 @@ function build_dashboard_active_filters(actives) {
 
 function resize_dashboard() {
 
-    if ($('#toggleDash').parent().is('footer.active')) {
+    /*if ($('#toggleDash').parent().is('footer.active')) {
 
         var sections_per_page = Math.floor(($(window).width() - 100) / 300);
 
@@ -181,7 +137,7 @@ function resize_dashboard() {
             $('#dashContent').append('<div id="xlDash" class="row d-flex"> <div class="col-3 no-gutters border"> ' + dash0 + ' </div> <div class="col-3 no-gutters border"> ' + dash1 + ' </div> <div class="col-3 no-gutters border"> ' + dash2 + ' </div> <div class="col-3 no-gutters border"> ' + dash3 + ' </div> </div>');
         }
 
-    } else if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
+    } else */ if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
 
         build_actives_carousel(get_max_filters_per_page(), get_all_active(), 0);
 
@@ -244,16 +200,36 @@ function get_display_page(max_filters_per_page, actives) {
 }
 
 
+$(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUTTONS
+    var carousel_page;
+    var display_page;
+    var name = $(this).find('figcaption').text();
+    var icon_path = $(this).find('img').attr('src');
+    var actives = add_active_filter(name, icon_path);
+    var no_actives = Object.keys(actives).length;
+
+    if ($('#filterCardFooter').length) {
+
+        if (no_actives % 4 == 0) { display_page = (no_actives / 4) - 1; } else { display_page = Math.floor(no_actives / 4); }
+        build_actives_carousel(4, actives, display_page);
+
+    } else {
+
+        carousel_page = 0;
+        $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+
+    }
+});
+
+
 function build_actives_carousel(max_filters_per_page, actives, display_page) {
     var carousel_page;
-
 
     if (Object.keys(actives).length) {
 
         $('#carousel-pages-active').empty();
         $('.carousel-arrow').remove();
         $('.actives-pages').empty();
-        $('.carousel-item.footer.active').removeClass('active');
 
         for (i = 0; i < Object.keys(actives).length; i++) {
 
@@ -261,16 +237,15 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
             icon_path = Object.values(actives)[i];
 
             if (i == 0) {
-                if (!$('.card-footer').length) {
-                    carousel_page = 0;
-                    $('.card-body').after('<div class="card-footer" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+                carousel_page = 0;
+                if (!$('#filterCardFooter').length) {
+                    $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
                     continue;
                 }
-
-                carousel_page = 0;
                 $('.actives-pages').append('<div class="carousel-item footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
 
             } else if (i % max_filters_per_page == 0) {
+                
                 carousel_page = i / max_filters_per_page;
                 $('#carousel-pages-active').empty();
 
@@ -291,13 +266,14 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
             }
 
             $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+            console.log('success');
 
         }
 
         $('#active-button-container' + display_page).parent().addClass('active');
         $('#active-page-indicator-container' + display_page).addClass('active');
 
-    } else { $('.card-footer').remove(); }
+    } else { $('#filterCardFooter').remove(); }
 
 }
 

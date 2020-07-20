@@ -24,10 +24,6 @@
     <!-- JQuery -->
     <script src="{% static "main/js/jquery.js" %}"></script>
     
-    <!-- POPPER -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
 
     <script src="{% static "main/js/bootstrap.bundle.js" %}"></script>
 
@@ -409,9 +405,9 @@
 <script>
     $(document).ready(function(){
         $('.testNewCarousel').slick({
+        infinite: false,
         slidesToShow: 2,
         slidesToScroll: 1,
-        infinite: true,
         });
     });
 </script>
