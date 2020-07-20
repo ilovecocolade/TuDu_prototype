@@ -1,14 +1,14 @@
-import './jquery.js'
-import './bootstrap/alert.js';
-import './bootstrap/button.js';
-import './bootstrap/carousel.js'; // NESTED CAROUSELS: https://github.com/TheMaxoor/bootstrap-nested-carousel
-import './bootstrap/collapse.js';
-import './bootstrap/dropdown.js';
-import './bootstrap/index.js';
-import './bootstrap/modal.js';
-import './bootstrap/popover.js';
-import './bootstrap/scrollspy.js';
-import './bootstrap/tab.js';
-import './bootstrap/tooltip.js';
-import './bootstrap/util.js';
+import './jquery';
+import './bootstrap/alert';
+import './bootstrap/button';
+import './bootstrap/carousel'; // NESTED CAROUSELS: https://github.com/TheMaxoor/bootstrap-nested-carousel
+import './bootstrap/collapse';
+import './bootstrap/dropdown';
+import './bootstrap/index';
+import './bootstrap/modal';
+import './bootstrap/popover';
+import './bootstrap/scrollspy';
+import './bootstrap/tab';
+import './bootstrap/tooltip';
+import './bootstrap/util';
 
