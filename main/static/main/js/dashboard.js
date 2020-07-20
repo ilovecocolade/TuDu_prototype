@@ -8,6 +8,7 @@ $(document).on('click', '.activeBtn', function () {
     if ($('#toggleDash').parent().is('footer.active')) {
         build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = get_display_page(4, actives));
     } else {
+        console.log(actives);
         build_dashboard_active_filters(actives = actives);
     }
 });
