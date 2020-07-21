@@ -46,7 +46,7 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
-    
+
 </head>
 
 <body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)"
@@ -93,7 +93,8 @@
         <!-- Floating interactionables -->
         <!-- DropPin button -->
         {% if user.is_authenticated %}
-        <button type="button" class="btn mapBtn" id="dropPin">
+        <button type="button" class="btn mapBtn" id="dropPin" data-toggle="tooltip"
+            title="Drag and drop to add something TuDu" data-placement="right">
             <span class="fa-stack fa-2x fa-fw">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-map-pin fa-stack-1x fa-inverse"></i>
@@ -102,12 +103,13 @@
         {% endif %}
 
         <!-- Filter button -->
-            <button type="button" class="btn mapBtn" name="filters" onclick="toggleDash()" id="filterBtn"> <!-- ONLICK TOGGLEDASH -->
-                <span class="fa-stack fa-2x fa-fw">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-sitemap fa-stack-1x fa-inverse"></i>
-                </span>
-            </button>
+        <button type="button" class="btn mapBtn" name="filters" onclick="toggleDash()" id="filterBtn">
+            <!-- ONLICK TOGGLEDASH -->
+            <span class="fa-stack fa-2x fa-fw">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-sitemap fa-stack-1x fa-inverse"></i>
+            </span>
+        </button>
 
         <!-- Floating search box -->
         <div class="container rounded" id="searchBoxFloat">
@@ -144,8 +146,7 @@
         <div id="dashContent" class="no-gutters" style="height: 100%; display: none;">
             <div class="row no-gutters" style="height: 100%;">
                 <div id="dashCarousel" class="container-fluid" style="height:100%;">
-                    <div id="dash0">            
-                        <!--Search card for dash-->
+                    <div id="dash0"><!-- Search card -->
                         <div class="container cardContainer">
                             <div class="card cardAlt mx-auto">
                                 <div class="card-header card-headerAlt">
@@ -185,23 +186,22 @@
                             </div>
                         </div>
                     </div>
-                    <div id="dash1">            
-                        <!-- Locations card -->
+                    <div id="dash1"><!-- Locations card -->
                         <script>
                             function show_value(current_range) {
                                 var unit = $('#range_unit').text();
-            
+
                                 if (unit == 'miles') {
                                     $('#range_value').html(current_range);
                                 } else if (unit == 'km') {
                                     $('#range_value').html(Math.round(current_range * 1.6));
                                 }
                             }
-            
+
                             function change_unit() {
                                 var unit = $('#range_unit').text();
                                 var current_range = $('#range_value').text();
-            
+
                                 if (unit == 'miles') {
                                     $('#range_unit').html('km');
                                     $('#range_value').html(Math.floor(current_range * 1.6));
@@ -209,7 +209,7 @@
                                     $('#range_unit').html('miles');
                                     $('#range_value').html(Math.round(current_range / 1.6));
                                 }
-            
+
                             }
                         </script>
                         <div class="container cardContainer">
@@ -229,8 +229,10 @@
                                                             style="padding:0;">Filter</button>
                                                     </div>
                                                     <div class="btn-group dropright">
-                                                        <button type="button" class="btn dropdown-toggle locationsCardBtn"
-                                                            style="padding:0; margin-left: 20px;" data-toggle="dropdown">Sort
+                                                        <button type="button"
+                                                            class="btn dropdown-toggle locationsCardBtn"
+                                                            style="padding:0; margin-left: 20px;"
+                                                            data-toggle="dropdown">Sort
                                                             by</button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item active">Ranking</a>
@@ -239,9 +241,10 @@
                                                             <a class="dropdown-item">Nearest</a>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-sm btn-outline-success" data-toggle="tooltip"
-                                                        style="margin-left:10px;" id="verifyOnly"
-                                                        onclick="verified_toggle()">Verified
+                                                    <button class="btn btn-sm btn-outline-success"
+                                                        data-toggle="tooltip"
+                                                        title="Only show verified locations" style="margin-left:10px;"
+                                                        id="verifyOnly">Verified
                                                         only</button>
                                                 </div>
                                             </div>
@@ -249,16 +252,18 @@
                                                 <div class="slidecontainer no-gutters" style="width:70px">
                                                     <label style="margin-bottom:0; margin-left:10px"
                                                         for="searchRange"><small>Range:</small></label>
-                                                    <input type="range" min="1" max="100" value="25" class="custom-range"
-                                                        onchange="show_value(this.value)" id="searchRange">
+                                                    <input type="range" min="1" max="100" value="25"
+                                                        class="custom-range" onchange="show_value(this.value)"
+                                                        id="searchRange">
                                                 </div>
                                             </div>
                                             <div class="col-2" style="padding-left: 5px;">
                                                 <div class="onoffswitch no-gutters">
                                                     <label for="myonoffswitch"
                                                         style="padding:0; margin:0;"><small>Units:</small></label>
-                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                                                        onchange="change_unit();" id="myonoffswitch" tabindex="0" checked>
+                                                    <input type="checkbox" name="onoffswitch"
+                                                        class="onoffswitch-checkbox" onchange="change_unit();"
+                                                        id="myonoffswitch" tabindex="0" checked>
                                                     <label class="onoffswitch-label" for="myonoffswitch">
                                                         <span class="onoffswitch-inner"></span>
                                                         <span class="onoffswitch-switch"></span>
@@ -358,8 +363,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="dash2">
-                        <!--Focus location card for dash-->
+                    <div id="dash2"><!-- Focus card -->
                         <div class="container cardContainer">
                             <div class="card cardAlt mx-auto">
                                 <div class="card-header" id="focusCardHeader">
@@ -451,7 +455,7 @@
                             $('#focusHeaderContainer').textfill({});
                         </script>
                     </div>
-                    <div id="dash3">
+                    <div id="dash3"><!-- Filter card -->
                         <div class="card" id="filterCard">
                             <div class="card-header" id="filterCardHeader">
                                 <div class="catBtnContainer no-gutters">
@@ -496,6 +500,7 @@
         </div>
 
     </footer>
+
 
     <!-- SLICK dashCarousel -->
     <script>

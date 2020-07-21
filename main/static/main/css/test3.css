@@ -437,6 +437,13 @@ input:checked + .slider:before {
     padding: 2px;
 }
 
+#verifyOnly.active {
+    font-size: small;
+    padding: 2px;
+    color: white;
+    background-color: green;
+}
+
 .badge-pill {
     height: 18px;
 }
