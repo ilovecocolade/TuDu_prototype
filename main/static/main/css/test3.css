@@ -224,3 +224,15 @@ footer.active {
 .slick-list {
     height: 100%;
 }
+
+.slick-prev.pull-left {
+    height: 30px;
+    width: 30px;
+    transform: translateX(80%);
+}
+
+.slick-next.pull-right {
+    height: 30px;
+    width: 30px;
+    transform: translateX(-50%);
+}
