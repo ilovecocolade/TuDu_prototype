@@ -11,7 +11,7 @@
 
     <link rel="icon" href="{% static "main/img/favicon.ico" %}">
 
-    <!--Slick carousel plugin css and theme.css-->
+    <!-- Slick carousel plugin css and theme.css -->
     <link rel="stylesheet" type="text/css" href="{% static "main/slick/slick.css" %}?{% now 'U' %}">
     <link rel="stylesheet" type="text/css" href="{% static "main/slick/slick-theme.css" %}?{% now 'U' %}">
 
@@ -90,11 +90,10 @@
     <!-- MAIN INTERACTIVE MAP -->
     <main class="no-gutters">
 
-        <!--Floating interactionables-->
-
-        <!--DropPin button-->
+        <!-- Floating interactionables -->
+        <!-- DropPin button -->
         {% if user.is_authenticated %}
-        <button type="button" class="btn" id="dropPin">
+        <button type="button" class="btn mapBtn" id="dropPin">
             <span class="fa-stack fa-2x fa-fw">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-map-pin fa-stack-1x fa-inverse"></i>
@@ -102,21 +101,21 @@
         </button>
         {% endif %}
 
-        <!--Filter button.....card and script TBI
-            <button type="button" class="btn mapBtn" name="filters" onclick="toggleFilterCard()">
+        <!-- Filter button -->
+            <button type="button" class="btn mapBtn" name="filters" onclick="toggleDash()" id="filterBtn"> <!-- ONLICK TOGGLEDASH -->
                 <span class="fa-stack fa-2x fa-fw">
                     <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fas fa-glasses fa-stack-1x fa-inverse"></i>
+                    <i class="fas fa-sitemap fa-stack-1x fa-inverse"></i>
                 </span>
-            </button>-->
+            </button>
 
-        <!--Floating search box-->
+        <!-- Floating search box -->
         <div class="container rounded" id="searchBoxFloat">
             <div class="row">
                 <form class="form-inline" action="#">
                     <!--define form action (is this 'enter'?)-->
                     <input type="text" class="form-control" placeholder="Search..." id="searchFieldFloat">
-                    <button class="btn" type="button" id="sidebarCollapse">
+                    <button class="btn btn-sm" type="button" id="floatSearch">
                         <span class="fa-stack">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-search fa-stack-1x fa-inverse"></i>
@@ -126,7 +125,7 @@
             </div>
         </div>
 
-        <!--MapBox panel.....if sizing weird due to bootstrap, see CSS comment-->
+        <!-- MapBox panel.....if sizing weird due to bootstrap, see CSS comment -->
         <div id="mapbox">
             <iframe width="100%" height="100%"
                 src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Leeds%20Castle%2C%20Broomfield%2C%20Maidstone+(mapboxplaceholder)&amp;ie=UTF8&amp;t=p&amp;z=9&amp;iwloc=B&amp;output=embed"
@@ -498,7 +497,7 @@
 
     </footer>
 
-    <!--SLICK dashCarousel-->
+    <!-- SLICK dashCarousel -->
     <script>
         $(document).on('click', '#toggleDash', function () {
             $('#dashCarousel').slick({
