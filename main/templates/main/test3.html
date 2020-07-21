@@ -129,27 +129,240 @@
 
     <!-- DASHBOARD FOOTER -->
     <footer>
+
         <button type="button" class="btn" id="toggleDash">
             <span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>
         </button>
 
-        <div id="dashContent" class="no-gutters" style="background-color: aquamarine; height: 100%; display: none;">
+        <div id="dashContent" class="no-gutters" style="height: 100%; display: none;">
             <div class="row no-gutters" style="height: 100%;">
                 <div id="dashCarousel" class="container-fluid" style="height:100%;">
-                    <div id="dash0">1</div>
-                    <div id="dash1">2</div>
+                    <div id="dash0">            
+                        <!--Search card for dash-->
+                        <div class="container cardContainer">
+                            <div class="card cardAlt mx-auto">
+                                <div class="card-header card-headerAlt">
+                                    <div class="container">
+                                        <div class="row">
+                                            <form class="form-inline" action="#" id="searchDash">
+                                                <!--define form action (is this 'enter'?)-->
+                                                <input type="text" class="form-control" placeholder="Search..."
+                                                    id="searchFieldDash">
+                                                <button class="btn" type="submit" id="goSearch">
+                                                    <span class="fa-stack">
+                                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                                        <i class="fas fa-search fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body card-body-main">
+                                    <div class="overflow-auto container-fluid card-bodyContainer">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                            <li class="list-group-item">search result</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dash1">            
+                        <!-- Locations card -->
+                        <script>
+                            function show_value(current_range) {
+                                var unit = $('#range_unit').text();
+            
+                                if (unit == 'miles') {
+                                    $('#range_value').html(current_range);
+                                } else if (unit == 'km') {
+                                    $('#range_value').html(Math.round(current_range * 1.6));
+                                }
+                            }
+            
+                            function change_unit() {
+                                var unit = $('#range_unit').text();
+                                var current_range = $('#range_value').text();
+            
+                                if (unit == 'miles') {
+                                    $('#range_unit').html('km');
+                                    $('#range_value').html(Math.floor(current_range * 1.6));
+                                } else if (unit == 'km') {
+                                    $('#range_unit').html('miles');
+                                    $('#range_value').html(Math.round(current_range / 1.6));
+                                }
+            
+                            }
+                        </script>
+                        <div class="container cardContainer">
+                            <div class="card cardAlt mx-auto">
+                                <div class="card-header locationCardHeader">
+                                    <div class="no-gutters">
+                                        <div class="row d-flex">
+                                            <div class="col-8">
+                                                <div class="row" style="height:30px;">
+                                                    <h6 style="padding:5px 0 0 20px;">Things TuDu within <span
+                                                            id="range_value">25</span>
+                                                        <span id="range_unit">miles</span></h6>
+                                                </div>
+                                                <div class="row" style="height:25px; padding-left:40px;">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-group locationsCardBtn"
+                                                            style="padding:0;">Filter</button>
+                                                    </div>
+                                                    <div class="btn-group dropright">
+                                                        <button type="button" class="btn dropdown-toggle locationsCardBtn"
+                                                            style="padding:0; margin-left: 20px;" data-toggle="dropdown">Sort
+                                                            by</button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item active">Ranking</a>
+                                                            <a class="dropdown-item">Visits</a>
+                                                            <a class="dropdown-item">Rating</a>
+                                                            <a class="dropdown-item">Nearest</a>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-success" data-toggle="tooltip"
+                                                        style="margin-left:10px;" id="verifyOnly"
+                                                        onclick="verified_toggle()">Verified
+                                                        only</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="padding:0;">
+                                                <div class="slidecontainer no-gutters" style="width:70px">
+                                                    <label style="margin-bottom:0; margin-left:10px"
+                                                        for="searchRange"><small>Range:</small></label>
+                                                    <input type="range" min="1" max="100" value="25" class="custom-range"
+                                                        onchange="show_value(this.value)" id="searchRange">
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="padding-left: 5px;">
+                                                <div class="onoffswitch no-gutters">
+                                                    <label for="myonoffswitch"
+                                                        style="padding:0; margin:0;"><small>Units:</small></label>
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                                        onchange="change_unit();" id="myonoffswitch" tabindex="0" checked>
+                                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body card-body-main">
+                                    <div class="overflow-auto container-fluid card-bodyContainer">
+                                        <table class="table table-sm table-hover w-auto locationsCardTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Icon</th>
+                                                    <th>Name</th>
+                                                    <th>Status</th>
+                                                    <th>Visits</th>
+                                                    <th>Distance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>icon_img</td>
+                                                    <td>Dungeness beach sea fishing</td>
+                                                    <td>img</td>
+                                                    <td>100k visits</td>
+                                                    <td>15.5 miles away</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="dash2">
                         <!--Focus location card for dash-->
-                        <div class="container border cardContainer">
-                            <div class="card mx-auto">
-                                <div class="card-header">
+                        <div class="container cardContainer">
+                            <div class="card cardAlt mx-auto">
+                                <div class="card-header" id="focusCardHeader">
                                     <div id="focusHeaderContainer" class="container-fluid"
                                         style="height: 60px; width: 360px;">
                                         <span>LOCATION TITLE</span>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="container-fluid border">
+                                <div class="card-body card-body-main">
+                                    <div class="container-fluid">
                                         <div class="row d-flex" style="height:200px;">
                                             <div class="col-8" style="overflow:hidden;">
                                                 <div id="locationImages" class="carousel slide" data-interval="false">
@@ -226,11 +439,15 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- TextFill -->
+                        <script>
+                            $('#focusHeaderContainer').textfill({});
+                        </script>
                     </div>
                     <div id="dash3">
                         <div class="card" id="filterCard">
                             <div class="card-header" id="filterCardHeader">
-                                <div class="catBtnContainer no-gutters border">
+                                <div class="catBtnContainer no-gutters">
                                     {% for name, sub_cat in categories.items %}
                                     <button class="btn catBtn"
                                         onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
@@ -280,25 +497,24 @@
                 //general
                 infinite: false,
                 slidesToShow: 4,
-                dots: true,
                 arrows: true,
-                prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-                nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+                prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+                nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
 
                 //responsivity
                 responsive: [{
-                    breakpoint: 1500,
+                    breakpoint: 1580,
                     settings: {
                         slidesToShow: 3,
                     }
                 }, {
-                    breakpoint: 1000,
+                    breakpoint: 1190,
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 2,
                     }
                 }, {
-                    breakpoint: 600,
+                    breakpoint: 800,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
@@ -309,10 +525,7 @@
 
     </script>
 
-    <!-- TextFill -->
-    <script>
-        $('#focusHeaderContainer').textfill({});
-    </script>
+
 </body>
 
 </html>
