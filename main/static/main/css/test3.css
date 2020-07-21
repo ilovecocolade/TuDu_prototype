@@ -184,14 +184,16 @@ footer.active {
 
 .slick-prev.pull-left {
     height: 30px;
-    width: 30px;
-    transform: translateX(80%);
+    width: 25px;
+    transform: translateX(100%);
+    background-color: red;
 }
 
 .slick-next.pull-right {
     height: 30px;
-    width: 30px;
-    transform: translateX(-50%);
+    width: 25px;
+    transform: translateX(-100%);
+    background-color: red;
 }
 
 /* DASH CARDS */
