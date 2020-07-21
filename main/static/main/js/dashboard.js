@@ -15,6 +15,89 @@ $(document).on('click', '.activeBtn', function () {
 
 // Open/Close Dashboard
 $(document).on('click', '#toggleDash', function () {
+    init_slick_dashboard();
+    dashboard_toggle();
+});
+
+$(document).on('click', '#filterBtn', function () {
+    init_slick_dashboard();
+    if (!($('#toggleDash').parent().is('footer.active'))) {
+        dashboard_toggle();
+    }
+    $('#dashCarousel').slick('slickGoTo', 3);
+    $('#dashCarousel').slick('slickNext');
+    $('#dash3').children().fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+});
+
+$(document).on('click', '#filterBtnDash', function () {
+
+    $('#dashCarousel').slick('slickGoTo', 3);
+    $('#dashCarousel').slick('slickNext');
+    $('#dash3').children().fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+});
+
+$(document).on('click', '.mapboxgl-ctrl-geocoder--icon-search', function () {
+    init_slick_dashboard();
+    if (!($('#toggleDash').parent().is('footer.active'))) {
+        dashboard_toggle();
+    }
+    $('#dashCarousel').slick('slickGoTo', 0);
+    //$('#dashCarousel').slick('slickPrev');
+    $('#dash0').children().fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+});
+
+$(document).on('click', '#dropPin', function() {
+
+    $('#mapbox').append('<div id="crosshair" style="position: absolute; z-index: 99; left: calc(50% - 16px); top: calc(50% - 17px); color: red;"> <i class="fas fa-crosshairs fa-2x"></i> </div>');
+    $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 600px; top: 1%; left: 32%;" id="locationPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button> Please position the crosshair on the location you would like to create. Click the tick to when you are done. </div>');
+    $('#mapbox').append('<button id="confirmLocation" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 53px); top: 9%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>');
+
+});
+
+$(document).on('click', '#confirmLocation', function() {
+
+    $('#crosshair').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+    console.log('success');
+
+    // TODO: Add longitude and latitude to add location form
+    new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
+
+    $('#locationPinInstruct').remove();
+    $('#confirmLocation').remove();
+    
+    $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 800px; top: 1%; left: 30%;" id="nearestAccessPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button> If this location has a nearest access point (i.e. nearby car park), that may be useful for visitors to know about, please add it as before. If this is not relevant for your location, press the cross. </div>');
+    $('#mapbox').append('<button id="confirmNearestAccess" class="btn" style="position: absolute; z-index: 99; right: calc(50% - 0px); top: 9%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>')
+    $('#mapbox').append('<button id="cancelNearestAccess" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 0px); top: 9%; color: red;"><i class="fas fa-window-close fa-5x"></i></button>')
+
+
+});
+
+
+
+$(document).on('click', '#confirmNearestAccess', function() {
+    upload_location();
+});
+
+$(document).on('click', '#cancelNearestAccess', function() {
+    upload_location();
+});
+
+
+
+function upload_location() {}
+
+
+
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
+function dashboard_toggle() {
     if ($('#toggleDash').parent().is('footer.active')) {
 
         if (!$('.activeBtn').length) {
@@ -39,10 +122,42 @@ $(document).on('click', '#toggleDash', function () {
         } else { $('#filterCardFooter').remove(); }
     };
     $('footer').toggleClass('active');
-});
+}
 
+function init_slick_dashboard() {
+    if (!($('#dashCarousel').hasClass('slick-initialized'))) {
 
+        $('#dashCarousel').slick({
+            //general
+            infinite: false,
+            slidesToShow: 4,
+            arrows: true,
+            prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+            nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
 
+            //responsivity
+            responsive: [{
+                breakpoint: 1580,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                }
+            }, {
+                breakpoint: 1190,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                }
+            }, {
+                breakpoint: 800,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }]
+        });
+    }
+}
 
 function popSubCategories(categories, sub_categories, initial) {
     var carousel_page = 0;
@@ -72,10 +187,8 @@ function popSubCategories(categories, sub_categories, initial) {
         }
         $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
     }
+
 }
-
-
-
 
 
 
@@ -245,7 +358,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
                 $('.actives-pages').append('<div class="carousel-item footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
 
             } else if (i % max_filters_per_page == 0) {
-                
+
                 carousel_page = i / max_filters_per_page;
                 $('#carousel-pages-active').empty();
 

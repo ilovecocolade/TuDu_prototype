@@ -39,7 +39,9 @@ class SubCategories(models.Model):
 class Locations(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sub_categories = models.ManyToManyField(SubCategories)
+    uploader = models.ForeignKey(User, default='Unknown', on_delete=models.SET_DEFAULT)
+    primary_sub_category = models.ForeignKey(SubCategories, default='Unknown', on_delete=models.SET_DEFAULT)
+    secondary_sub_categories = models.ManyToManyField(SubCategories, related_name='secondary_sub_categories')
     name = models.CharField(max_length=200, unique=True)
     location = LocationField()
     nearest_access = LocationField()

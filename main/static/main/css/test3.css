@@ -190,7 +190,13 @@ footer.active {
 /* DASHBOARD */
 #dashContent {
     position: absolute;
+    z-index: 9;
     width: 100%;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 999999;
 }
 
 .slick-list {
