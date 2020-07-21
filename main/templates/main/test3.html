@@ -39,6 +39,14 @@
 
     <!-- Dashboard controller -->
     <script src="{% static "main/js/dashboard.js" %}?{% now 'U' %}" rel="dashboardcontroller"></script>
+
+    <!-- Select all elements with data-toggle="tooltips" in the document -->
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    
 </head>
 
 <body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)"
