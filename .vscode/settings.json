@@ -1,5 +1,6 @@
 {
     "vscode_custom_css.imports": [
         "file:///C:/Users/john6/.vscode/extensions/victoriadrake.kabukicho-0.0.5/lights-on.css"
-    ]
+    ],
+    "python.pythonPath": "/Users/John/opt/anaconda3/envs/toodoo/bin/python"
 }
