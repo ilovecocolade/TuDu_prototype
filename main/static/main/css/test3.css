@@ -475,6 +475,7 @@ input:checked + .slider:before {
 
 .filterCard {
     height: 300px;
+    margin: 4px;
 }
 
 #activeFilters {
