@@ -235,6 +235,7 @@ function popSubCategoriesAddLocation(categories, sub_categories, initial) {
     if (initial) {
         var category = Object.keys(categories)[0];
         sub_categories = categories[category];
+        $('')
     } else {
         $('#carousel-pages-add-location').empty()
         $('#subCatCarouselAddLocation').empty()
@@ -259,6 +260,9 @@ function popSubCategoriesAddLocation(categories, sub_categories, initial) {
     }
 
 }
+
+
+
 
 
 
