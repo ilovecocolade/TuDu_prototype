@@ -441,6 +441,16 @@ input:checked + .slider:before {
 
 
 /* FILTER CARD */
+.catBtn {
+    color: white;
+    background-color: blue;
+}
+
+.catBtn.active {
+    color: blue;
+    background-color: white;
+}
+
 .carousel-item {
     height: 100%;
 }
