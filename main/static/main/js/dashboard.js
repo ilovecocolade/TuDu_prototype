@@ -202,9 +202,18 @@ function popSubCategories(categories, sub_categories, initial) {
     if (initial) {
         var category = Object.keys(categories)[0];
         sub_categories = categories[category];
+        $('#' + category + '-dash-filter').addClass('active');
+
     } else {
-        $('.carousel-indicators.subCat').empty()
-        $('#subCatCarousel').empty()
+        $('.carousel-indicators.subCat').empty();
+        $('#subCatCarousel').empty();
+        $('.catBtn').each( function() {
+            if ($(this).attr('id') == String(categories + '-dash-filter')) { 
+                $(this).addClass('active');
+            } else if ($(this).attr('id').slice(-11) == 'dash-filter') {
+                $(this).removeClass('active');
+            }
+        });
     }
 
     var sub_cat_length = Object.keys(sub_categories).length;
@@ -235,10 +244,17 @@ function popSubCategoriesAddLocation(categories, sub_categories, initial) {
     if (initial) {
         var category = Object.keys(categories)[0];
         sub_categories = categories[category];
-        $('')
+        $('#' + category + '-add-location').addClass('active');
     } else {
         $('#carousel-pages-add-location').empty()
         $('#subCatCarouselAddLocation').empty()
+        $('.catBtn').each( function() {
+            if ($(this).attr('id') == String(categories + '-add-location')) { 
+                $(this).addClass('active');
+            } else if ($(this).attr('id').slice(-12) == 'add-location') {
+                $(this).removeClass('active');
+            }
+        });
     }
 
     var sub_cat_length = Object.keys(sub_categories).length;

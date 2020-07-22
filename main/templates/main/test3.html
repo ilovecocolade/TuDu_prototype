@@ -140,8 +140,8 @@
                                     <div class="card-header" id="filterCardHeaderAddLocation">
                                         <div class="catBtnContainer no-gutters">
                                             {% for name, sub_cat in categories.items %}
-                                            <button class="btn catBtn"
-                                                onclick="popSubCategoriesAddLocation(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                            <button class="btn catBtn" id="{{name}}-add-location"
+                                                onclick="popSubCategoriesAddLocation(categories='{{name}}', sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -584,8 +584,8 @@
                                 <div class="card-header" id="filterCardHeader">
                                     <div class="catBtnContainer no-gutters">
                                         {% for name, sub_cat in categories.items %}
-                                        <button class="btn catBtn"
-                                            onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                        <button class="btn catBtn" id="{{name}}-dash-filter"
+                                            onclick="popSubCategories(categories='{{name}}', sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
                                         {% endfor %}
                                     </div>
                                 </div>

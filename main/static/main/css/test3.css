@@ -441,12 +441,12 @@ input:checked + .slider:before {
 
 
 /* FILTER CARD */
-.catBtn {
+.catBtn.active {
     color: white;
     background-color: blue;
 }
 
-.catBtn.active {
+.catBtn {
     color: blue;
     background-color: white;
 }
