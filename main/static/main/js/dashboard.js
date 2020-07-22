@@ -407,7 +407,7 @@ $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUT
     var carousel_page;
     var display_page;
     var name = $(this).find('figcaption').text();
-    var icon_path = $(this).find('img').attr('src');
+    var icon_path = $(this).find('img').attr('src').replace('_64.svg', '_64_clr.svg');
     var actives = add_active_filter(name, icon_path);
     var no_actives = Object.keys(actives).length;
 
@@ -482,7 +482,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
 //  RANGE SLIDER ISSUE !!!!
 $(document).on("input", "#searchRange", function(){
     $('#dashCarousel').slick("slickSetOption", "draggable", false);
-});
+}, );
 
 $(document).on("change", "#searchRange", function(){
     $('#dashCarousel').slick("slickSetOption", "draggable", true);
