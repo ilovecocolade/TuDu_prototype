@@ -40,7 +40,7 @@ class SubCategories(models.Model):
 class Locations(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    #uploader = models.ForeignKey(settings.AUTH_USER_MODEL, default='Unknown', on_delete=models.SET_DEFAULT)
+    uploader = models.ForeignKey(settings.AUTH_USER_MODEL, default=-1, on_delete=models.PROTECT)
     primary_sub_category = models.ForeignKey(SubCategories, default='Unknown', on_delete=models.SET_DEFAULT)
     secondary_sub_categories = models.ManyToManyField(SubCategories, related_name='secondary_sub_categories')
     name = models.CharField(max_length=200, unique=True)
