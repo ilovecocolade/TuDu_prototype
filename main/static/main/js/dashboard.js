@@ -469,7 +469,6 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
             }
 
             $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-            console.log('success');
 
         }
 
@@ -480,8 +479,14 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
 
 }
 
-$(".slider").on("slide mouseenter mousedown",function(event){
-    event.stopPropagation();
+//  RANGE SLIDER ISSUE !!!!
+$(document).on("input", "#searchRange", function(){
+    $('#dashCarousel').slick("slickSetOption", "draggable", false);
+});
+
+$(document).on("change", "#searchRange", function(){
+    $('#dashCarousel').slick("slickSetOption", "draggable", true);
+    
 });
 
 // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES

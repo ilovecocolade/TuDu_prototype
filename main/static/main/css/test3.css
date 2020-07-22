@@ -441,13 +441,38 @@ input:checked + .slider:before {
 
 
 /* FILTER CARD */
-.catBtn.active {
+#Activities-dash-filter.active {
     color: white;
-    background-color: blue;
+    background-color: rgb(169, 31, 250);
+}
+
+#Nature-dash-filter.active {
+    color: white;
+    background-color: rgb(138, 251, 97);
+}
+
+#Culture-dash-filter.active {
+    color: white;
+    background-color: rgb(244, 136, 72);
+}
+
+#Activities-add-location.active {
+    color: white;
+    background-color: rgb(194, 68, 247);
+}
+
+#Nature-add-location.active {
+    color: white;
+    background-color: rgb(138, 251, 97);
+}
+
+#Culture-add-location.active {
+    color: white;
+    background-color: rgb(244, 136, 72);
 }
 
 .catBtn {
-    color: blue;
+    color: black;
     background-color: white;
 }
 
