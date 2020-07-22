@@ -480,6 +480,10 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
 
 }
 
+$(".slider").on("slide mouseenter mousedown",function(event){
+    event.stopPropagation();
+});
+
 // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
 /*$.ajax({
     url: 'ajax/populate_sub_categories/',
