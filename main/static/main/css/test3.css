@@ -53,53 +53,25 @@ main {
 #filterBtn {
     position: absolute;
     left: 270px;
+    top: 57px;
     z-index: 2;
 }
 
 .fa-sitemap {
-    color: green;
+    color: greenyellow;
 }
 
 #dropPin {
     position: absolute;
     left: 350px;
+    top: 57px;
     z-index: 2;
   }
 
 .fa-map-pin {
-    color: #EFFD5F;
+    color: greenyellow;
   }
 
-#searchBoxFloat {
-    position: absolute;
-    margin-top: 5px;
-    margin-left: 5px;
-    z-index: 2;
-    width: 250px;
-    border: 2px solid #252424;
-    border-radius: 15%;
-    background-color: #6b6b6b;
-  }
-  
-#searchFieldFloat {
-    width: 200px;
-    border: none;
-    background-color: transparent;
-    color: #EFFD5F;
-  }
-  
-#searchFieldFloat::placeholder {
-    color: #EFFD5F;
-  }
-
-#floatSearch {
-    color: yellow;
-    padding: 0;
-}
-
-.fa-search {
-    color: #EFFD5F;
-  }
   
   /* Change autocomplete styles in WebKit */
   input:-webkit-autofill,
@@ -115,7 +87,7 @@ main {
     -webkit-text-fill-color: #EFFD5F;
     -webkit-box-shadow: 0 0 0px 1000px #6b6b6b inset;
   }
-  
+
 
 #mapbox {
     position: relative;
@@ -196,7 +168,7 @@ footer.active {
 
 .tooltip {
     position: absolute;
-    z-index: 999999;
+    z-index: 99999;
 }
 
 .slick-list {
