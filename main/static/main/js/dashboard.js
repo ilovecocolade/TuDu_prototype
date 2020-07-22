@@ -48,6 +48,9 @@ $(document).on('click', '.mapboxgl-ctrl-geocoder--icon-search', function () {
 
 $(document).on('click', '#dropPin', function() {
 
+    $('#toggleDash').parent().removeClass('active');
+    $('#toggleDash').css({'display': 'none'});
+
     $('#mapbox').append('<div id="crosshair" style="position: absolute; z-index: 99; left: calc(50% - 16px); top: calc(50% - 17px); color: red;"> <i class="fas fa-crosshairs fa-2x"></i> </div>');
     $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 520px; top: 1%; left: 32%;" id="locationPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ol><li>Position the crosshair on the location you want to add.</li><li>Press the tick when you are done.</li></ol></div>');
     $('#mapbox').append('<button id="confirmLocation" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 53px); top: 11%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>');
@@ -57,10 +60,9 @@ $(document).on('click', '#dropPin', function() {
 $(document).on('click', '#confirmLocation', function() {
 
     $('#crosshair').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
-    console.log('success');
 
     // TODO: Add longitude and latitude to add location form
-    new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
+    var new_location = new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
 
     $('#locationPinInstruct').remove();
     $('#confirmLocation').remove();
@@ -69,12 +71,13 @@ $(document).on('click', '#confirmLocation', function() {
     $('#mapbox').append('<button id="confirmNearestAccess" class="btn" style="position: absolute; z-index: 99; right: calc(50% - 0px); top: 11%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>')
     $('#mapbox').append('<button id="cancelNearestAccess" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 0px); top: 11%; color: red;"><i class="fas fa-window-close fa-5x"></i></button>')
 
-
 });
 
 
 
 $(document).on('click', '#confirmNearestAccess', function() {
+    $('#crosshair').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+    var new_nearest_access = new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
     upload_location();
 });
 
@@ -84,7 +87,31 @@ $(document).on('click', '#cancelNearestAccess', function() {
 
 
 
-function upload_location() {}
+function upload_location() {
+    $('#crosshair').remove();
+    $('#confirmLocation').remove();
+    $('#confirmNearestAccess').remove();
+    $('#cancelNearestAccess').remove();
+    $('#nearestAccessPinInstruct').remove();
+
+    $('#uploadLocationModal').modal().fadeIn(500);
+    
+}
+
+
+$(document).on('click', 'button.close', function() {
+    end_create_location();
+});
+
+
+
+function end_create_location() {
+    $('#crosshair').remove();
+    $('#confirmLocation').remove();
+    $('#confirmNearestAccess').remove();
+    $('#cancelNearestAccess').remove();
+    $('#toggleDash').css({'display': ''});
+}
 
 
 
@@ -125,7 +152,16 @@ function dashboard_toggle() {
 }
 
 function init_slick_dashboard() {
+
     if (!($('#dashCarousel').hasClass('slick-initialized'))) {
+
+        $('#dashCarousel').on('breakpoint', function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $('#dashCarousel').on('init', function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
         $('#dashCarousel').slick({
             //general
@@ -159,15 +195,25 @@ function init_slick_dashboard() {
     }
 }
 
+
 function popSubCategories(categories, sub_categories, initial) {
     var carousel_page = 0;
 
     if (initial) {
         var category = Object.keys(categories)[0];
         sub_categories = categories[category];
+        $('#' + category + '-dash-filter').addClass('active');
+
     } else {
-        $('.carousel-indicators.subCat').empty()
-        $('#subCatCarousel').empty()
+        $('.carousel-indicators.subCat').empty();
+        $('#subCatCarousel').empty();
+        $('.catBtn').each( function() {
+            if ($(this).attr('id') == String(categories + '-dash-filter')) { 
+                $(this).addClass('active');
+            } else if ($(this).attr('id').slice(-11) == 'dash-filter') {
+                $(this).removeClass('active');
+            }
+        });
     }
 
     var sub_cat_length = Object.keys(sub_categories).length;
@@ -189,6 +235,50 @@ function popSubCategories(categories, sub_categories, initial) {
     }
 
 }
+
+
+
+function popSubCategoriesAddLocation(categories, sub_categories, initial) {
+    var carousel_page = 0;
+
+    if (initial) {
+        var category = Object.keys(categories)[0];
+        sub_categories = categories[category];
+        $('#' + category + '-add-location').addClass('active');
+    } else {
+        $('#carousel-pages-add-location').empty()
+        $('#subCatCarouselAddLocation').empty()
+        $('.catBtn').each( function() {
+            if ($(this).attr('id') == String(categories + '-add-location')) { 
+                $(this).addClass('active');
+            } else if ($(this).attr('id').slice(-12) == 'add-location') {
+                $(this).removeClass('active');
+            }
+        });
+    }
+
+    var sub_cat_length = Object.keys(sub_categories).length;
+
+    for (var i = 0; i < sub_cat_length; i++) {
+        var name = String(Object.keys(sub_categories)[i]);
+        // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
+        var icon_path = '/media/' + String(Object.values(sub_categories)[i]);
+
+        if (i == 0) {
+            $('#carousel-pages-add-location').append('<li data-target="#filterMenuAddLocation" data-slide-to="' + carousel_page + '" class="active"></li>');
+            $('#subCatCarouselAddLocation').append('<div class="carousel-item active"><div class="container" id="button-container-add-location' + carousel_page + '"></div></div>');
+        } else if (i % 4 == 0) {
+            carousel_page += 1;
+            $('#carousel-pages-add-location').append('<li data-target="#filterMenuAddLocation" data-slide-to="' + carousel_page + '"></li>');
+            $('#subCatCarouselAddLocation').append('<div class="carousel-item"><div class="container" id="button-container-add-location' + carousel_page + '"></div></div>');
+        }
+        $('#button-container-add-location' + carousel_page).append('<button class="btn" type="button" id="subCatBtnAddLocation"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+    }
+
+}
+
+
+
 
 
 
@@ -379,7 +469,6 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
             }
 
             $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-            console.log('success');
 
         }
 
@@ -389,6 +478,16 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
     } else { $('#filterCardFooter').remove(); }
 
 }
+
+//  RANGE SLIDER ISSUE !!!!
+$(document).on("input", "#searchRange", function(){
+    $('#dashCarousel').slick("slickSetOption", "draggable", false);
+});
+
+$(document).on("change", "#searchRange", function(){
+    $('#dashCarousel').slick("slickSetOption", "draggable", true);
+    
+});
 
 // AJAX REQUEST FOR QUERYING DB FOR SUB-CATEGORIES
 /*$.ajax({

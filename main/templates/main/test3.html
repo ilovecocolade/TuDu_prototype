@@ -53,16 +53,10 @@
     <!-- Dashboard controller -->
     <script src="{% static "main/js/dashboard.js" %}?{% now 'U' %}" rel="dashboardcontroller"></script>
 
-    <!-- Select all elements with data-toggle="tooltips" in the document -->
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
-
 </head>
 
-<body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true)"
+<body
+    onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true); popSubCategoriesAddLocation(categories={{categories}}, sub_categories=null, initial=true);"
     onresize="resize_dashboard()">
     <!-- NAVBAR -->
     <nav class="navbar fixed-top navbar-expand">
@@ -108,8 +102,7 @@
         {% if user.is_authenticated %}
         <button type="button" class="btn mapBtn" id="dropPin">
             <!-- INSERT ID OF DROPPIN MODAL -->
-            <span class="fa-stack fa-lg fa-fw" data-toggle="tooltip" title="Add something TuDu"
-                data-placement="right">
+            <span class="fa-stack fa-lg fa-fw" data-toggle="tooltip" title="Add something TuDu" data-placement="right">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-map-pin fa-stack-1x fa-inverse"></i>
             </span>
@@ -129,67 +122,133 @@
         <div id="mapbox">
 
 
-            <!-- The Modal --
-            <div class="modal fade" id="uploadLocationModal">
+            <!-- The Modal -->
+            <div class="modal fade" id="uploadLocationModal" style="position: absolute;">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
 
-                        <!-- Modal Header --
+                        <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Please select a primary and up to two secondary categories.</h4>
+                            <span><h2 class="modal-title">Which category best describes your upload?</h2><h4>Choose one primary and up to two secondary categories.</h4></span>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
-                        <!-- Modal body --
-                        <div class="modal-body">
-                            filter card 
+                        <!-- Modal body -->
+                        <div class="modal-body" style="height: 400px">
+                            <div class="container-fluid">
+                                <div class="card border rounded" id="filterCardAddLocation" style="margin-top: 4px; border: none;">
+                                    <div class="card-header" id="filterCardHeaderAddLocation">
+                                        <div class="catBtnContainer no-gutters">
+                                            {% for name, sub_cat in categories.items %}
+                                            <button class="btn catBtn" id="{{name}}-add-location"
+                                                onclick="popSubCategoriesAddLocation(categories='{{name}}', sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="card-body" id="filterCardBodyAddLocation"
+                                        style="background-color: orange; padding:10px; margin:0;">
+
+                                        <div class="no-gutters">
+                                            <div id="filterMenuAddLocation" class="carousel slide"
+                                                data-interval="false">
+
+                                                <ul class="carousel-indicators" style="margin: 0; padding: 0;"
+                                                    id="carousel-pages-add-location">
+                                                </ul>
+
+                                                <div class="carousel-inner">
+                                                    <div class="container" id="subCatCarouselAddLocation">
+                                                    </div>
+                                                </div>
+
+                                                <a class="carousel-control-prev" href="#filterMenuAddLocation"
+                                                    role="button" data-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#filterMenuAddLocation"
+                                                    role="button" data-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid" style="margin-top: 20px;">
+                                <div class="row no-gutters">
+                                    <div class="col">
+                                        <h5>Primary category:</h5>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Secondary category:</h5>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters" style="height: 150px">
+                                    <div class="col">
+                                        <div class="container" id="primarySubCatContainer">
+                                            <img src="#" alt="primary_subCat_icon">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="container" id="secondarySubCatContainer">
+                                            <span>
+                                                <img src="#" alt="secondary_subCat_icon">
+                                                <img src="#" alt="secondary_subCat_icon">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Modal footer --
+                        <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger">Back</button>
+                            <button type="button" class="btn btn-success">Continue</button>
                         </div>
-
                     </div>
                 </div>
-            </div>-->
+            </div>
 
-            <div id='map' style='width: 100%; height: 100%;'></div>
 
-            <script>
-                // generate mapbox interactive map
-                mapboxgl.accessToken = 'pk.eyJ1IjoidG9vZG9vIiwiYSI6ImNrYmpncWk4ODBwNWgycW1idWltZnpqaHgifQ.WGlRW_oHZX7M2Ks_kJL_GA';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [-0.164088, 51.508907],
-                    zoom: 4,
-                });
+        <div id='map' style='width: 100%; height: 100%;'></div>
 
-                map.addControl(
-                    new MapboxGeocoder({
-                        accessToken: mapboxgl.accessToken,
-                        limit: 8,
-                        flyTo: {
-                            bearing: 0,
-                            // These options control the flight curve, making it move
-                            // slowly and zoom out almost completely before starting
-                            // to pan.
-                            speed: 1, // make the flying slow
-                            curve: 3, // change the speed at which it zooms out
-                            // This can be any easing function: it takes a number between
-                            // 0 and 1 and returns another number between 0 and 1.
-                            easing: function (t) {
-                                return t;
-                            }
-                        },
-                        mapboxgl: mapboxgl
-                    }), 'top-left'
-                );
+        <script>
+            // generate mapbox interactive map
+            mapboxgl.accessToken = 'pk.eyJ1IjoidG9vZG9vIiwiYSI6ImNrYmpncWk4ODBwNWgycW1idWltZnpqaHgifQ.WGlRW_oHZX7M2Ks_kJL_GA';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [-0.164088, 51.508907],
+                zoom: 4,
+            });
 
-                map.addControl(new mapboxgl.NavigationControl());
+            map.addControl(
+                new MapboxGeocoder({
+                    accessToken: mapboxgl.accessToken,
+                    limit: 8,
+                    flyTo: {
+                        bearing: 0,
+                        // These options control the flight curve, making it move
+                        // slowly and zoom out almost completely before starting
+                        // to pan.
+                        speed: 1, // make the flying slow
+                        curve: 3, // change the speed at which it zooms out
+                        // This can be any easing function: it takes a number between
+                        // 0 and 1 and returns another number between 0 and 1.
+                        easing: function (t) {
+                            return t;
+                        }
+                    },
+                    mapboxgl: mapboxgl
+                }), 'top-left'
+            );
 
-            </script>
+            map.addControl(new mapboxgl.NavigationControl());
+
+        </script>
 
         </div>
     </main>
@@ -305,7 +364,7 @@
                                                         style="margin-left:10px; padding: 0;" id="verifyOnly"><span
                                                             class="no-gutters"
                                                             style="height: 100%; padding: 0; margin: 0;"
-                                                            data-toggle="tooltip" 
+                                                            data-toggle="tooltip"
                                                             title="Only show verified locations">Verified
                                                             only</span></button>
                                                 </div>
@@ -315,7 +374,7 @@
                                                     <label style="margin-bottom:0; margin-left:10px"
                                                         for="searchRange"><small>Range:</small></label>
                                                     <input type="range" min="1" max="100" value="25"
-                                                        class="custom-range" onchange="show_value(this.value)"
+                                                        class="custom-range" oninput="show_value(this.value)"
                                                         id="searchRange">
                                                 </div>
                                             </div>
@@ -525,8 +584,8 @@
                                 <div class="card-header" id="filterCardHeader">
                                     <div class="catBtnContainer no-gutters">
                                         {% for name, sub_cat in categories.items %}
-                                        <button class="btn catBtn"
-                                            onclick="popSubCategories(categories=null, sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
+                                        <button class="btn catBtn" id="{{name}}-dash-filter"
+                                            onclick="popSubCategories(categories='{{name}}', sub_categories={{sub_cat}}, initial=false)">{{name}}</button>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -602,7 +661,6 @@
         </script>
 
     </footer>
-
 
 </body>
 
