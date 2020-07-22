@@ -129,13 +129,13 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Please select a primary and up to two secondary categories.</h4>
+                            <h3 class="modal-title">Which category best describes your upload? Select one primary and up to two secondary categories.</h3>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
                         <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="container border">
+                        <div class="modal-body" style="height: 400px">
+                            <div class="container-fluid">
                                 <div class="card border rounded" id="filterCardAddLocation" style="margin-top: 4px; border: none;">
                                     <div class="card-header" id="filterCardHeaderAddLocation">
                                         <div class="catBtnContainer no-gutters">
@@ -172,6 +172,31 @@
                                                     <span class="sr-only">Next</span>
                                                 </a>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid" style="margin-top: 20px;">
+                                <div class="row no-gutters">
+                                    <div class="col">
+                                        <h5>Primary category:</h5>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Secondary category:</h5>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters" style="height: 150px">
+                                    <div class="col">
+                                        <div class="container" id="primarySubCatContainer">
+                                            <img src="#" alt="primary_subCat_icon">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="container" id="secondarySubCatContainer">
+                                            <span>
+                                                <img src="#" alt="secondary_subCat_icon">
+                                                <img src="#" alt="secondary_subCat_icon">
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
