@@ -15,6 +15,116 @@ $(document).on('click', '.activeBtn', function () {
 
 // Open/Close Dashboard
 $(document).on('click', '#toggleDash', function () {
+    init_slick_dashboard();
+    dashboard_toggle();
+});
+
+$(document).on('click', '#filterBtn', function () {
+    init_slick_dashboard();
+    if (!($('#toggleDash').parent().is('footer.active'))) {
+        dashboard_toggle();
+    }
+    $('#dashCarousel').slick('slickGoTo', 3);
+    $('#dashCarousel').slick('slickNext');
+    $('#dash3').children().fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+});
+
+$(document).on('click', '#filterBtnDash', function () {
+
+    $('#dashCarousel').slick('slickGoTo', 3);
+    $('#dashCarousel').slick('slickNext');
+    $('#dash3').children().fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+});
+
+$(document).on('click', '.mapboxgl-ctrl-geocoder--icon-search', function () {
+    init_slick_dashboard();
+    if (!($('#toggleDash').parent().is('footer.active'))) {
+        dashboard_toggle();
+    }
+    $('#dashCarousel').slick('slickGoTo', 0);
+    //$('#dashCarousel').slick('slickPrev');
+    $('#dash0').children().fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+});
+
+$(document).on('click', '#dropPin', function() {
+
+    $('#toggleDash').parent().removeClass('active');
+    $('#toggleDash').css({'display': 'none'});
+
+    $('#mapbox').append('<div id="crosshair" style="position: absolute; z-index: 99; left: calc(50% - 16px); top: calc(50% - 17px); color: red;"> <i class="fas fa-crosshairs fa-2x"></i> </div>');
+    $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 520px; top: 1%; left: 32%;" id="locationPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ol><li>Position the crosshair on the location you want to add.</li><li>Press the tick when you are done.</li></ol></div>');
+    $('#mapbox').append('<button id="confirmLocation" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 53px); top: 11%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>');
+
+});
+
+$(document).on('click', '#confirmLocation', function() {
+
+    $('#crosshair').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
+    // TODO: Add longitude and latitude to add location form
+    var new_location = new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
+
+    $('#locationPinInstruct').remove();
+    $('#confirmLocation').remove();
+    
+    $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 700px; top: 1%; left: 30%;" id="nearestAccessPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ul><li>If appropriate, add the location of a nearby access point (e.g. car park) as before.</li><li>If this is not relevant, press the cross.</li></ul></div>');
+    $('#mapbox').append('<button id="confirmNearestAccess" class="btn" style="position: absolute; z-index: 99; right: calc(50% - 0px); top: 11%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>')
+    $('#mapbox').append('<button id="cancelNearestAccess" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 0px); top: 11%; color: red;"><i class="fas fa-window-close fa-5x"></i></button>')
+
+});
+
+
+
+$(document).on('click', '#confirmNearestAccess', function() {
+    $('#crosshair').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+    var new_nearest_access = new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
+    upload_location();
+});
+
+$(document).on('click', '#cancelNearestAccess', function() {
+    upload_location();
+});
+
+
+
+function upload_location() {
+    $('#crosshair').remove();
+    $('#confirmLocation').remove();
+    $('#confirmNearestAccess').remove();
+    $('#cancelNearestAccess').remove();
+    $('#nearestAccessPinInstruct').remove();
+
+    $('#uploadLocationModal').modal().fadeIn(500);
+    
+}
+
+
+$(document).on('click', 'button.close', function() {
+    end_create_location();
+});
+
+
+
+function end_create_location() {
+    $('#crosshair').remove();
+    $('#confirmLocation').remove();
+    $('#confirmNearestAccess').remove();
+    $('#cancelNearestAccess').remove();
+    $('#toggleDash').css({'display': ''});
+}
+
+
+
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
+function dashboard_toggle() {
     if ($('#toggleDash').parent().is('footer.active')) {
 
         if (!$('.activeBtn').length) {
@@ -39,9 +149,51 @@ $(document).on('click', '#toggleDash', function () {
         } else { $('#filterCardFooter').remove(); }
     };
     $('footer').toggleClass('active');
-});
+}
 
+function init_slick_dashboard() {
 
+    if (!($('#dashCarousel').hasClass('slick-initialized'))) {
+
+        $('#dashCarousel').on('breakpoint', function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $('#dashCarousel').on('init', function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $('#dashCarousel').slick({
+            //general
+            infinite: false,
+            slidesToShow: 4,
+            arrows: true,
+            prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+            nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+
+            //responsivity
+            responsive: [{
+                breakpoint: 1580,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                }
+            }, {
+                breakpoint: 1190,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                }
+            }, {
+                breakpoint: 800,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }]
+        });
+    }
+}
 
 
 function popSubCategories(categories, sub_categories, initial) {
@@ -72,10 +224,41 @@ function popSubCategories(categories, sub_categories, initial) {
         }
         $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
     }
+
 }
 
 
 
+function popSubCategoriesAddLocation(categories, sub_categories, initial) {
+    var carousel_page = 0;
+
+    if (initial) {
+        var category = Object.keys(categories)[0];
+        sub_categories = categories[category];
+    } else {
+        $('#carousel-pages-add-location').empty()
+        $('#subCatCarouselAddLocation').empty()
+    }
+
+    var sub_cat_length = Object.keys(sub_categories).length;
+
+    for (var i = 0; i < sub_cat_length; i++) {
+        var name = String(Object.keys(sub_categories)[i]);
+        // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
+        var icon_path = '/media/' + String(Object.values(sub_categories)[i]);
+
+        if (i == 0) {
+            $('#carousel-pages-add-location').append('<li data-target="#filterMenuAddLocation" data-slide-to="' + carousel_page + '" class="active"></li>');
+            $('#subCatCarouselAddLocation').append('<div class="carousel-item active"><div class="container" id="button-container-add-location' + carousel_page + '"></div></div>');
+        } else if (i % 4 == 0) {
+            carousel_page += 1;
+            $('#carousel-pages-add-location').append('<li data-target="#filterMenuAddLocation" data-slide-to="' + carousel_page + '"></li>');
+            $('#subCatCarouselAddLocation').append('<div class="carousel-item"><div class="container" id="button-container-add-location' + carousel_page + '"></div></div>');
+        }
+        $('#button-container-add-location' + carousel_page).append('<button class="btn" type="button" id="subCatBtnAddLocation"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+    }
+
+}
 
 
 
@@ -245,7 +428,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
                 $('.actives-pages').append('<div class="carousel-item footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
 
             } else if (i % max_filters_per_page == 0) {
-                
+
                 carousel_page = i / max_filters_per_page;
                 $('#carousel-pages-active').empty();
 
