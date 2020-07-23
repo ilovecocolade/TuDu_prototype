@@ -182,20 +182,20 @@
                                         <h5>Primary category:</h5>
                                     </div>
                                     <div class="col">
-                                        <h5>Secondary category:</h5>
+                                        <h5>Secondary categories:</h5>
                                     </div>
                                 </div>
-                                <div class="row no-gutters" style="height: 150px">
+                                <div class="row no-gutters align-items-center" style="height: 150px">
                                     <div class="col">
-                                        <div class="container" id="primarySubCatContainer">
-                                            <img src="#" alt="primary_subCat_icon">
+                                        <div class="flex-container d-flex justify-content-center" id="primarySubCatContainer">
+                                            <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}" alt="primary_subCat_icon" style="height: 100px; width: 100px;">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="container" id="secondarySubCatContainer">
                                             <span>
-                                                <img src="#" alt="secondary_subCat_icon">
-                                                <img src="#" alt="secondary_subCat_icon">
+                                                <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}" alt="secondary_subCat_icon" style="height: 90px; width: 90px;">
+                                                <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}" alt="secondary_subCat_icon" style="height: 90px; width: 90px;">
                                             </span>
                                         </div>
                                     </div>
@@ -590,9 +590,9 @@
                                     </div>
                                 </div>
                                 <div class="card-body" id="filterCardBody"
-                                    style="background-color: orange; padding:10px; margin:0;">
+                                    style="background-color: lightblue; padding:0; margin:0; height: 150px;">
 
-                                    <div class="no-gutters">
+                                    <div class="no-gutters d-flex align-items-center border" style="height: 150px;">
                                         <div id="filterMenu" class="carousel slide" data-interval="false">
 
                                             <ul class="carousel-indicators subCat" style="margin: 0; padding: 0;"
