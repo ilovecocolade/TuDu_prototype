@@ -86,6 +86,12 @@ $(document).on('click', '#cancelNearestAccess', function() {
 });
 
 
+$(document).on('click', '#primarySubCatContinue', function() {
+    $('#uploadLocationModalPrimary').modal('hide');
+    $('#uploadLocationModalSecondary').modal();
+});
+
+
 
 function upload_location() {
     $('#crosshair').remove();
@@ -94,7 +100,7 @@ function upload_location() {
     $('#cancelNearestAccess').remove();
     $('#nearestAccessPinInstruct').remove();
 
-    $('#uploadLocationModal').modal().fadeIn(500);
+    $('#uploadLocationModalPrimary').modal().fadeIn(500);
     
 }
 
@@ -165,6 +171,7 @@ function init_slick_dashboard() {
             arrows: true,
             prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
             nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+            centerMode: true,
 
             //responsivity
             responsive: [{
@@ -226,14 +233,14 @@ function popSubCategories(categories, sub_categories, initial) {
             $('#carousel-pages').append('<li data-target="#filterMenu" data-slide-to="' + carousel_page + '"></li>');
             $('#subCatCarousel').append('<div class="carousel-item"><div class="container" id="button-container' + carousel_page + '"></div></div>');
         }
-        $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+        $('#button-container' + carousel_page).append('<button class="btn" type="button" id="subCatBtn"><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
     }
 
 }
 
 
 
-function popSubCategoriesAddLocation(categories, sub_categories, initial) {
+function popSubCategoriesAddLocationPrimary(categories, sub_categories, initial) {
     var carousel_page = 0;
 
     if (initial) {
@@ -273,6 +280,66 @@ function popSubCategoriesAddLocation(categories, sub_categories, initial) {
 }
 
 
+function popSubCategoriesAddLocationSecondary(categories, sub_categories, initial) {
+    var carousel_page = 0;
+
+    if (initial) {
+        var category = Object.keys(categories)[0];
+        sub_categories = categories[category];
+        $('#' + category + '-add-location-secondary').addClass('active');
+    } else {
+        $('#carousel-pages-add-location-secondary').empty()
+        $('#subCatCarouselAddLocationSecondary').empty()
+        $('.catBtn').each( function() {
+            if ($(this).attr('id') == String(categories + '-add-location-secondary')) { 
+                $(this).addClass('active');
+            } else if ($(this).attr('id').slice(-22) == 'add-location-secondary') {
+                $(this).removeClass('active');
+            }
+        });
+    }
+
+    var sub_cat_length = Object.keys(sub_categories).length;
+
+    for (var i = 0; i < sub_cat_length; i++) {
+        var name = String(Object.keys(sub_categories)[i]);
+        // var icon_path = String(Object.values(categories[default_category])[i]).replace('static/', "/static/");\
+        var icon_path = '/media/' + String(Object.values(sub_categories)[i]);
+
+        if (i == 0) {
+            $('#carousel-pages-add-location-secondary').append('<li data-target="#filterMenuAddLocationSecondary" data-slide-to="' + carousel_page + '" class="active"></li>');
+            $('#subCatCarouselAddLocationSecondary').append('<div class="carousel-item active"><div class="container" id="button-container-add-location-secondary' + carousel_page + '"></div></div>');
+        } else if (i % 4 == 0) {
+            carousel_page += 1;
+            $('#carousel-pages-add-location-secondary').append('<li data-target="#filterMenuAddLocationSecondary" data-slide-to="' + carousel_page + '"></li>');
+            $('#subCatCarouselAddLocationSecondary').append('<div class="carousel-item"><div class="container" id="button-container-add-location-secondary' + carousel_page + '"></div></div>');
+        }
+        $('#button-container-add-location-secondary' + carousel_page).append('<button class="btn" type="button" id="subCatBtnAddLocationSecondary"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+    }
+
+}
+
+
+
+$(document).on('click', '#subCatBtnAddLocation', function() {
+
+    var name = $(this).find('figcaption').text();
+    var icon_path = $(this).find('img').attr('src');
+
+    //modal_id = $(this).closest('.modal.fade').attr('id');
+
+    if ($('#uploadLocationModalPrimary').find($(this)).length) {
+        
+        $('#primarySubCatContainer').empty();
+        $('#primarySubCatContainer').append('<button class="btn" type="button" id="primarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 100px; width: 100px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+
+    } else if ($('uploadLocationModalSecondary').find($(this)).length) {
+        //add secondaries
+    }
+
+});
+
+
 
 
 
@@ -303,39 +370,7 @@ function build_dashboard_active_filters(actives) {
 
 function resize_dashboard() {
 
-    /*if ($('#toggleDash').parent().is('footer.active')) {
-
-        var sections_per_page = Math.floor(($(window).width() - 100) / 300);
-
-        if (1 < sections_per_page && sections_per_page < 4 && $('#mdDash').length == 0) {
-            var dash0 = $('#dash0')[0].outerHTML;
-            var dash1 = $('#dash1')[0].outerHTML;
-            var dash2 = $('#dash2')[0].outerHTML;
-            var dash3 = $('#dash3')[0].outerHTML;
-            
-            $('#dashContent').empty();
-            $('#dashContent').append('<div id="mdDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true"> <ul class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#mdDash" data-slide-to="0" class="active"></li> <li data-target="#mdDash" data-slide-to="1"></li> </ul> <div class="carousel-inner no-gutters carouselRow"> <div class="carousel-item active container-fluid"> <div class="row d-flex border carouselRow"> <div class="col-6 border"> ' + dash0 + ' </div> <div class="col-6 border"> ' + dash1 + ' </div> </div> </div> <div class="carousel-item container-fluid"> <div class="row d-flex border carouselRow"> <div class="col-6 border"> ' + dash2 + ' </div> <div class="col-6 border"> ' + dash3 + ' </div> </div> </div> </div> <a class="carousel-control-prev" href="#mdDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#mdDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>');
-            
-        } else if (sections_per_page < 2 && $('#smDash').length == 0) {
-            var dash0 = $('#dash0')[0].outerHTML;
-            var dash1 = $('#dash1')[0].outerHTML;
-            var dash2 = $('#dash2')[0].outerHTML;
-            var dash3 = $('#dash3')[0].outerHTML;
-
-            $('#dashContent').empty();
-            $('#dashContent').append('<div id="smDash" class="no-gutters border carousel slide" data-interval="false" data-touch="true">  <ul class="carousel-indicators" style="margin: 0; padding: 0;"> <li data-target="#smDash" data-slide-to="0" class="active"></li> <li data-target="#smDash" data-slide-to="1"></li> <li data-target="#smDash" data-slide-to="2"></li> <li data-target="#smDash" data-slide-to="3"></li> </ul>  <div class="carousel-inner no-gutters carouselRow"> <div class="carousel-item active container-fluid"><div class="row d-flex border carouselRow"> <div class="col-12 border"> ' + dash0 + ' </div></div></div> <div class="carousel-item container-fluid"> <div class="row d-flex border carouselRow"> <div class="col-12 border">' + dash1 + '</div></div> </div> <div class="carousel-item container-fluid"> <div class="row d-flex border carouselRow"> <div class="col-12 border">' + dash2 + '</div></div> </div> <div class="carousel-item container-fluid"> <div class="row d-flex border carouselRow"> <div class="col-12 border">' + dash3 + '</div></div> </div> </div>  <a class="carousel-control-prev" href="#smDash" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#smDash" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>');
-
-        } else if (sections_per_page >= 4 && $('#xlDash').length == 0) {
-            var dash0 = $('#dash0')[0].outerHTML;
-            var dash1 = $('#dash1')[0].outerHTML;
-            var dash2 = $('#dash2')[0].outerHTML;
-            var dash3 = $('#dash3')[0].outerHTML;
-            
-            $('#dashContent').empty();
-            $('#dashContent').append('<div id="xlDash" class="row d-flex"> <div class="col-3 no-gutters border"> ' + dash0 + ' </div> <div class="col-3 no-gutters border"> ' + dash1 + ' </div> <div class="col-3 no-gutters border"> ' + dash2 + ' </div> <div class="col-3 no-gutters border"> ' + dash3 + ' </div> </div>');
-        }
-
-    } else */ if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
+    if (!$('#toggleDash').parent().is('footer.active') && $('footer').hasClass('collapseFilters')) {
 
         build_actives_carousel(get_max_filters_per_page(), get_all_active(), 0);
 
@@ -414,7 +449,7 @@ $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUT
     } else {
 
         carousel_page = 0;
-        $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+        $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: goldenrod; padding: 0; margin: 0; height: 150px;"><div class="no-gutters d-flex align-items-center border" style="height: 150px;"><div id="activeFilters" class="carousel slide" data-interval="false"><ul class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ul><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
 
     }
 });
@@ -437,7 +472,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
             if (i == 0) {
                 carousel_page = 0;
                 if (!$('#filterCardFooter').length) {
-                    $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: aquamarine; padding: 0; margin: 0;"><div id="activeFilters" class="carousel slide" data-interval="false" data-touch="true"><ol class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ol><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+                    $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: goldenrod; padding: 0; margin: 0; height: 150px;"><div class="no-gutters d-flex align-items-center border" style="height: 150px;"><div id="activeFilters" class="carousel slide" data-interval="false"><ul class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ul><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
                     continue;
                 }
                 $('.actives-pages').append('<div class="carousel-item footer"><div class="container" id="active-button-container' + carousel_page + '"></div></div>');
@@ -463,7 +498,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
                 carousel_page = Math.floor(i / max_filters_per_page);
             }
 
-            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
 
         }
 

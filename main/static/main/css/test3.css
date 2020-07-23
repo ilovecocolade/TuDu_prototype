@@ -474,6 +474,21 @@ input:checked + .slider:before {
     background-color: rgb(244, 136, 72);
 }
 
+#Activities-add-location-secondary.active {
+    color: white;
+    background-color: rgb(194, 68, 247);
+}
+
+#Nature-add-location-secondary.active {
+    color: white;
+    background-color: rgb(138, 251, 97);
+}
+
+#Culture-add-location-secondary.active {
+    color: white;
+    background-color: rgb(244, 136, 72);
+}
+
 .catBtn {
     color: black;
     background-color: white;
@@ -487,11 +502,6 @@ input:checked + .slider:before {
     height: 300px;
     margin: 4px;
     width: 380px;
-}
-
-#activeFilters {
-    position: absolute;
-    z-index: 9999;
 }
 
 .carousel-control-prev {
