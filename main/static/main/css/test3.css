@@ -107,6 +107,7 @@ footer.collapseFilters {
     height: 80px;
     width: 100%;
     position: absolute;
+    z-index: 9;
     bottom: 0;
     background-color: black;
 }
@@ -164,6 +165,8 @@ footer.active {
     position: absolute;
     z-index: 9;
     width: 100%;
+    background-color: aquamarine; 
+    height: 100%;
 }
 
 .tooltip {

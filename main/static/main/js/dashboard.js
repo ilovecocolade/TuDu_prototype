@@ -106,6 +106,7 @@ $(document).on('click', 'button.close', function() {
 
 
 function end_create_location() {
+    $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>');
     $('#crosshair').remove();
     $('#confirmLocation').remove();
     $('#confirmNearestAccess').remove();
@@ -114,19 +115,9 @@ function end_create_location() {
 }
 
 
-
-
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
-
 function dashboard_toggle() {
     if ($('#toggleDash').parent().is('footer.active')) {
-
+                
         if (!$('.activeBtn').length) {
             $('footer').attr('id', '');
             $('body').attr('id', '');
@@ -137,7 +128,7 @@ function dashboard_toggle() {
             build_dashboard_active_filters(actives = actives);
         }
         $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up"></i>DASHBOARD</span>');
-        $('#dashContent').attr('style', 'background-color: aquamarine; height: 100%; display: none;');
+        $('#dashContent').attr('style', 'background-color: aquamarine; height: 0px; overflow-y: hidden;');
     } else {
         $('#dashArrow').replaceWith('<span class="no-gutters" id="dashArrow"><i class="fas fa-caret-up fa-rotate-180"></i>DASHBOARD</span>');
         $('#dashContent').attr('style', 'background-color: aquamarine; height: 100%;');
@@ -147,9 +138,11 @@ function dashboard_toggle() {
             $('.dashboardActiveFilters').remove();
             build_actives_carousel(max_filters_per_page = 4, actives = actives, display_page = 0);
         } else { $('#filterCardFooter').remove(); }
+        $('.slick-track').attr
     };
     $('footer').toggleClass('active');
 }
+
 
 function init_slick_dashboard() {
 
@@ -170,6 +163,7 @@ function init_slick_dashboard() {
             arrows: true,
             prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
             nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+            adaptiveHeight: true,
 
             //responsivity
             responsive: [{
@@ -480,11 +474,11 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
 }
 
 //  RANGE SLIDER ISSUE !!!!
-$(document).on("input", "#searchRange", function(){
+$(document).on("mouseenter", "#searchRange", function(){
     $('#dashCarousel').slick("slickSetOption", "draggable", false);
-}, );
+});
 
-$(document).on("change", "#searchRange", function(){
+$(document).on("mouseleave", "#searchRange", function(){
     $('#dashCarousel').slick("slickSetOption", "draggable", true);
     
 });
