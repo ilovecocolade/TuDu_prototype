@@ -150,10 +150,12 @@ function init_slick_dashboard() {
 
         $('#dashCarousel').on('breakpoint', function() {
             $('[data-toggle="tooltip"]').tooltip();
+            $('#focusHeaderContainer').textfill({});
         });
 
         $('#dashCarousel').on('init', function() {
             $('[data-toggle="tooltip"]').tooltip();
+            $('#focusHeaderContainer').textfill({});
         });
 
         $('#dashCarousel').slick({
@@ -163,7 +165,6 @@ function init_slick_dashboard() {
             arrows: true,
             prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
             nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-            adaptiveHeight: true,
 
             //responsivity
             responsive: [{

@@ -100,13 +100,15 @@
         <!-- Floating interactionables -->
         <!-- DropPin button -->
         {% if user.is_authenticated %}
-        <button type="button" class="btn mapBtn" id="dropPin" data-toggle="tooltip" title="Add something TuDu" data-placement="right">
+        <button type="button" class="btn mapBtn" id="dropPin" data-toggle="tooltip" title="Create something TuDu"
+            data-placement="right">
             <img src="{% static "main/img/droppin_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
         </button>
         {% endif %}
 
         <!-- Filter button -->
-        <button type="button" class="btn mapBtn" name="filters" id="filterBtn" data-toggle="tooltip" title="Filter things TuDu" data-placement="bottom">
+        <button type="button" class="btn mapBtn" name="filters" id="filterBtn" data-toggle="tooltip"
+            title="Filter things TuDu" data-placement="bottom">
             <img src="{% static "main/img/filter_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
         </button>
 
@@ -121,14 +123,18 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <span><h2 class="modal-title">Which category best describes your upload?</h2><h4>Choose one primary and up to two secondary categories.</h4></span>
+                            <span>
+                                <h2 class="modal-title">Which category best describes your upload?</h2>
+                                <h4>Choose one primary and up to two secondary categories.</h4>
+                            </span>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
                         <!-- Modal body -->
                         <div class="modal-body" style="height: 400px">
                             <div class="container-fluid">
-                                <div class="card border rounded" id="filterCardAddLocation" style="margin-top: 4px; border: none;">
+                                <div class="card border rounded" id="filterCardAddLocation"
+                                    style="margin-top: 4px; border: none;">
                                     <div class="card-header" id="filterCardHeaderAddLocation">
                                         <div class="catBtnContainer no-gutters">
                                             {% for name, sub_cat in categories.items %}
@@ -179,15 +185,19 @@
                                 </div>
                                 <div class="row no-gutters align-items-center" style="height: 150px">
                                     <div class="col">
-                                        <div class="flex-container d-flex justify-content-center" id="primarySubCatContainer">
-                                            <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}" alt="primary_subCat_icon" style="height: 100px; width: 100px;">
+                                        <div class="flex-container d-flex justify-content-center"
+                                            id="primarySubCatContainer">
+                                            <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}"
+                                                alt="primary_subCat_icon" style="height: 100px; width: 100px;">
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="container" id="secondarySubCatContainer">
                                             <span>
-                                                <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}" alt="secondary_subCat_icon" style="height: 90px; width: 90px;">
-                                                <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}" alt="secondary_subCat_icon" style="height: 90px; width: 90px;">
+                                                <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}"
+                                                    alt="secondary_subCat_icon" style="height: 90px; width: 90px;">
+                                                <img src="{% static "main/img/icons/subcat_icon_placeholder.svg" %}"
+                                                    alt="secondary_subCat_icon" style="height: 90px; width: 90px;">
                                             </span>
                                         </div>
                                     </div>
@@ -205,42 +215,42 @@
             </div>
 
 
-        <div id='map' style='width: 100%; height: 100%;'></div>
+            <div id='map' style='width: 100%; height: 100%;'></div>
 
-        <script>
-            // generate mapbox interactive map
-            mapboxgl.accessToken = 'pk.eyJ1IjoidG9vZG9vIiwiYSI6ImNrYmpncWk4ODBwNWgycW1idWltZnpqaHgifQ.WGlRW_oHZX7M2Ks_kJL_GA';
-            var map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [-0.164088, 51.508907],
-                zoom: 4,
-            });
+            <script>
+                // generate mapbox interactive map
+                mapboxgl.accessToken = 'pk.eyJ1IjoidG9vZG9vIiwiYSI6ImNrYmpncWk4ODBwNWgycW1idWltZnpqaHgifQ.WGlRW_oHZX7M2Ks_kJL_GA';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [-0.164088, 51.508907],
+                    zoom: 4,
+                });
 
-            map.addControl(
-                new MapboxGeocoder({
-                    accessToken: mapboxgl.accessToken,
-                    limit: 8,
-                    flyTo: {
-                        bearing: 0,
-                        // These options control the flight curve, making it move
-                        // slowly and zoom out almost completely before starting
-                        // to pan.
-                        speed: 1, // make the flying slow
-                        curve: 3, // change the speed at which it zooms out
-                        // This can be any easing function: it takes a number between
-                        // 0 and 1 and returns another number between 0 and 1.
-                        easing: function (t) {
-                            return t;
-                        }
-                    },
-                    mapboxgl: mapboxgl
-                }), 'top-left'
-            );
+                map.addControl(
+                    new MapboxGeocoder({
+                        accessToken: mapboxgl.accessToken,
+                        limit: 8,
+                        flyTo: {
+                            bearing: 0,
+                            // These options control the flight curve, making it move
+                            // slowly and zoom out almost completely before starting
+                            // to pan.
+                            speed: 1, // make the flying slow
+                            curve: 3, // change the speed at which it zooms out
+                            // This can be any easing function: it takes a number between
+                            // 0 and 1 and returns another number between 0 and 1.
+                            easing: function (t) {
+                                return t;
+                            }
+                        },
+                        mapboxgl: mapboxgl
+                    }), 'top-left'
+                );
 
-            map.addControl(new mapboxgl.NavigationControl());
+                map.addControl(new mapboxgl.NavigationControl());
 
-        </script>
+            </script>
 
         </div>
     </main>
@@ -564,10 +574,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- TextFill -->
-                        <script>
-                            $('#focusHeaderContainer').textfill({});
-                        </script>
                     </div>
                     <div id="dash3">
                         <!-- Filter card -->
@@ -653,6 +659,17 @@
         </script>
 
     </footer>
+
+    <!-- TextFill -->
+    <script>
+        $('#focusHeaderContainer').textfill({});
+    </script>
+
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
 
 </body>
 
