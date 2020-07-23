@@ -494,6 +494,10 @@
                                     <div id="focusHeaderContainer" class="container-fluid"
                                         style="height: 60px; width: 360px;">
                                         <span>LOCATION TITLE</span>
+                                        <!-- TextFill -->
+                                        <script>
+                                            $('#focusHeaderContainer').textfill({});
+                                        </script>
                                     </div>
                                 </div>
                                 <div class="card-body card-body-main">
@@ -660,15 +664,10 @@
 
     </footer>
 
-    <!-- TextFill -->
     <script>
-        $('#focusHeaderContainer').textfill({});
-    </script>
-
-    <script>
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 
 </body>
