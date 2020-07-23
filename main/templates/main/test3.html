@@ -100,16 +100,19 @@
         <!-- Floating interactionables -->
         <!-- DropPin button -->
         {% if user.is_authenticated %}
-        <button type="button" class="btn mapBtn" id="dropPin" data-toggle="tooltip" title="Create something TuDu"
-            data-placement="right">
-            <img src="{% static "main/img/droppin_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
+        <button type="button" class="btn mapBtn" id="dropPin">
+            <span data-toggle="tooltip" title="Create something TuDu" data-placement="right">
+                <img src="{% static "main/img/droppin_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
+            </span>
         </button>
         {% endif %}
 
         <!-- Filter button -->
-        <button type="button" class="btn mapBtn" name="filters" id="filterBtn" data-toggle="tooltip"
-            title="Filter things TuDu" data-placement="bottom">
-            <img src="{% static "main/img/filter_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
+        <button type="button" class="btn mapBtn" name="filters" id="filterBtn">
+            <span data-toggle="tooltip" title="Filter things TuDu" data-placement="bottom">            
+                <img src="{% static "main/img/filter_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
+            </span>
+
         </button>
 
         <!-- MapBox panel -->
@@ -277,10 +280,7 @@
                                                 <input type="text" class="form-control" placeholder="Search..."
                                                     id="searchFieldDash">
                                                 <button class="btn" type="submit" id="goSearch">
-                                                    <span class="fa-stack">
-                                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                                        <i class="fas fa-search fa-stack-1x fa-inverse"></i>
-                                                    </span>
+                                                    <img src="{% static "main/img/search_btn.svg" %}" alt="logo" style="width: 32px; height: 32px;">
                                                 </button>
                                             </form>
                                         </div>
