@@ -100,22 +100,14 @@
         <!-- Floating interactionables -->
         <!-- DropPin button -->
         {% if user.is_authenticated %}
-        <button type="button" class="btn mapBtn" id="dropPin">
-            <!-- INSERT ID OF DROPPIN MODAL -->
-            <span class="fa-stack fa-lg fa-fw" data-toggle="tooltip" title="Add something TuDu" data-placement="right">
-                <i class="fas fa-circle fa-stack-2x"></i>
-                <i class="fas fa-map-pin fa-stack-1x fa-inverse"></i>
-            </span>
+        <button type="button" class="btn mapBtn" id="dropPin" data-toggle="tooltip" title="Add something TuDu" data-placement="right">
+            <img src="{% static "main/img/droppin_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
         </button>
         {% endif %}
 
         <!-- Filter button -->
-        <button type="button" class="btn mapBtn" name="filters" id="filterBtn">
-            <!-- ONLICK TOGGLEDASH -->
-            <span class="fa-stack fa-lg fa-fw">
-                <i class="fas fa-circle fa-stack-2x"></i>
-                <i class="fas fa-sitemap fa-stack-1x fa-inverse"></i>
-            </span>
+        <button type="button" class="btn mapBtn" name="filters" id="filterBtn" data-toggle="tooltip" title="Filter things TuDu" data-placement="bottom">
+            <img src="{% static "main/img/filter_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
         </button>
 
         <!-- MapBox panel -->
