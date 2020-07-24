@@ -353,8 +353,13 @@ $(document).on('click', '#subCatBtnAddLocationSecondary', function () {
     var name = $(this).find('figcaption').text();
     var icon_path = $(this).find('img').attr('src');
 
-    $('#secondaryPlaceholder').replaceWith('<button class="btn" type="button" id="secondarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 90px; width: 90px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');#
-    
+    $('#secondaryPlaceholder').replaceWith('<button class="btn" type="button" id="secondarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 90px; width: 90px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+
+});
+
+
+$(document).on('click', '#secondarySubCatBtn', function() {
+    $(this).replaceWith('<img id="secondaryPlaceholder" src="/static/main/img/icons/subcat_icon_placeholder.svg" alt="secondary_subCat_icon" style="height: 90px; width: 90px;">');
 });
 
 
