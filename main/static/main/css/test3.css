@@ -63,7 +63,7 @@ main {
 
 #dropPin {
     position: absolute;
-    left: 350px;
+    left: 328px;
     top: 57px;
     z-index: 2;
   }
@@ -148,12 +148,12 @@ footer.active {
     font-size: small;
 }
 
-#activeFilters {
+/*#activeFilters {
     margin-top: 2px;
-    height: 100%;
+    height: 150px;
     width: 100%;
     position: absolute;
-}
+}*/
 
 .filterBarBtn {
     margin: 5px;

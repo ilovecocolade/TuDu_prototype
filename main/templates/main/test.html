@@ -56,30 +56,89 @@
 </head>
 
 <body>
-    
+
     <div class="card" id="filterCard" style="margin-top: 4px; border: none;">
         <div class="card-header" id="filterCardHeader">
             <div class="catBtnContainer no-gutters">
-                
-                <button class="btn catBtn active" id="Activities-dash-filter" onclick="popSubCategories(categories='Activities', sub_categories={'Swimming': 'main/img/sub_cat_icons/swimming_64.svg', 'Fishing': 'main/img/sub_cat_icons/fishing_64.svg', 'Hiking': 'main/img/sub_cat_icons/hiking_64.svg', 'Climbing': 'main/img/sub_cat_icons/climbing_64.svg', 'Walking': 'main/img/sub_cat_icons/walking_64.svg', 'Cycling': 'main/img/sub_cat_icons/cycling_64.svg', 'Cliff Jumping': 'main/img/sub_cat_icons/cliff_jumping_64.svg'}, initial=false)" tabindex="-1">Activities</button>
-                
-                <button class="btn catBtn" id="Nature-dash-filter" onclick="popSubCategories(categories='Nature', sub_categories={'Waterfall': 'main/img/sub_cat_icons/waterfall_64.svg', 'Panoramic': 'main/img/sub_cat_icons/panoramic_64.svg', 'Picturesque': 'main/img/sub_cat_icons/picturesque_64.svg'}, initial=false)" tabindex="-1">Nature</button>
-                
-                <button class="btn catBtn" id="Culture-dash-filter" onclick="popSubCategories(categories='Culture', sub_categories={'Monument': 'main/img/sub_cat_icons/monument_64.svg', 'Castle': 'main/img/sub_cat_icons/castle_64.svg', 'Museum': 'main/img/sub_cat_icons/museum_64.svg', 'Skyline': 'main/img/sub_cat_icons/skyline_64.svg'}, initial=false)" tabindex="-1">Culture</button>
-                
+
+                <button class="btn catBtn active" id="Activities-dash-filter"
+                    onclick="popSubCategories(categories='Activities', sub_categories={'Swimming': 'main/img/sub_cat_icons/swimming_64.svg', 'Fishing': 'main/img/sub_cat_icons/fishing_64.svg', 'Hiking': 'main/img/sub_cat_icons/hiking_64.svg', 'Climbing': 'main/img/sub_cat_icons/climbing_64.svg', 'Walking': 'main/img/sub_cat_icons/walking_64.svg', 'Cycling': 'main/img/sub_cat_icons/cycling_64.svg', 'Cliff Jumping': 'main/img/sub_cat_icons/cliff_jumping_64.svg'}, initial=false)"
+                    tabindex="-1">Activities</button>
+
+                <button class="btn catBtn" id="Nature-dash-filter"
+                    onclick="popSubCategories(categories='Nature', sub_categories={'Waterfall': 'main/img/sub_cat_icons/waterfall_64.svg', 'Panoramic': 'main/img/sub_cat_icons/panoramic_64.svg', 'Picturesque': 'main/img/sub_cat_icons/picturesque_64.svg'}, initial=false)"
+                    tabindex="-1">Nature</button>
+
+                <button class="btn catBtn" id="Culture-dash-filter"
+                    onclick="popSubCategories(categories='Culture', sub_categories={'Monument': 'main/img/sub_cat_icons/monument_64.svg', 'Castle': 'main/img/sub_cat_icons/castle_64.svg', 'Museum': 'main/img/sub_cat_icons/museum_64.svg', 'Skyline': 'main/img/sub_cat_icons/skyline_64.svg'}, initial=false)"
+                    tabindex="-1">Culture</button>
+
             </div>
         </div>
-        <div class="card-body" id="filterCardBody" style="background-color: lightblue; padding:0; margin:0; height: 150px;">
+        <div class="card-body" id="filterCardBody"
+            style="background-color: lightblue; padding:0; margin:0; height: 150px;">
 
             <div class="no-gutters d-flex align-items-center border" style="height: 150px;">
                 <div id="filterMenu" class="carousel slide" data-interval="false">
 
                     <ul class="carousel-indicators subCat" style="margin: 0; padding: 0;" id="carousel-pages">
-                    <li data-target="#filterMenu" data-slide-to="0" class="active"></li><li data-target="#filterMenu" data-slide-to="1"></li></ul>
+                        <li data-target="#filterMenu" data-slide-to="0" class="active"></li>
+                        <li data-target="#filterMenu" data-slide-to="1"></li>
+                    </ul>
 
                     <div class="carousel-inner">
                         <div class="container" id="subCatCarousel">
-                        <div class="carousel-item active"><div class="container" id="button-container0"><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/swimming_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Swimming</figcaption></figure></button><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/fishing_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Fishing</figcaption></figure></button><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/hiking_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Hiking</figcaption></figure></button><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/climbing_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Climbing</figcaption></figure></button></div></div><div class="carousel-item"><div class="container" id="button-container1"><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/walking_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Walking</figcaption></figure></button><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/cycling_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Cycling</figcaption></figure></button><button class="btn" type="button" id="subCatBtn" tabindex="-1"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/cliff_jumping_64.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Cliff Jumping</figcaption></figure></button></div></div></div>
+                            <div class="carousel-item active">
+                                <div class="container" id="button-container0"><button class="btn" type="button"
+                                        id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/swimming_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Swimming</figcaption>
+                                        </figure>
+                                    </button><button class="btn" type="button" id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/fishing_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Fishing</figcaption>
+                                        </figure>
+                                    </button><button class="btn" type="button" id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/hiking_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Hiking</figcaption>
+                                        </figure>
+                                    </button><button class="btn" type="button" id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/climbing_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Climbing</figcaption>
+                                        </figure>
+                                    </button></div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="container" id="button-container1"><button class="btn" type="button"
+                                        id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/walking_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Walking</figcaption>
+                                        </figure>
+                                    </button><button class="btn" type="button" id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/cycling_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Cycling</figcaption>
+                                        </figure>
+                                    </button><button class="btn" type="button" id="subCatBtn" tabindex="-1">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/cliff_jumping_64.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Cliff Jumping</figcaption>
+                                        </figure>
+                                    </button></div>
+                            </div>
+                        </div>
                     </div>
 
                     <a class="carousel-control-prev" href="#filterMenu" role="button" data-slide="prev" tabindex="-1">
@@ -92,7 +151,30 @@
                     </a>
                 </div>
             </div>
-        </div><div class="card-footer" id="filterCardFooter" style="background-color: goldenrod; padding: 0; margin: 0; height: 150px;"><div class="no-gutters d-flex align-items-center border" style="height: 150px;"><div id="activeFilters" class="carousel slide" data-interval="false"><ul class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ul><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container0"><button class="btn activeBtn" type="button"><figure class="figure"><img class="mx-auto d-block" src="/media/main/img/sub_cat_icons/swimming_64_clr.svg" style="height: 40px; width: 40px;"><figcaption class="figure-caption">Swimming</figcaption></figure></button></div></div></div></div></div></div></div>
+        </div>
+        <div class="card-footer" id="filterCardFooter"
+            style="background-color: goldenrod; padding: 0; margin: 0; height: 150px;">
+            <div class="no-gutters d-flex align-items-center border" style="height: 150px;">
+                <div id="activeFilters" class="carousel slide" data-interval="false">
+                    <ul class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active">
+                    </ul>
+                    <div class="carousel-inner">
+                        <div class="container actives-pages">
+                            <div class="carousel-item active footer">
+                                <div class="container" id="active-button-container0"><button class="btn activeBtn"
+                                        type="button">
+                                        <figure class="figure"><img class="mx-auto d-block"
+                                                src="/media/main/img/sub_cat_icons/swimming_64_clr.svg"
+                                                style="height: 40px; width: 40px;">
+                                            <figcaption class="figure-caption">Swimming</figcaption>
+                                        </figure>
+                                    </button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

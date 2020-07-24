@@ -94,6 +94,7 @@
         </div>
     </nav>
 
+
     <!-- MAIN INTERACTIVE MAP -->
     <main class="no-gutters">
 
@@ -101,17 +102,19 @@
         <!-- DropPin button -->
         {% if user.is_authenticated %}
         <button type="button" class="btn mapBtn" id="dropPin">
-            <span data-toggle="tooltip" title="Create something TuDu" data-placement="right">
+            <div data-toggle="tooltip" title="Create something TuDu" data-placement="right"
+                style="width: 100%; height: 100%;">
                 <img src="{% static "main/img/droppin_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
-            </span>
+            </div>
         </button>
         {% endif %}
 
         <!-- Filter button -->
         <button type="button" class="btn mapBtn" name="filters" id="filterBtn">
-            <span data-toggle="tooltip" title="Filter things TuDu" data-placement="bottom">
+            <div data-toggle="tooltip" title="Filter things TuDu" data-placement="bottom"
+                style="width: 100%; height: 100%;">
                 <img src="{% static "main/img/filter_btn.svg" %}" alt="logo" style="width: 40px; height: 40px;">
-            </span>
+            </div>
 
         </button>
 
