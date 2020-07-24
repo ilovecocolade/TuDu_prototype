@@ -126,7 +126,7 @@ $(document).on('click', '#subCatBtnAddLocationSecondary', function () {
 
 
 $(document).on('click', '#secondarySubCatBtn', function() {
-    $(this).replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">. </figcaption></figure></button>');
+    $(this).replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
 });
 
 $(document).on('click', '#secondarySubCatBack', function() {
@@ -167,8 +167,8 @@ function end_create_location() {
     $('#primarySubCatContainer').empty();
     $('#primarySubCatContainer').append('<img src="/static/main/img/icons/subcat_icon_placeholder.svg" alt="primary_subCat_icon" style="height: 100px; width: 100px;">');
 
-    $('#secondarySubCatContainer').empty();
-    $('#secondarySubCatCOntainer').append('<img src="/static/main/img/icons/subcat_icon_placeholder.svg" alt="secondary_subCat_icon" style="height: 90px; width: 90px;"> <img src="/static/main/img/icons/subcat_icon_placeholder.svg" alt="secondary_subCat_icon" style="height: 90px; width: 90px;">');
+    $('#secondarySubCatBtn').replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
+    $('#secondarySubCatBtn').replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
 }
 
 
