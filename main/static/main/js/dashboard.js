@@ -102,6 +102,41 @@ $(document).on('click', '#primarySubCatContinue', function () {
 });
 
 
+$(document).on('click', '#subCatBtnAddLocation', function () {
+
+    var name = $(this).find('figcaption').text();
+    var icon_path = $(this).find('img').attr('src');
+
+    $('#primarySubCatContainer').empty();
+    $('#primarySubCatContainer').append('<button class="btn" type="button" id="primarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 100px; width: 100px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+
+
+});
+
+
+$(document).on('click', '#subCatBtnAddLocationSecondary', function () {
+
+    var name = $(this).find('figcaption').text();
+    var icon_path = $(this).find('img').attr('src');
+
+    if ($('#secondarySubCatBtn').find('.figure-caption').html() != name) {
+        $('#secondaryPlaceholder').replaceWith('<button class="btn" type="button" id="secondarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 90px; width: 90px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+    }
+});
+
+
+$(document).on('click', '#secondarySubCatBtn', function() {
+    $(this).replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">. </figcaption></figure></button>');
+});
+
+$(document).on('click', '#secondarySubCatBack', function() {
+
+    $('#uploadLocationModalSecondary').modal('hide');
+    $('#uploadLocationModalPrimary').modal();
+
+});
+
+
 
 function upload_location() {
     $('#crosshair').remove();
@@ -333,39 +368,6 @@ function popSubCategoriesAddLocationSecondary(categories, sub_categories, initia
     }
 
 }
-
-
-
-$(document).on('click', '#subCatBtnAddLocation', function () {
-
-    var name = $(this).find('figcaption').text();
-    var icon_path = $(this).find('img').attr('src');
-
-    $('#primarySubCatContainer').empty();
-    $('#primarySubCatContainer').append('<button class="btn" type="button" id="primarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 100px; width: 100px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-
-
-});
-
-
-$(document).on('click', '#subCatBtnAddLocationSecondary', function () {
-
-    var name = $(this).find('figcaption').text();
-    var icon_path = $(this).find('img').attr('src');
-
-    if ($('#secondarySubCatBtn').find('.figure-caption').html() != name) {
-        $('#secondaryPlaceholder').replaceWith('<button class="btn" type="button" id="secondarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 90px; width: 90px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
-    }
-});
-
-
-$(document).on('click', '#secondarySubCatBtn', function() {
-    $(this).replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">. </figcaption></figure></button>');
-});
-
-
-
-
 
 
 function build_dashboard_active_filters(actives) {
