@@ -57,9 +57,10 @@ $(document).on('click', '#dropPin', function () {
     $('#toggleDash').css({ 'display': 'none' });
 
     $('#mapbox').append('<div id="crosshair" style="position: absolute; z-index: 99; left: calc(50% - 16px); top: calc(50% - 17px); color: red;"> <i class="fas fa-crosshairs fa-2x"></i> </div>');
-    $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 520px; top: 1%; left: 32%;" id="locationPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ol><li>Position the crosshair on the location you want to add.</li><li>Press the tick when you are done.</li></ol></div>');
+    $('#mapbox').append('<div class="alert alert-primary alert-dismissible" style="position: absolute; z-index: 99; width: 520px; top: 1%; left: 32%;" id="locationPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ol><li>Position the crosshair on the location you want to add.</li><li>Press the tick when you are done.</li></ol></div>');
     $('#mapbox').append('<button id="confirmLocation" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 53px); top: 11%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>');
 
+    $('#uploaderEntry').val($('#navUsername').html());
 });
 
 $(document).on('click', '#confirmLocation', function () {
@@ -72,18 +73,23 @@ $(document).on('click', '#confirmLocation', function () {
     $('#locationPinInstruct').remove();
     $('#confirmLocation').remove();
 
-    $('#mapbox').append('<div class="alert alert-dark alert-dismissible" style="position: absolute; z-index: 99; width: 700px; top: 1%; left: 30%;" id="nearestAccessPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ul><li>If appropriate, add the location of a nearby access point (e.g. car park) as before.</li><li>If this is not relevant, press the cross.</li></ul></div>');
+    $('#mapbox').append('<div class="alert alert-primary alert-dismissible" style="position: absolute; z-index: 99; width: 700px; top: 1%; left: 30%;" id="nearestAccessPinInstruct"> <button type="button" class="close" data-dismiss="alert">&times;</button><ul><li>If appropriate, add the location of a nearby access point (e.g. car park) as before.</li><li>If this is not relevant, press the cross.</li></ul></div>');
     $('#mapbox').append('<button id="confirmNearestAccess" class="btn" style="position: absolute; z-index: 99; right: calc(50% - 0px); top: 11%; color: greenyellow;"><i class="fas fa-check-circle fa-5x"></i></button>')
     $('#mapbox').append('<button id="cancelNearestAccess" class="btn" style="position: absolute; z-index: 99; left: calc(50% - 0px); top: 11%; color: red;"><i class="fas fa-window-close fa-5x"></i></button>')
+
+    $('#locationEntry').val(map.getCenter());
 
 });
 
 
-
 $(document).on('click', '#confirmNearestAccess', function () {
     $('#crosshair').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+
     var new_nearest_access = new mapboxgl.Marker().setLngLat(map.getCenter()).addTo(map);
+
     upload_location();
+
+    $('#nearestAccessEntry').val(map.getCenter());
 });
 
 $(document).on('click', '#cancelNearestAccess', function () {
@@ -97,8 +103,10 @@ $(document).on('click', '#primarySubCatContinue', function () {
 
         $('#uploadLocationModalPrimary').modal('hide');
         $('#uploadLocationModalSecondary').modal();
+        $('continueErrorPrimary').remove();
 
-    } else {  /* PLEASE SELECT A PRIMARY CATEGORY */ }
+        $('#primarySubCatEntry').val($('#primarySubCatBtn').find('.figure-caption').html());
+    }
 });
 
 
@@ -109,7 +117,16 @@ $(document).on('click', '#subCatBtnAddLocation', function () {
 
     $('#primarySubCatContainer').empty();
     $('#primarySubCatContainer').append('<button class="btn" type="button" id="primarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 100px; width: 100px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+    $('#primarySubCatContinue').tooltip('disable');
+    
+    $('.selectedPrimaryCategory').tooltip('dispose');
+    $('.selectedPrimaryCategory').removeClass('.selectedPrimaryCategory');
 
+    $('button[id^="secondarySubCatBtn"]').each(function () {
+        if ($(this).find('.figure-caption').html() == name) {
+            $(this).replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
+        }
+    });
 
 });
 
@@ -120,20 +137,94 @@ $(document).on('click', '#subCatBtnAddLocationSecondary', function () {
     var icon_path = $(this).find('img').attr('src');
 
     if ($('#secondarySubCatBtn').find('.figure-caption').html() != name) {
-        $('#secondaryPlaceholder').replaceWith('<button class="btn" type="button" id="secondarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 90px; width: 90px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+        
+        if ($('#primarySubCatBtn').find('.figure-caption').html() != name) {
+            $('#secondaryPlaceholder').replaceWith('<button class="btn" type="button" id="secondarySubCatBtn"><figure class="figure"><img src="' + icon_path + '" style="height: 90px; width: 90px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+        } else { 
+
+            $(this).addClass('selectedPrimaryCategory');
+            $(this).attr('data-toggle', 'tooltip');
+            $(this).attr('title', 'This is your primary category. You cannot select it as a secondary category.');
+            $(this).attr('data-placement', 'bottom');
+            $(this).tooltip('show');
+
+
+        
+        }
     }
 });
 
 
-$(document).on('click', '#secondarySubCatBtn', function() {
+$(document).on('click', '#secondarySubCatBtn', function () {
     $(this).replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
 });
 
-$(document).on('click', '#secondarySubCatBack', function() {
+$(document).on('click', '#secondarySubCatBack', function () {
 
     $('#uploadLocationModalSecondary').modal('hide');
     $('#uploadLocationModalPrimary').modal();
 
+});
+
+
+$(document).on('click', '#secondarySubCatContinue', function () {
+
+    $('#uploadLocationModalSecondary').modal('hide');
+    $('#submitLocationModal').modal();
+
+    var secondary_sub_cats = []
+
+    $('button[id^="secondarySubCatBtn"]').each(function () {
+        secondary_sub_cats.push($(this).find('.figure-caption').html());
+    });
+
+    $('#secondarySubCatEntry').val(secondary_sub_cats);
+
+});
+
+
+
+$(document).on('click', '#submitLocationBack', function () {
+
+    $('#submitLocationModal').modal('hide');
+    $('#uploadLocationModalSecondary').modal();
+
+});
+
+
+$(document).on('input', '#inputLocationName', function () {
+    $('#submitLocation').tooltip('disable');
+});
+
+
+$(document).on('click', '#submitLocation', function () {
+    console.log($('#inputLocationName').val());
+    console.log($('#inputLocationDescription').val());
+
+    if ($('#inputLocationName').val() != '') {
+
+        $('#nameEntry').val($('#inputLocationName').val());
+        $('#descriptionEntry').val($('#inputLocationDescription').val());
+        var cloned_image_input = $('#inputLocationImage').clone();
+        cloned_image_input.attr('class', '');
+        cloned_image_input.attr('id', 'photoEntry');
+        cloned_image_input.attr('name', 'photo');
+        $('#photoEntry').replaceWith(cloned_image_input);
+        // $('#photoEntry').files[0] = $('#inputLocationImage').files[0];
+
+        $('#createLocationForm').submit();
+
+        end_create_location();
+    }
+
+});
+
+$(document).on('mouseover', '#submitLocation', function () {
+
+    if ($('#inputLocationName').val() == '') {
+        $('#submitLocation').tooltip('enable');
+        $('#submitLocation').tooltip('show');
+    }
 });
 
 
@@ -169,6 +260,17 @@ function end_create_location() {
 
     $('#secondarySubCatBtn').replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
     $('#secondarySubCatBtn').replaceWith('<button class="btn" type="button" id="secondaryPlaceholder"><figure class="figure"><img src="/static/main/img/icons/subcat_icon_placeholder.svg" style="height: 90px; width: 90px;"><figcaption class="figure-caption">&nbsp </figcaption></figure></button>');
+
+    $('#primarySubCatContinue').tooltip('enable');
+
+    $('#inputLocationName').replaceWith('<input type="text" class="form-control" id="inputLocationName" placeholder="Name your location" aria-label="Name of location">');
+    $('#inputLocationImage').next('.custom-file-label').html('Select file');
+    $('#inputLocationDescription').replaceWith('<textarea class="form-control" id="inputLocationDescription" placeholder="Describe your location" aria-label="Description of location"></textarea>');
+    $('submitLocation').tooltip('enable');
+
+    $('.selectedPrimaryCategory').tooltip('dispose');
+    $('.selectedPrimaryCategory').removeClass('.selectedPrimaryCategory');
+
 }
 
 

@@ -44,10 +44,10 @@ class Locations(models.Model):
     primary_sub_category = models.ForeignKey(SubCategories, default='Unknown', on_delete=models.SET_DEFAULT)
     secondary_sub_categories = models.ManyToManyField(SubCategories, related_name='secondary_sub_categories')
     name = models.CharField(max_length=200, unique=True)
-    location = LocationField()
-    nearest_access = LocationField()
+    location = models.CharField(max_length=200)
+    nearest_access = models.CharField(max_length=200)
     description = models.TextField()
-    photo = models.ImageField(upload_to='photos/')
+    photo = models.FileField(upload_to='main/locations/photos/')
     upload_date = models.DateTimeField(default=dt.now())
 
     class Meta:

@@ -3,7 +3,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
+from .models import SubCategories, Locations
+from django.http import HttpResponse
 
 
 
@@ -84,3 +85,72 @@ class CreateAccountForm(forms.Form):
         if (password1 and password2) and (password1 != password2):
             raise forms.ValidationError('Passwords do not match.')
         return password2
+
+
+class CreateLocationForm(forms.Form):
+
+    # create ID for location ? id = forms.UUIDField()
+    uploader = forms.CharField(widget=forms.TextInput(attrs={'id': 'uploaderEntry'}))
+    primary_sub_category = forms.CharField(widget=forms.TextInput(attrs={'id': 'primarySubCatEntry'}))
+    secondary_sub_categories = forms.CharField(widget=forms.TextInput(attrs={'id': 'secondarySubCatEntry'}), required=False)
+    name = forms.CharField(widget=forms.TextInput(attrs={'id': 'nameEntry'}))
+    location = forms.CharField(widget=forms.TextInput(attrs={'id': 'locationEntry'}))
+    nearest_access = forms.CharField(widget=forms.TextInput(attrs={'id': 'nearestAccessEntry'}), required=False)
+    description = forms.CharField(widget=forms.TextInput(attrs={'id': 'descriptionEntry'}), required=False)
+    photo = forms.FileField(widget=forms.FileInput(attrs={'id': 'photoEntry'}), required=False)
+    # need upload_date for loaction ? upload_date = forms.CharField(widget=forms.TextInput(attrs={'id': 'uploaderEntry'}))
+
+    class Meta:
+        model = Locations
+    
+    def save(self, commit=True, photo_file=None):
+
+        uploader = self.clean_uploader()
+        primary_sub_category = self.clean_primary_sub_category()
+        secondary_sub_categories = self.clean_secondary_sub_categories()
+        name = self.clean_name()
+        location = self.clean_location()
+        nearest_access = self.clean_nearest_access()
+        description = self.clean_description()
+        photo = photo_file  # self.clean_photo()
+
+        if commit:
+            created_location = Locations.objects.create(uploader=uploader, primary_sub_category=primary_sub_category, name=name, location=location, nearest_access=nearest_access, description=description)
+            [created_location.secondary_sub_categories.add(SubCategories.objects.get(name=sub_cat_name)) for sub_cat_name in secondary_sub_categories]
+            return created_location
+
+    def clean_uploader(self):
+        uploader = User.objects.get(username=self.cleaned_data['uploader'])
+        return uploader
+
+    def clean_primary_sub_category(self):
+        primary_sub_category = SubCategories.objects.get(name=self.data['primary_sub_category'])
+        return primary_sub_category
+
+    def clean_secondary_sub_categories(self):
+        secondary_sub_categories = self.cleaned_data['secondary_sub_categories']
+        if ',' in secondary_sub_categories:
+            secondary_sub_categories = (secondary_sub_categories[:secondary_sub_categories.find(',')], secondary_sub_categories[(secondary_sub_categories.find(',')+1):])
+        else:
+            secondary_sub_categories = (secondary_sub_categories)
+        return secondary_sub_categories
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        return name
+    
+    def clean_location(self):
+        location = self.cleaned_data['location']
+        return location
+
+    def clean_nearest_access(self):
+        nearest_access = self.cleaned_data['nearest_access']
+        return nearest_access
+    
+    def clean_description(self):
+        description = self.cleaned_data['description']
+        return description
+    
+    def clean_photo(self):
+        photo = self.cleaned_data['photo']
+        return photo
