@@ -364,7 +364,7 @@
             </div>
 
             <!-- Instantiate add location form -->
-            <form id="createLocationForm" method="POST" enctype="multipart/form-data"> <!-- style="display: none;" -->
+            <form id="createLocationForm" method="POST" enctype="multipart/form-data" style="display: none;"> <!-- style="display: none;" -->
             {% csrf_token %}
             {{ add_location_form }}
             </form>

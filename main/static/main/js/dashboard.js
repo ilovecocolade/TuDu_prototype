@@ -206,7 +206,7 @@ $(document).on('click', '#submitLocation', function () {
         $('#nameEntry').val($('#inputLocationName').val());
         $('#descriptionEntry').val($('#inputLocationDescription').val());
         var cloned_image_input = $('#inputLocationImage').clone();
-        cloned_image_input.attr('class', '');
+        // cloned_image_input.attr('class', '');
         cloned_image_input.attr('id', 'photoEntry');
         cloned_image_input.attr('name', 'photo');
         $('#photoEntry').replaceWith(cloned_image_input);

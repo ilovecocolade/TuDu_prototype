@@ -115,7 +115,7 @@ class CreateLocationForm(forms.Form):
         photo = photo_file  # self.clean_photo()
 
         if commit:
-            created_location = Locations.objects.create(uploader=uploader, primary_sub_category=primary_sub_category, name=name, location=location, nearest_access=nearest_access, description=description)
+            created_location = Locations.objects.create(uploader=uploader, primary_sub_category=primary_sub_category, name=name, location=location, nearest_access=nearest_access, description=description, photo=photo)
             [created_location.secondary_sub_categories.add(SubCategories.objects.get(name=sub_cat_name)) for sub_cat_name in secondary_sub_categories]
             return created_location
 
