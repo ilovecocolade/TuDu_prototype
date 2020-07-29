@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
-from .forms import UserLoginForm, CreateAccountForm
+from .forms import UserLoginForm, CreateAccountForm, CreateLocationForm
 from django.contrib import messages
 from django import forms
 from .models import Categories, SubCategories
@@ -32,7 +32,18 @@ def test3(request):
         [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category.name)]
         categories.update({category.name: sub_categories})
 
-    return render(request, 'main/test3.html', context={'categories': categories})
+    context = {'categories': categories}
+
+    if request.user.is_authenticated:
+        new_location = CreateLocationForm(request.POST, request.FILES)
+        if new_location.is_valid():
+            new_location = new_location.save(photo_file=request.FILES)
+            messages.success(request, f'Location Created: {new_location.name}')
+        else:
+            new_location = CreateLocationForm()
+        context.update({'add_location_form': new_location})
+
+    return render(request, 'main/test3.html', context=context)
 
 
 '''def populate_sub_categories(request):

@@ -155,6 +155,10 @@ footer.active {
     position: absolute;
 }*/
 
+#descriptionInput{
+   height: 70%;
+}
+
 .filterBarBtn {
     margin: 5px;
     padding: 0;
