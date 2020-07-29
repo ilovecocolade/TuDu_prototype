@@ -37,7 +37,7 @@ def test3(request):
     if request.user.is_authenticated:
         new_location = CreateLocationForm(request.POST, request.FILES)
         if new_location.is_valid():
-            new_location = new_location.save(photo_file=request.FILES)
+            new_location = new_location.save(photo_file=request.FILES.get('photo'))
             messages.success(request, f'Location Created: {new_location.name}')
         else:
             new_location = CreateLocationForm()
