@@ -12,13 +12,7 @@ from django.http import JsonResponse
 
 # TEST VIEWS FOR HTML FILES
 def test(request):
-    categories = {}
-    for category in Categories.objects.all():
-        sub_categories = {}
-        [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category.name)]
-        categories.update({category.name: sub_categories})
-
-    return render(request, 'main/test.html', context={'categories': categories})
+    return render(request, 'main/test.html')
 
 
 def test2(request):
@@ -26,23 +20,7 @@ def test2(request):
 
 
 def test3(request):
-    categories = {}
-    for category in Categories.objects.all():
-        sub_categories = {}
-        [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category.name)]
-        categories.update({category.name: sub_categories})
-
-    context = {'categories': categories}
-
-    if request.user.is_authenticated:
-        new_location = CreateLocationForm(request.POST, request.FILES)
-        if new_location.is_valid():
-            new_location = new_location.save(photo_file=request.FILES.get('photo'))
-            messages.success(request, f'Location Created: {new_location.name}')
-            return redirect('main:test3')
-        context.update({'add_location_form': new_location})
-
-    return render(request, 'main/test3.html', context=context)
+    return render(request, 'main/test3.html')
 
 
 '''def populate_sub_categories(request):
