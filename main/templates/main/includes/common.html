@@ -12,11 +12,13 @@
 {% block head %}
 {% endblock %}
 
-<!-- Browser tab icon -->
-<link rel="icon" href="{% static "main/img/favicon.ico" %}">
 
 <!-- Google fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Quicksand:wght@300;400;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Quicksand:wght@300;400;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet">
+
+<link rel="icon" href="{% static "main/img/favicon.ico" %}">
 
 <!-- Slick carousel plugin css and theme.css -->
 <link rel="stylesheet" type="text/css" href="{% static "main/slick/slick.css" %}?{% now 'U' %}">
@@ -38,31 +40,38 @@
 <script src="{% static "main/js/jquery.textfill.js" %}"></script>
 <script src="{% static "main/js/jquery.textfill.min.js" %}"></script>
 
+<!-- Mapbox -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+    type="text/css" />
+
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
 <!-- Slick plugin -->
 <script type="text/javascript" src="{% static "main/slick/slick.js" %}?{% now 'U' %}"></script>
 
 <!-- Custom styles for this template -->
 <link href="{% static "main/css/test3.css" %}?{% now 'U' %}" rel="stylesheet">
 
-<!-- Dashboard controller -->
-<script src="{% static "main/js/dashboard.js" %}?{% now 'U' %}" rel="dashboardcontroller"></script>
-
-<!-- Select all elements with data-toggle="tooltips" in the document -->
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
+<!-- TuDu controller -->
+<script src="{% static "main/js/tudu.js" %}?{% now 'U' %}" rel="TuDuController"></script>
 
 </head>
 
-<body>
+<body onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true); popSubCategoriesAddLocationPrimary(categories={{categories}}, sub_categories=null, initial=true); popSubCategoriesAddLocationSecondary(categories={{categories}}, sub_categories=null, initial=true);">
     <div class="no-gutters">
         <div class="row header">
             {% include "main/includes/navbar.html" %}
         </div>
     </div>
+    
     {% include 'main/includes/messages.html' %}
+    
     {% block content %}
     {% endblock %}
 

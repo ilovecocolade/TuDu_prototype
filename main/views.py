@@ -39,8 +39,7 @@ def test3(request):
         if new_location.is_valid():
             new_location = new_location.save(photo_file=request.FILES.get('photo'))
             messages.success(request, f'Location Created: {new_location.name}')
-        else:
-            new_location = CreateLocationForm()
+            return redirect('main:test3')
         context.update({'add_location_form': new_location})
 
     return render(request, 'main/test3.html', context=context)
@@ -58,7 +57,23 @@ def test3(request):
 
 
 def home(request):
-    return render(request=request, template_name='main/index.html')
+    categories = {}
+    for category in Categories.objects.all():
+        sub_categories = {}
+        [sub_categories.update({sub_category.name: str(sub_category.icon)}) for sub_category in SubCategories.objects.filter(category=category.name)]
+        categories.update({category.name: sub_categories})
+
+    context = {'categories': categories}
+
+    if request.user.is_authenticated:
+        new_location = CreateLocationForm(request.POST, request.FILES)
+        if new_location.is_valid():
+            new_location = new_location.save(photo_file=request.FILES.get('photo'))
+            messages.success(request, f'Location Created: {new_location.name}')
+            return redirect('main:test3')
+        context.update({'add_location_form': new_location})
+
+    return render(request, 'main/index.html', context=context)
 
 
 def register(request):

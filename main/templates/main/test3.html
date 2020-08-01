@@ -55,9 +55,7 @@
 
 </head>
 
-<body
-    onload="popSubCategories(categories={{categories}}, sub_categories=null, initial=true); popSubCategoriesAddLocationPrimary(categories={{categories}}, sub_categories=null, initial=true); popSubCategoriesAddLocationSecondary(categories={{categories}}, sub_categories=null, initial=true);"
-    onresize="resize_dashboard()">
+<body>
     <!-- NAVBAR -->
     <nav class="navbar fixed-top navbar-expand">
         <a class="navbar-brand" href="/" style="color: #EFFD5F;">
@@ -96,7 +94,7 @@
 
 
     <!-- MAIN INTERACTIVE MAP -->
-    <main class="no-gutters">
+    <main class="no-gutters" onresize="resize_dashboard()">
 
         <!-- Floating interactionables -->
         <!-- DropPin button -->
