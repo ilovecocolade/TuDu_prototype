@@ -148,8 +148,6 @@ $(document).on('click', '#subCatBtnAddLocationSecondary', function () {
             $(this).attr('data-placement', 'bottom');
             $(this).tooltip('show');
 
-
-        
         }
     }
 });
@@ -210,7 +208,6 @@ $(document).on('click', '#submitLocation', function () {
         cloned_image_input.attr('id', 'photoEntry');
         cloned_image_input.attr('name', 'photo');
         $('#photoEntry').replaceWith(cloned_image_input);
-        // $('#photoEntry').files[0] = $('#inputLocationImage').files[0];
 
         $('#createLocationForm').submit();
 
@@ -565,7 +562,7 @@ $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUT
     var carousel_page;
     var display_page;
     var name = $(this).find('figcaption').text();
-    var icon_path = $(this).find('img').attr('src').replace('_64.svg', '_64_clr.svg');
+    var icon_path = $(this).find('img').attr('src') //.replace('_64.svg', '_64_clr.svg');
     var actives = add_active_filter(name, icon_path);
     var no_actives = Object.keys(actives).length;
 
@@ -577,7 +574,7 @@ $(document).on('click', '#subCatBtn', function () { // USE THIS FOR APPENDED BUT
     } else {
 
         carousel_page = 0;
-        $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: goldenrod; padding: 0; margin: 0; height: 150px;"><div class="no-gutters d-flex align-items-center border" style="height: 150px;"><div id="activeFilters" class="carousel slide" data-interval="false"><ul class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ul><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button></div></div></div></div></div></div>');
+        $('#filterCardBody').after('<div class="card-footer" id="filterCardFooter" style="background-color: goldenrod; padding: 0; margin: 0; height: 150px;"><div class="no-gutters d-flex align-items-center border" style="height: 150px;"><div id="activeFilters" class="carousel slide" data-interval="false"><ul class="carousel-indicators actives" style="margin: 0; padding: 0;" id="carousel-pages-active"></ul><div class="carousel-inner"><div class="container actives-pages"><div class="carousel-item active footer"><div class="container" id="active-button-container' + carousel_page + '"><button class="btn activeBtn" type="button" ><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption><i class="fa fa-close" style="font-size:12px; color:red; vertical-align:top;"></i></figure></button></div></div></div></div></div></div>');
 
     }
 });
@@ -626,7 +623,7 @@ function build_actives_carousel(max_filters_per_page, actives, display_page) {
                 carousel_page = Math.floor(i / max_filters_per_page);
             }
 
-            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption></figure></button>');
+            $('#active-button-container' + carousel_page).append('<button class="btn activeBtn" type="button"><figure class="figure"><img class="mx-auto d-block" src="' + icon_path + '" style="height: 40px; width: 40px;"><figcaption class="figure-caption">' + name + '</figcaption><i class="fa fa-close" style="font-size:12px; color:red; vertical-align:top;"></i></figure></button>');
 
         }
 
