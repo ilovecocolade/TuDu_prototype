@@ -44,10 +44,10 @@ class Locations(models.Model):
     primary_sub_category = models.ForeignKey(SubCategories, default='Unknown', on_delete=models.SET_DEFAULT)
     secondary_sub_categories = models.ManyToManyField(SubCategories, related_name='secondary_sub_categories')
     name = models.CharField(max_length=200, unique=True)
-    location = LocationField()
-    nearest_access = LocationField()
+    location = models.CharField(max_length=200)
+    nearest_access = models.CharField(max_length=200)
     description = models.TextField()
-    photo = models.ImageField(upload_to='photos/')
+    photo = models.FileField(upload_to='main/locations/')
     upload_date = models.DateTimeField(default=dt.now())
 
     class Meta:
@@ -63,7 +63,7 @@ class Visits(models.Model):
     visitor = models.ForeignKey(User, default='Deleted', on_delete=models.SET_DEFAULT)
     location = models.ForeignKey(Locations, default='Deleted', on_delete=models.SET_DEFAULT)
     comment = models.TextField()
-    photo = models.ImageField(upload_to='main/photos/')
+    photo = models.ImageField(upload_to='main/locations/visits/')
     Rating_CHOICES = ((1, 'Poor'), (2, 'Average'), (3, 'Good'), (4, 'Very Good'), (5, 'Excellent'))
     rating = models.IntegerField(choices=Rating_CHOICES, default=3)
     is_fraudlent = models.BooleanField(default=False)
