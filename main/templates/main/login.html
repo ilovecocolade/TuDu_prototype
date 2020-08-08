@@ -20,7 +20,7 @@
 <div class="main">
     <div class="no-gutters h-100 d-flex flex-column justify-content-center">
         <div class="row" style="min-vh-100;">
-            <div class="container" id="login_form">
+            <div class="container accForm" id="login_form">
                 <div class="container text-center mb-4">
                     <img class="mb-1" src="{% static "main/img/favicon.png" %}" alt="logo" width="150" height="150">
                     <h1 class="h2 font-weight-normal"><strong>Login to TuDu</strong></h1>
@@ -47,7 +47,7 @@
                         {% render_field form.password class="form-control" %}
                     </div>
                     <div style="text-align: center;">
-                        <button class="btn-lg" type="submit" formmethod="POST">Sign in</button>
+                        <button class="btn btn-lg btn-warning" type="submit" formmethod="POST">Sign in</button>
                     </div>
 
                     <div class="text-center mb-4">

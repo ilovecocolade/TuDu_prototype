@@ -36,6 +36,33 @@ nav {
   z-index: 5;
 }
 
+.navbar-nav .nav-item .nav-link {
+  color: yellow;
+}
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+  color: yellow;
+}
+
+/* Create account & Login */
+.accForm {
+  padding-top: 80px;
+  width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+  .accForm {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1028px) {
+  .accForm {
+    width: 60%;
+  }
+}
+
+
 /* MAIN INTERACTIVE MAP*/
 main {
   height: 100%;

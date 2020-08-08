@@ -19,8 +19,8 @@
 {% block content %}
 <div class="main">
     <div class="no-gutters h-100 d-flex flex-column justify-content-center">
-        <div class="row" style="min-vh-100;">
-            <div class="container" id="register_form">
+        <div class="row no-gutters" style="min-vh-100;">
+            <div class="container accForm" id="register_form">
 
                 <div class="container text-center mb-4">
                     <img class="mb-1" src="{% static "main/img/favicon.png" %}" alt="logo" width="150" height="150">
@@ -86,7 +86,7 @@
                     </div>
 
                     <div style="text-align: center;">
-                        <button class="btn-lg" type="submit" formmethod="POST">Create Account</button>
+                        <button class="btn btn-lg btn-warning" type="submit" formmethod="POST">Create Account</button>
                     </div>
 
                 </form>
